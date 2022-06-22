@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { query } from "@onflow/fcl"
-import { GET_ALL_SERIES } from '../scripts/get-all-series.script';
 import { GET_ALL_SETS } from '../scripts/get-all-sets.script';
 import { GET_ALL_EDITIONS } from '../scripts/get-all-editions.script';
 import { GET_TOTAL_SUPPLY } from "../scripts/get-total-supply.script";
-
-const getAllSeries = async () => {
-    const res = await query({
-      cadence: GET_ALL_SERIES
-    });
-    return res;
-}
+import { useSeries } from '../providers/SeriesProvider.comp';
 
 const getAllSets = async () => {
     const res = await query({
@@ -34,15 +27,8 @@ const getTotalSupply = async() => {
 }
 
 export function Home() {
+    const { series } = useSeries();
     const [error, setError] = useState(null);
-    const [series, setSeries] = useState([]);
-    useEffect(() => {
-        getAllSeries()
-        .then((d) => {
-            setSeries(d);
-        })
-        .catch(() => setError(true))
-    }, []);
 
     const [sets, setSets] = useState([]);
     useEffect(() => {
