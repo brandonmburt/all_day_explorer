@@ -1,16 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import { Landing } from './components/landing.comp';
+import { Home } from './pages/Home.page';
+import { NotFound } from './pages/NotFound.page';
+import { Layout } from './components/Layout.comp';
 import './config/config';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 function App() {
 
   return (
-      <div>
-        <p>Hello, world.</p>
-        <Landing />
-      </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

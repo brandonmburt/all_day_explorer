@@ -9,13 +9,13 @@ const getAllDaySeries = async () => {
     return res;
 }
 
-  export function Landing() {
+export function Home() {
     const [error, setError] = useState(null);
     const [allDayData, setAllDayData] = useState();
     useEffect(() => {
         getAllDaySeries()
         .then((d) => {
-          setAllDayData(d);
+            setAllDayData(d);
         })
         .catch(() => setError(true))
     }, []);
