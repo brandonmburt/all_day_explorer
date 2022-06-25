@@ -15,7 +15,11 @@ export default function useAllSeries() {
   useEffect(() => {
       getAllSeries()
       .then((d) => {
-          setSeries(d);
+          const seriesMap = new Map();
+          d.forEach(x => {
+            seriesMap.set(x.id, x)
+          });
+          setSeries(seriesMap);
       })
       .catch(() => console.log("Error occured in use-all-series.hook.js"))
   }, []);
