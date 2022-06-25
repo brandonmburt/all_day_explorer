@@ -1,47 +1,23 @@
-import React, { useState, useEffect } from "react"
-import { query } from "@onflow/fcl"
-import { GET_ALL_SETS } from '../scripts/get-all-sets.script';
-import { GET_ALL_EDITIONS } from '../scripts/get-all-editions.script';
+import React, { useState } from "react"
 import { useSeries } from '../providers/SeriesProvider.comp';
+import { useSets } from '../providers/SetsProvider.comp';
+import { useEditions } from "../providers/EditionsProvider.comp";
 import useTotalSupply from '../hooks/use-total-supply.hook';
-
-const getAllSets = async () => {
-    const res = await query({
-      cadence: GET_ALL_SETS
-    });
-    return res;
-}
-
-const getAllEditions = async () => {
-    const res = await query({
-      cadence: GET_ALL_EDITIONS
-    });
-    return res;
-}
+import { getSetsWithinSeries } from '../utils/nav.utils';
+import { SeriesNav } from "../components/SeriesNav.comp";
 
 export function Home() {
     const { series } = useSeries();
-    const [error, setError] = useState(null);
-
-    const [sets, setSets] = useState([]);
-    useEffect(() => {
-        getAllSets()
-        .then((d) => {
-            setSets(d);
-        })
-        .catch(() => setError(true))
-    }, []);
-
-    const [editions, setEditions] = useState([]);
-    useEffect(() => {
-        getAllEditions()
-        .then((d) => {
-            setEditions(d);
-        })
-        .catch(() => setError(true))
-    }, []);
+    const { sets } = useSets();
+    const { editions } = useEditions();
+    const [ error, setError ] = useState(null);
 
     const [totalSupply] = useTotalSupply();
+
+    let seriesSets = getSetsWithinSeries(series, sets, editions);
+    if (seriesSets !== null) {
+        console.log(seriesSets);
+    }
 
     if (error != null) {
         return (
@@ -57,7 +33,12 @@ export function Home() {
                 Moments in existence: {totalSupply}
             </h2>
             <div>
-                {series.map(x => <p>{x.name}</p>)}
+                {seriesSets !== null &&
+                    Array.from(seriesSets).map(([key, val]) => {
+                        const s = series.get(key);
+                        return <SeriesNav key={key} id={s.id} name={s.name} active={s.active} sets={val} />
+                    })
+                }
             </div>
         </div>
     )
