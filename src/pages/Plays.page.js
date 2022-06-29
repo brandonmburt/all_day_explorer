@@ -50,6 +50,9 @@ export function Plays() {
                 columns={columns}
                 data={playArr}
                 defaultSortFieldId={1}
+                fixedHeader
+                highlightOnHover
+                progressPending={playArr.length === 0}
                 pagination
             />
         </Container>

@@ -1,20 +1,41 @@
 import React from 'react'
-import { useHistory } from "react-router-dom"
+import { useSeries } from '../providers/SeriesProvider.comp';
+import { useSets } from '../providers/SetsProvider.comp';
+import { useEditions } from "../providers/EditionsProvider.comp";
+import { getSetsWithinSeries } from '../utils/nav.utils';
+import { SeriesNav } from "../components/SeriesNav.comp";
+import { Navbar, Nav, Container } from "react-bootstrap"
 
-export default function Navbar() {
-  const history = useHistory()
 
-  const NavItem = ({ route }) => (
-    <div className="navbar__item">
-      <div className="btn" onClick={() => history.push(route.path)}>
-        {route.name}
-      </div>
-    </div>
-  )
+export function NavBar() {
 
-  return (
-    <div className="navbar">
-      {/* {NAV_ROUTES.map(item => <NavItem route={item} key={item.path} />)} */}
-    </div>
-  )
+    const { series } = useSeries();
+    const { sets } = useSets();
+    const { editions } = useEditions();
+
+    let seriesSets = getSetsWithinSeries(series, sets, editions);
+    if (seriesSets !== null) {
+        console.log(seriesSets);
+    }
+
+    return (
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Navbar.Brand href="/">All Day Explorer</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link href="/plays">Plays</Nav.Link>
+                        {seriesSets !== null &&
+                            Array.from(seriesSets).map(([key, val]) => {
+                                const s = series.get(key);
+                                return <SeriesNav key={key} id={s.id} name={s.name} active={s.active} sets={val} />
+                            })
+                        } 
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+    )
+
 }

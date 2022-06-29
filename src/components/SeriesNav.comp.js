@@ -1,5 +1,5 @@
 import React from "react"
-import { SetNav } from "./SetNav.comp";
+import { NavDropdown } from "react-bootstrap"
 
 export function SeriesNav(props) {
 
@@ -9,13 +9,13 @@ export function SeriesNav(props) {
     }
 
     return (
-        <div>
-            <p>Series: {props.name} - {activeStr}</p>
+        // {props.name} ({activeStr})
+        <NavDropdown title={props.name} id="basic-nav-dropdown">
             {Array.from(props.sets).map((set) => {
                 const [id, name] = set.split(":");
-                return <SetNav key={id} setID={id} name={name} />
+                return <NavDropdown.Item key={id} href={"/editions/" + props.id + "/" + id}>{id}: {name}</NavDropdown.Item>
             })}
-        </div>
+        </NavDropdown>
     )
 
 }
