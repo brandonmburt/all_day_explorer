@@ -24,6 +24,5 @@ export default function useAllSeries() {
       .catch(() => console.log("Error occured in use-all-series.hook.js"))
   }, []);
 
-
   return [series];
 }

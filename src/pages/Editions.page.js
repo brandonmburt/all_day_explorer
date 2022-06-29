@@ -17,35 +17,35 @@ export function Editions() {
     const { editions } = useEditions();
     const { plays } = usePlays();
 
-    if (!series || !sets || !editions || !plays) {
-        return null;
-    }
+    const title = !!series & !!sets ? series.get(seriesID).name + ": " + sets.get(setID).name : "";
 
     const gridData = [];
 
-    const filteredEditions = editions.filter(e => {
-        return e.seriesID === seriesID && e.setID === setID
-    });
+    if (!!editions && !!plays) {
+        const filteredEditions = editions.filter(e => {
+            return e.seriesID === seriesID && e.setID === setID
+        });
 
-    filteredEditions.forEach(e => {
-        const { id, playID, tier, numMinted, maxMintSize } = e;
-        const play = plays.get(playID);
-        if (play != null) {
-            gridData.push({
-                id,
-                tier,
-                numMinted,
-                maxMintSize,
-                ...play
-            });
-        }
-    });
+        filteredEditions.forEach(e => {
+            const { id, playID, tier, numMinted, maxMintSize } = e;
+            const play = plays.get(playID);
+            if (play != null) {
+                gridData.push({
+                    id,
+                    tier,
+                    numMinted,
+                    maxMintSize,
+                    ...play
+                });
+            }
+        });
+    }
 
     return (
         <div>
             <Container>
                 <DataTable
-                    title={series && sets ? series.get(seriesID).name + ": " + sets.get(setID).name : "Waiting"}
+                    title={title}
                     columns={EDITIONS_COLS}
                     data={gridData}
                     defaultSortFieldId={1}

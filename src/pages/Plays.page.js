@@ -8,12 +8,10 @@ export function Plays() {
 
     const { plays } = usePlays();
 
-    if (!plays) {
-        return null;
-    }
-
     const playArr = [];
-    plays.forEach(play => playArr.push(play));
+    if (!!plays) {
+        plays.forEach(play => playArr.push(play));
+    }
 
     return (
         <Container>

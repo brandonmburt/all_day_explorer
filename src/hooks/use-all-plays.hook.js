@@ -24,6 +24,5 @@ export default function useAllPlays() {
       .catch(() => console.log("Error occured in use-all-plays.hook.js"))
   }, []);
 
-
   return [plays];
 }
