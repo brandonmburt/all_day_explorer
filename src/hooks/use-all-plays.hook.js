@@ -3,7 +3,7 @@ import { query } from "@onflow/fcl";
 import { GET_ALL_PLAYS } from "../scripts/get-all-plays.script";
 
 export default function useAllPlays() {
-  const [plays, setPlays] = useState([]);
+  const [plays, setPlays] = useState(null);
 
   const getAllPlays = async () => {
     const res = await query({

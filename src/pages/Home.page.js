@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import useTotalSupply from '../hooks/use-total-supply.hook';
+import { Container } from "react-bootstrap";
 
 export function Home() {
 
@@ -16,11 +17,11 @@ export function Home() {
     }
 
     return (
-        <div>
-            <h2>
+        <Container>
+            <h3>
                 Moments in existence: {totalSupply}
-            </h2>
-        </div>
+            </h3>
+        </Container>
     )
 
 }

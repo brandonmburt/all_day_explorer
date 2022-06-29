@@ -3,7 +3,7 @@ import { query } from "@onflow/fcl";
 import { GET_ALL_SETS } from "../scripts/get-all-sets.script";
 
 export default function useAllSets() {
-  const [sets, setSets] = useState([]);
+  const [sets, setSets] = useState(null);
 
   const getAllSets = async () => {
     const res = await query({

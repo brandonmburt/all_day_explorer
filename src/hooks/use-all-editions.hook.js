@@ -3,7 +3,7 @@ import { query } from "@onflow/fcl";
 import { GET_ALL_EDITIONS } from "../scripts/get-all-editions.script";
 
 export default function useAllEditions() {
-  const [editions, setEditions] = useState([]);
+  const [editions, setEditions] = useState(null);
 
   const getAllEditions = async () => {
     const res = await query({

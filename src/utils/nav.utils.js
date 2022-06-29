@@ -7,7 +7,7 @@
 */
 
 export const getSetsWithinSeries = (series, sets, editions) => {
-    if (sets == null || series.length === 0 || sets.length === 0 || editions.length === 0) {
+    if (series == null || sets == null || editions == null) {
         // TODO: Clean this up
         console.log("Still waiting for data");
         return null;

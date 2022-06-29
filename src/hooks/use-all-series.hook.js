@@ -3,7 +3,7 @@ import { query } from "@onflow/fcl";
 import { GET_ALL_SERIES } from "../scripts/get-all-series.script";
 
 export default function useAllSeries() {
-  const [series, setSeries] = useState([]);
+  const [series, setSeries] = useState(null);
 
   const getAllSeries = async () => {
     const res = await query({
