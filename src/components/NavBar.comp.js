@@ -14,9 +14,9 @@ export function NavBar() {
     const { sets } = useSets();
     const { editions } = useEditions();
 
-    let seriesSets = getSetsWithinSeries(series, sets, editions);
-    if (seriesSets !== null) {
-        console.log(seriesSets);
+    let seriesSets = null;
+    if (!!series && !!sets && !!editions) {
+        seriesSets = getSetsWithinSeries(series, sets, editions);
     }
 
     return (

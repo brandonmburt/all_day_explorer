@@ -7,11 +7,6 @@
 */
 
 export const getSetsWithinSeries = (series, sets, editions) => {
-    if (series == null || sets == null || editions == null) {
-        // TODO: Clean this up
-        console.log("Still waiting for data");
-        return null;
-    }
 
     const myMap = new Map();
     series.forEach(s => {
