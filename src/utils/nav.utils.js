@@ -1,5 +1,3 @@
-
-
 /*
     GOAL: Determine which Sets have Editions within a Series
 

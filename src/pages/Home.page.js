@@ -1,26 +1,33 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import useTotalSupply from '../hooks/use-total-supply.hook';
 import { Container } from "react-bootstrap";
+import { useSeries } from '../providers/SeriesProvider.comp';
+import { useEditions } from "../providers/EditionsProvider.comp";
+import PieChart from '../components/PieChart.comp.js';
+import Sunburst from "../components/Sunburst.comp";
+import { getSupplyPerSeries } from '../utils/supply.utils.js';
 
 export function Home() {
 
-    // const [ error, setError ] = useState(null);
+    const { series } = useSeries();
+    const { editions } = useEditions();
 
-    const [totalSupply] = useTotalSupply();
+    let seriesSupply = null;
+    if (!!series && !!editions) {
+        seriesSupply = getSupplyPerSeries(series, editions);
+    }
 
-    // if (error != null) {
-    //     return (
-    //         <h3>
-    //             <span>Error Fetching All Day Info: {error}</span>
-    //         </h3>
-    //     )
-    // }
+    const [ totalSupply ] = useTotalSupply();
 
     return (
         <Container>
             <h3>
                 Moments in existence: {totalSupply}
             </h3>
+            {seriesSupply !== null &&
+                <PieChart data={seriesSupply} />
+            }
+            <Sunburst />
         </Container>
     )
 
