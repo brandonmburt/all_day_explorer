@@ -1,17 +1,16 @@
 import React from "react"
-import { NavDropdown } from "react-bootstrap"
+import { NavDropdown, Badge } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
 
 export function SeriesNav(props) {
 
-    let activeStr = 'closed';
-    if (props.active) {
-        activeStr = 'active';
-    }
+    let badge = props.active ?
+        <><Badge pill bg="success">Active</Badge> {props.name}</ > :
+        <><Badge pill bg="danger">Locked</Badge> {props.name}</ >;
+    
 
     return (
-        // {props.name} ({activeStr})
-        <NavDropdown title={props.name} id="basic-nav-dropdown">
+        <NavDropdown title={badge} id="basic-nav-dropdown">
             {Array.from(props.sets).map((set) => {
                 const [id, name] = set.split(":");
                 return (
