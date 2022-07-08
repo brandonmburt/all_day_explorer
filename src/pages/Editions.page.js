@@ -5,7 +5,7 @@ import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useParams } from "react-router-dom";
 import DataTable from 'react-data-table-component';
-import { Container } from "react-bootstrap";
+import { Container, Badge } from "react-bootstrap";
 import { EDITIONS_COLS } from '../config/editions-columns';
 
 export function Editions() {
@@ -17,7 +17,18 @@ export function Editions() {
     const { editions } = useEditions();
     const { plays } = usePlays();
 
-    const title = !!series & !!sets ? series.get(seriesID).name + ": " + sets.get(setID).name : "";
+    let title = "";
+    if (!!series & !!sets) {
+        const seriesInfo = series.get(seriesID);
+        const setInfo = sets.get(setID);
+        const titleStr = seriesInfo.name + ": " + setInfo.name;
+
+        title = seriesInfo.active ?
+            <><Badge pill bg="success">Active</Badge> {titleStr}</> :
+            <><Badge pill bg="danger">Locked</Badge> {titleStr}</>;
+
+        
+    }
 
     const gridData = [];
 
