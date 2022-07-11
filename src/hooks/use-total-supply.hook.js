@@ -15,7 +15,7 @@ export default function useTotalSupply() {
   useEffect(() => {
     getTotalSupply()
     .then((d) => {
-        setTotalSupply(d);
+        setTotalSupply(+d);
     })
     .catch(() => console.log("Error occured in use-total-supply.hook.js"))
   }, []);

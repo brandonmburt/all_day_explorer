@@ -10,9 +10,7 @@ class PieChart extends React.Component {
     }
 
     componentDidMount() {
-        let data = [];
-        this.props.data.forEach( (val, key) => data.push({name: val.name, value: val.count}) );
-        let chart = PieChartUtil(data, {
+        let chart = PieChartUtil(this.props.data, {
             name: d => d.name,
             value: d => d.value
         })
