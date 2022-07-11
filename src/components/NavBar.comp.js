@@ -27,9 +27,6 @@ export function NavBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <LinkContainer to="/">
-                            <Nav.Link>Dashboard</Nav.Link>
-                        </LinkContainer>
                         <LinkContainer to="/plays">
                             <Nav.Link>Plays</Nav.Link>
                         </LinkContainer>
