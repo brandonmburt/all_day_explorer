@@ -46,26 +46,20 @@ export function Home() {
                             <Table striped bordered hover responsive>
                                 <thead>
                                     <tr>
-                                        <th>Series</th>
-                                        <th>Common</th>
-                                        <th>Rare</th>
-                                        <th>Legendary</th>
-                                        <th>Ultimate</th>
-                                        <th>Total</th>
+                                        {['Series', 'Common', 'Rare', 'Legendary', 'Ultimate', 'Total'].map((header, j) => {
+                                            return <th key={j}>{header}</th>
+                                        })}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {seriesTiersSupply !== null &&
                                         seriesTiersSupply.map((row, i) => {
                                             return (
-                                            <tr key={i}>
-                                                <td>{row.name}</td>
-                                                <td>{numFormat(row.COMMON)}</td>
-                                                <td>{numFormat(row.RARE)}</td>
-                                                <td>{numFormat(row.LEGENDARY)}</td>
-                                                <td>{numFormat(row.ULTIMATE)}</td>
-                                                <td>{numFormat(row.TOTAL)}</td>
-                                            </tr>
+                                                <tr key={i}>
+                                                    {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
+                                                        return <td key={j}>{numFormat(data)}</td>
+                                                    })}
+                                                </tr>
                                             )
                                         })
                                     }
@@ -91,12 +85,9 @@ export function Home() {
                             <Table striped bordered hover responsive>
                                 <thead>
                                     <tr>
-                                        <th>Series</th>
-                                        <th>Common</th>
-                                        <th>Rare</th>
-                                        <th>Legendary</th>
-                                        <th>Ultimate</th>
-                                        <th>Total</th>
+                                        {['Series', 'Common', 'Rare', 'Legendary', 'Ultimate', 'Total'].map((header, j) => {
+                                            return <th key={j}>{header}</th>
+                                        })}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,12 +95,9 @@ export function Home() {
                                         editionTiersPerSeries.map((row, i) => {
                                             return (
                                             <tr key={i}>
-                                                <td>{row.name}</td>
-                                                <td>{numFormat(row.COMMON)}</td>
-                                                <td>{numFormat(row.RARE)}</td>
-                                                <td>{numFormat(row.LEGENDARY)}</td>
-                                                <td>{numFormat(row.ULTIMATE)}</td>
-                                                <td>{numFormat(row.TOTAL)}</td>
+                                                {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
+                                                    return <td key={j}>{numFormat(data)}</td>
+                                                })}
                                             </tr>
                                             )
                                         })
