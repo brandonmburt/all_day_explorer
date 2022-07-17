@@ -4,6 +4,7 @@ import { Container, Row, Col, Table, Card } from "react-bootstrap";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
 import PieChart from '../components/PieChart.comp.js';
+import { SupplyTable } from '../components/SupplyTable.comp.js';
 import { getSupplyPerSeries, getSupplyPerTier, getSupplyPerSeriesAndTier, getNumEditionsPerSeries, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
 
 export function Home() {
@@ -43,28 +44,9 @@ export function Home() {
                             <h5>
                                 Total Moments: {totalSupply ? numFormat(totalSupply) : ''}
                             </h5>
-                            <Table striped bordered hover responsive>
-                                <thead>
-                                    <tr>
-                                        {['Series', 'Common', 'Rare', 'Legendary', 'Ultimate', 'Total'].map((header, j) => {
-                                            return <th key={j}>{header}</th>
-                                        })}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {seriesTiersSupply !== null &&
-                                        seriesTiersSupply.map((row, i) => {
-                                            return (
-                                                <tr key={i}>
-                                                    {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
-                                                        return <td key={j}>{numFormat(data)}</td>
-                                                    })}
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </Table>
+                            {seriesTiersSupply !== null &&
+                                <SupplyTable rows={seriesTiersSupply} />
+                            }
                         </Col>
                     </Row>
                 </Card.Body>
@@ -82,28 +64,9 @@ export function Home() {
                             <h5>
                                 Total Editions: {editionsPerSeries ? editionsPerSeries.reduce((acc, v) => acc += v.value, 0) : ''}
                             </h5>
-                            <Table striped bordered hover responsive>
-                                <thead>
-                                    <tr>
-                                        {['Series', 'Common', 'Rare', 'Legendary', 'Ultimate', 'Total'].map((header, j) => {
-                                            return <th key={j}>{header}</th>
-                                        })}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {editionTiersPerSeries !== null &&
-                                        editionTiersPerSeries.map((row, i) => {
-                                            return (
-                                            <tr key={i}>
-                                                {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
-                                                    return <td key={j}>{numFormat(data)}</td>
-                                                })}
-                                            </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </Table>
+                            {editionTiersPerSeries !== null &&
+                                <SupplyTable rows={editionTiersPerSeries} />
+                            }
                         </Col>
                     </Row>
                 </Card.Body>
