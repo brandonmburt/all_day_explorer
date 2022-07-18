@@ -5,24 +5,17 @@ import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
 import PieChart from '../components/PieChart.comp.js';
 import { SupplyTable } from '../components/SupplyTable.comp.js';
-import { getSupplyPerSeries, getSupplyPerTier, getSupplyPerSeriesAndTier, getNumEditionsPerSeries, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
+import { getSupplyPerSeriesAndTier, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
 
 export function Home() {
 
     const { series } = useSeries();
     const { editions } = useEditions();
 
-    let seriesSupply = null, seriesTiersSupply = null, editionsPerSeries = null, editionTiersPerSeries = null;
+    let seriesTiersSupply = null, editionTiersPerSeries = null;
     if (!!series && !!editions) {
-        seriesSupply = getSupplyPerSeries(series, editions);
         seriesTiersSupply = getSupplyPerSeriesAndTier(series, editions);
-        editionsPerSeries = getNumEditionsPerSeries(series, editions);
         editionTiersPerSeries = getNumEditionsPerSeriesAndTier(series, editions);
-    }
-
-    let tiersSupply = null;
-    if (!!editions) {
-        tiersSupply = getSupplyPerTier(editions);
     }
 
     const [ totalSupply ] = useTotalSupply();
@@ -36,8 +29,8 @@ export function Home() {
                 <Card.Body>
                     <Row>
                         <Col lg={true} >
-                            {seriesSupply !== null &&
-                                <PieChart data={seriesSupply} />
+                            {seriesTiersSupply !== null &&
+                                <PieChart data={seriesTiersSupply.map(s => ({name: s.name, value: s.TOTAL}))} />
                             }
                         </Col>
                         <Col lg={true} style={{marginTop: '15px'}}>
@@ -56,13 +49,13 @@ export function Home() {
                 <Card.Body>
                     <Row>
                         <Col lg={true} >
-                            {editionsPerSeries !== null &&
-                                <PieChart data={editionsPerSeries} />
+                            {editionTiersPerSeries !== null &&
+                                <PieChart data={editionTiersPerSeries.map(e => ({name: e.name, value: e.TOTAL}))} />
                             }
                         </Col>
                         <Col lg={true} style={{marginTop: '15px'}}>
                             <h5>
-                                Total Editions: {editionsPerSeries ? editionsPerSeries.reduce((acc, v) => acc += v.value, 0) : ''}
+                                Total Editions: {editionTiersPerSeries ? editionTiersPerSeries.reduce((acc, v) => acc += v.TOTAL, 0) : ''}
                             </h5>
                             {editionTiersPerSeries !== null &&
                                 <SupplyTable rows={editionTiersPerSeries} />
