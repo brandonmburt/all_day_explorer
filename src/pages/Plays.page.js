@@ -1,8 +1,9 @@
 import React from "react"
 import { usePlays } from "../providers/PlaysProvider.comp";
 import DataTable from 'react-data-table-component';
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { PLAYS_COLS } from '../config/plays-columns';
+import StackedBarChart from '../components/StackedBarChart.comp';
 
 export function Plays() {
 
@@ -15,6 +16,12 @@ export function Plays() {
 
     return (
         <Container>
+            {plays !== null &&
+                <Row>
+                    <h6 style={{margin: '20px 0px 0px 20px'}}>Plays Per Team</h6>
+                    <StackedBarChart plays={plays} />
+                </Row>
+            }
             <DataTable
                 title="Plays"
                 columns={PLAYS_COLS}

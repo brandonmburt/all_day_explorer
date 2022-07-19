@@ -88,6 +88,5 @@ export function PieChartUtil(data, {
         .attr("font-weight", (_, i) => i ? null : "bold")
         .text(d => d);
   
-    //return svg;
     return Object.assign(svg.node(), {scales: {color}});
   }
