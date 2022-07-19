@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import useTotalSupply from '../hooks/use-total-supply.hook';
-import { Container, Row, Col, Table, Card } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
 import PieChart from '../components/PieChart.comp.js';
