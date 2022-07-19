@@ -1,7 +1,7 @@
 import React from "react"
-import { StackedBarChartUtil } from "../utils/stacked-bar-chart.utils";
+import { StackedBarChartUtil } from "../../utils/d3/stacked-bar-chart.utils";
 import * as d3 from 'd3'
-import { numPlaysByTypeAndTeam, getUniquePlayTypes } from '../utils/plays.utils';
+import { numPlaysByTypeAndTeam, getUniquePlayTypes } from '../../utils/plays.utils';
 
 class StackedBarChart extends React.Component {
 

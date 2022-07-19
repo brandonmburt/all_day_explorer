@@ -1,5 +1,5 @@
 import React from "react"
-import { PieChartUtil } from "../utils/pie-chart.utils";
+import { PieChartUtil } from "../../utils/d3/pie-chart.utils";
 import * as d3 from 'd3'
 
 class PieChart extends React.Component {

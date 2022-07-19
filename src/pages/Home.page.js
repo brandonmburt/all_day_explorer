@@ -3,7 +3,7 @@ import useTotalSupply from '../hooks/use-total-supply.hook';
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
-import PieChart from '../components/PieChart.comp.js';
+import PieChart from '../components/d3/PieChart.comp.js';
 import { SupplyTable } from '../components/SupplyTable.comp.js';
 import { getSupplyPerSeriesAndTier, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
 
