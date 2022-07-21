@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react"
-import useTotalSupply from '../hooks/use-total-supply.hook';
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
@@ -7,6 +6,7 @@ import PieChart from '../components/d3/PieChart.comp.js';
 import { SupplyTable } from '../components/SupplyTable.comp.js';
 import { getSupplyPerSeriesAndTier, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
 import { Loading } from '../components/Loading.comp';
+import { numFormat } from '../utils/num.utils';
 
 export function Home() {
 
@@ -18,10 +18,6 @@ export function Home() {
         seriesTiersSupply = getSupplyPerSeriesAndTier(series, editions);
         editionTiersPerSeries = getNumEditionsPerSeriesAndTier(series, editions);
     }
-
-    const [ totalSupply ] = useTotalSupply();
-
-    const numFormat = (num) => num.toLocaleString();
 
     return (
         <Container>
@@ -40,7 +36,7 @@ export function Home() {
                             </Col>
                             <Col lg={true} style={{marginTop: '15px'}}>
                                 <h5>
-                                    Total Moments: {totalSupply ? numFormat(totalSupply) : ''}
+                                    Total Moments: {seriesTiersSupply ? numFormat(seriesTiersSupply.reduce((acc, v) => acc += v.TOTAL, 0)) : ''}
                                 </h5>
                                 {seriesTiersSupply !== null &&
                                     <SupplyTable rows={seriesTiersSupply} />
@@ -60,7 +56,7 @@ export function Home() {
                             </Col>
                             <Col lg={true} style={{marginTop: '15px'}}>
                                 <h5>
-                                    Total Editions: {editionTiersPerSeries ? editionTiersPerSeries.reduce((acc, v) => acc += v.TOTAL, 0) : ''}
+                                    Total Editions: {editionTiersPerSeries ? numFormat(editionTiersPerSeries.reduce((acc, v) => acc += v.TOTAL, 0)) : ''}
                                 </h5>
                                 {editionTiersPerSeries !== null &&
                                     <SupplyTable rows={editionTiersPerSeries} />

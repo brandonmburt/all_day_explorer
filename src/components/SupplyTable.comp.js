@@ -1,10 +1,10 @@
 import React from "react"
 import { Table } from "react-bootstrap";
+import { numFormat } from '../utils/num.utils';
 
 export function SupplyTable(props) {
 
     const headers = ['Series', 'Common', 'Rare', 'Legendary', 'Ultimate', 'Total'];
-    const numFormat = (num) => num.toLocaleString();
     
     return (
         <Table striped bordered hover responsive>
