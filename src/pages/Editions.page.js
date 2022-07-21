@@ -55,34 +55,32 @@ export function Editions() {
     const numEditions = gridData.length;
 
     return (
-        <div>
-            <Container>
-                <Row style={{margin: '20px 5px 30px 5px'}}>
-                    {[["Status", badge], ["Num Editions", numEditions.toLocaleString()],
-                        ["Minted Moments", numMintedMoments.toLocaleString()]].map((data, i) => {
-                            const [header, body] = data;
-                            return (
-                                <Col key={i} md={true}>
-                                    <Card style={{margin: '20px 10px 0px'}}>
-                                        <Card.Header as="h6">{header}</Card.Header>
-                                        <Card.Body as="h5" style={{textAlign: 'center'}}>{body}</Card.Body>
-                                    </Card>
-                                </Col>
-                            )
-                    })}
-                </Row>
-                <DataTable
-                    title={title}
-                    columns={EDITIONS_COLS}
-                    data={gridData}
-                    defaultSortFieldId={1}
-                    fixedHeader
-                    highlightOnHover
-                    progressPending={gridData.length === 0}
-                    pagination
-                />
-            </Container>
-        </div>
+        <Container>
+            <Row style={{margin: '20px 5px 30px 5px'}}>
+                {[["Status", badge], ["Num Editions", numEditions.toLocaleString()],
+                    ["Minted Moments", numMintedMoments.toLocaleString()]].map((data, i) => {
+                        const [header, body] = data;
+                        return (
+                            <Col key={i} md={true}>
+                                <Card style={{margin: '20px 10px 0px'}}>
+                                    <Card.Header as="h6">{header}</Card.Header>
+                                    <Card.Body as="h5" style={{textAlign: 'center'}}>{body}</Card.Body>
+                                </Card>
+                            </Col>
+                        )
+                })}
+            </Row>
+            <DataTable
+                title={title}
+                columns={EDITIONS_COLS}
+                data={gridData}
+                defaultSortFieldId={1}
+                fixedHeader
+                highlightOnHover
+                progressPending={gridData.length === 0}
+                pagination
+            />
+        </Container>
     )
 
 }

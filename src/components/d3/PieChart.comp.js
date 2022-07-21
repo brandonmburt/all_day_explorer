@@ -13,7 +13,7 @@ class PieChart extends React.Component {
         let chart = PieChartUtil(this.props.data, {
             name: d => d.name,
             value: d => d.value
-        })
+        });
 
         d3.select(this.myRef.current).node().appendChild(chart);
     }

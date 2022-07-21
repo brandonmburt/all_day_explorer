@@ -4,6 +4,7 @@ import DataTable from 'react-data-table-component';
 import { Container, Row } from "react-bootstrap";
 import { PLAYS_COLS } from '../config/plays-columns';
 import StackedBarChart from '../components/d3/StackedBarChart.comp';
+import { Loading } from '../components/Loading.comp';
 
 export function Plays() {
 
@@ -16,7 +17,10 @@ export function Plays() {
 
     return (
         <Container>
-            {plays !== null &&
+            {!plays && 
+                <Loading />
+            }
+            {!!plays &&
                 <>
                     <Row>
                         <h6 style={{margin: '20px 0px 0px 20px'}}>Plays Per Team</h6>
