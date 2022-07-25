@@ -1,45 +1,30 @@
-// TODO: Need to refactor all the functions on this page
-
 export const numPlaysByTypeAndTeam = (plays) => {
+    
+    const teamAbbreviations = getTeamAbbreviations();
+    const playTypeArr = getPlayTypeArray(plays);
     const playTypeByTeam = new Map();
-
-    const playTypeSet = new Set();
-    plays.forEach(p => {
-        const { metadata } = p;
-        let { playType } = metadata;
-        if (playType === "") {
-            playType = "Team Melt";
-        }
-        playTypeSet.add(playType);
-    });
-    let playTypeArr = Array.from(playTypeSet);
-    const teamsMap = getTeamAbbreviations();
-    let playTypeByTeamTEST = new Map();
-    teamsMap.forEach((v, k) => {
+    
+    teamAbbreviations.forEach((v, k) => {
         playTypeArr.forEach(type => {
-            playTypeByTeamTEST.set((k + ";" + type), {count: 0});
+            playTypeByTeam.set((k + ";" + type), {count: 0});
         });
     });
 
+    // Current implementation is looping through plays twice
     plays.forEach(play => {
         const { metadata } = play;
-        let { teamName, playType } = metadata;
-        if (playType === "") {
-            playType = "Team Melt";
+        const { teamName, playType } = metadata;
+        const key = teamName + ";" + (playType === "" ? "Team Melt" : playType);
+        if (!playTypeByTeam.has(key)) {
+            // this condition should never be met
+            playTypeByTeam.set(key, {count: 0});
         }
-        const key = teamName + ";" + playType;
-
-        if (!playTypeByTeamTEST.has(key)) {
-            playTypeByTeamTEST.set(key, {count: 0});
-        }
-
-        playTypeByTeamTEST.get(key).count += 1;
+        playTypeByTeam.get(key).count += 1;
     });
 
-    const teamAbbreviations = getTeamAbbreviations();
 
     let playObjs = [];
-    playTypeByTeamTEST.forEach((v, k) => {
+    playTypeByTeam.forEach((v, k) => {
         const [ team, playType ] = k.split(";");
         const abbreviation = teamAbbreviations.has(team) ? teamAbbreviations.get(team) : team;
         playObjs.push({
@@ -49,27 +34,33 @@ export const numPlaysByTypeAndTeam = (plays) => {
         });
     });
 
-    console.log(playObjs);
-
     return playObjs;
 
+}
+
+const getPlayTypeArray = (plays) => {
+
+    const playTypeSet = new Set();
+    plays.forEach(p => {
+        const { metadata } = p;
+        let { playType } = metadata;
+        playTypeSet.add(playType === "" ? "Team Melt" : playType);
+    });
+    return Array.from(playTypeSet);
+    
 }
 
 export const getUniquePlayTypes = (playsByTeam) => {
 
     const mySet = new Set();
-
     playsByTeam.forEach(p => mySet.add(p.type));
-
-    console.log(mySet);
-
     return Array.from(mySet);
 
 }
 
 export const getTeamAbbreviations = () => {
 
-    const myMap = new Map([
+    return new Map([
         ["Arizona Cardinals", "ARI"],
         ["Los Angeles Rams", "LAR"],
         ["Kansas City Chiefs", "KC"],
@@ -105,7 +96,5 @@ export const getTeamAbbreviations = () => {
         ["Phoenix Cardinals", "PHX"],
         ["Tennessee Oilers", "OIL"]
     ]);
-
-    return myMap;
 
 }

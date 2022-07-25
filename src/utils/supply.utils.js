@@ -24,8 +24,6 @@ export const getSupplyPerSeriesAndTier = (series, editions) => {
         data.push({TOTAL: tot, ...val});
     });
 
-    console.log("Moment Supply: ", data);
-
     return data;
 
 }
@@ -55,8 +53,6 @@ export const getNumEditionsPerSeriesAndTier = (series, editions) => {
         const tot = val.COMMON + val.RARE + val.LEGENDARY + val.ULTIMATE;
         data.push({TOTAL: tot, ...val});
     });
-
-    console.log("Edition Supply: ", data);
 
     return data;
 
