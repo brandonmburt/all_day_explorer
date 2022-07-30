@@ -1,4 +1,4 @@
-# All Day Explorer
+# All Day Tools
 
 React app that pulls NFL All Day Series/Set/Edition data from the Flow Blockchain
 

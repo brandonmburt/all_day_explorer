@@ -22,7 +22,7 @@ export function NavBar() {
         <Navbar bg="light" expand="lg">
             <Container>
                 <LinkContainer to="/">
-                    <Navbar.Brand>All Day Explorer</Navbar.Brand>
+                    <Navbar.Brand>All Day Tools</Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
