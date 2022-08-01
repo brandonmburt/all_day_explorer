@@ -20,8 +20,9 @@ export const getSupplyPerSeriesAndTier = (series, editions) => {
 
     let data = [];
     myMap.forEach(val => {
-        const tot = val.COMMON + val.RARE + val.LEGENDARY + val.ULTIMATE;
-        data.push({TOTAL: tot, ...val});
+        const { COMMON, RARE, LEGENDARY, ULTIMATE } = val;
+        const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
+        data.push({TOTAL: TOT, ...val});
     });
 
     return data;
@@ -50,8 +51,9 @@ export const getNumEditionsPerSeriesAndTier = (series, editions) => {
 
     let data = [];
     myMap.forEach(val => {
-        const tot = val.COMMON + val.RARE + val.LEGENDARY + val.ULTIMATE;
-        data.push({TOTAL: tot, ...val});
+        const { COMMON, RARE, LEGENDARY, ULTIMATE } = val;
+        const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
+        data.push({TOTAL: TOT, ...val});
     });
 
     return data;
