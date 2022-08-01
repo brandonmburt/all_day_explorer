@@ -35,10 +35,10 @@ export function Home() {
                     <Card.Body>
                         <Row>
                             <Col lg={true} style={{marginBottom: "15px"}}>
-                                <ToggleButtonGroup style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
+                                <ToggleButtonGroup size="sm" style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
                                     type="radio" name="momentButtons" value={momentRadio} onChange={(v) => setMomentRadio(v)}>
                                     {RADIOS.map((radio, id) => (
-                                        <ToggleButton key={id} id={`moment-${id}`} variant="outline-secondary" value={radio.value} >
+                                        <ToggleButton style={{padding: "5px"}} key={id} id={`moment-${id}`} variant="outline-secondary" value={radio.value} >
                                             {radio.name}
                                         </ToggleButton>
                                     ))}
@@ -63,10 +63,10 @@ export function Home() {
                     <Card.Body>
                         <Row>
                             <Col lg={true} style={{marginBottom: "15px"}}>
-                                <ToggleButtonGroup style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
+                                <ToggleButtonGroup size="sm" style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
                                     type="radio" name="editionButtons" value={editionRadio} onChange={(v) => setEditionRadio(v)}>
                                     {RADIOS.map((radio, id) => (
-                                        <ToggleButton key={id} id={`edition-${id}`} variant="outline-secondary" value={radio.value} >
+                                        <ToggleButton style={{padding: "5px"}} key={id} id={`edition-${id}`} variant="outline-secondary" value={radio.value} >
                                             {radio.name}
                                         </ToggleButton>
                                     ))}
