@@ -94,7 +94,9 @@ export const getTeamAbbreviations = () => {
         ["Houston Texans", "HOU"],
         ["Carolina Panthers", "CAR"],
         ["Phoenix Cardinals", "PHX"],
-        ["Tennessee Oilers", "OIL"]
+        ["Tennessee Oilers", "OIL"],
+        ["Oakland Raiders", "OAK"],
+        ["Los Angeles Raiders", "RAI"]
     ]);
 
 }
