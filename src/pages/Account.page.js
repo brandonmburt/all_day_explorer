@@ -11,9 +11,8 @@ import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
-import { COLLECTION_COLS } from '../config/collection-columns';
-import DataTable from 'react-data-table-component';
-
+import { AG_COLLECTION_COLS } from '../config/collection-columns';
+import { AgGrid } from '../components/AgGrid.comp';
 
 export function Account() {
 
@@ -103,14 +102,7 @@ export function Account() {
                 </Row>
             }
             {collectionMoments.length > 0 &&
-                <DataTable
-                    columns={COLLECTION_COLS}
-                    data={collectionMoments}
-                    defaultSortFieldId={7}
-                    fixedHeader
-                    highlightOnHover
-                    pagination
-                />
+                <AgGrid columnDefs={AG_COLLECTION_COLS} rowData={collectionMoments} />
             }
         </Container>
     )

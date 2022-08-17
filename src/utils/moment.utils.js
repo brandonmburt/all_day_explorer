@@ -27,7 +27,7 @@ export const getDescriptiveMoments = (moments, editionsMap, playsMap, seriesMap,
             series: series.name,
             set: set.name,
             playID,
-            serialNumber,
+            serialNumber: +serialNumber,
             tier,
             classification,
             playerFirstName,
@@ -35,7 +35,7 @@ export const getDescriptiveMoments = (moments, editionsMap, playsMap, seriesMap,
             name: playerFirstName + " " + playerLastName,
             teamName,
             playerPosition,
-            playType,
+            playType: classification === "PLAYER_GAME" ? playType : "Team Melt",
             gameDate
         });
     });

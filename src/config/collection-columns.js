@@ -1,42 +1,34 @@
-export const COLLECTION_COLS = [
+export const AG_COLLECTION_COLS = [
     {
-        name: 'Player',
-        selector: row => row.name,
-        sortable: true,
+        headerName: 'Player',
+        field: 'name',
     },
     {
-        name: 'Team',
-        selector: row => row.teamName,
-        sortable: true,
+        headerName: 'Team',
+        field: 'teamName',
     },
     {
-        name: 'Position',
-        selector: row => row.playerPosition,
-        sortable: true,
+        headerName: 'Position',
+        field: 'playerPosition',
     },
     {
-        name: 'Series',
-        selector: row => row.series,
-        sortable: true,
+        headerName: 'Series',
+        field: 'series',
     },
     {
-        name: 'Set',
-        selector: row => row.set,
-        sortable: true,
+        headerName: 'Set',
+        field: 'set',
     },
     {
-        name: 'Tier',
-        selector: row => row.tier,
-        sortable: true,
+        headerName: 'Tier',
+        field: 'tier',
     },
     {
-        name: 'Serial Number',
-        selector: row => +row.serialNumber,
-        sortable: true,
+        headerName: 'Serial Number',
+        field: 'serialNumber',
     },
     {
-        name: 'Play Type',
-        selector: row => row.classification === "PLAYER_GAME" ? row.playType : "Team Melt",
-        sortable: true,
+        headerName: 'Play Type',
+        field: 'playType',
     }
 ];
