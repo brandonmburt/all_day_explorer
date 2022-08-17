@@ -58,6 +58,30 @@ export const getUniquePlayTypes = (playsByTeam) => {
 
 }
 
+export const getPlaysGridData = (plays) => {
+
+    let gridData = [];
+    plays.forEach((val, key) => {
+        let { id, classification, metadata } = val;
+        let { playerPosition, playerFirstName, playerLastName, teamName, playType, gameDate, awayTeamName, homeTeamName } = metadata;
+        gridData.push({
+            id: +id,
+            classification,
+            playerPosition,
+            playerFirstName,
+            playerLastName,
+            teamName,
+            opponent: homeTeamName === teamName ? awayTeamName : homeTeamName,
+            homeGame: homeTeamName === teamName ? 'Yes' : 'No',
+            playType: classification === "PLAYER_GAME" ? playType : "Team Melt",
+            gameDate,
+            player: [playerFirstName, playerLastName].join(' ')
+        })
+    });
+    return gridData;
+
+}
+
 export const getTeamAbbreviations = () => {
 
     return new Map([

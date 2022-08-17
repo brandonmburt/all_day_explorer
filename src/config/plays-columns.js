@@ -1,32 +1,34 @@
-export const PLAYS_COLS = [
+export const AG_PLAYS_COLS = [
     {
-        name: 'ID',
-        selector: row => +row.id,
-        sortable: true,
+        headerName: 'ID',
+        field: 'id',
+        minWidth: 85
     },
     {
-        name: 'Player',
-        selector: row => [row.metadata.playerFirstName, row.metadata.playerLastName].join(' '),
-        sortable: true,
+        headerName: 'Player',
+        field: 'player',
+        filter: true,
     },
     {
-        name: 'Team',
-        selector: row => row.metadata.teamName,
-        sortable: true,
+        headerName: 'Team',
+        field: 'teamName',
     },
     {
-        name: 'Position',
-        selector: row => row.metadata.playerPosition,
-        sortable: true,
+        headerName: 'Opponent',
+        field: 'opponent',
     },
     {
-        name: 'Play Type',
-        selector: row => row.classification === "PLAYER_GAME" ? row.metadata.playType : "Team Melt",
-        sortable: true,
+        headerName: 'Position',
+        field: 'playerPosition',
+        minWidth: 100
     },
     {
-        name: 'Game Date',
-        selector: row => row.metadata.gameDate,
-        sortable: true,
-    }
-];
+        headerName: 'Play Type',
+        field: 'playType',
+    },
+    {
+        headerName: 'Game Date',
+        field: 'gameDate',
+        sortable: false
+    },
+]
