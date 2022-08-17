@@ -37,6 +37,9 @@ export function NavBar() {
                                 return <SeriesNav key={key} id={s.id} name={s.name} active={s.active} sets={val} />
                             })
                         } 
+                        <LinkContainer to="/account">
+                            <Nav.Link>Account</Nav.Link>
+                        </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
