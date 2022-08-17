@@ -4,10 +4,14 @@ import ReactLoading from "react-loading";
 export function Loading() {
 
     return (
-        <div style={{margin: '30px 10px'}}>
-            <ReactLoading type="spin" color="gray" height="130px" width="130px" delay={100} />
-            <h5 style={{marginTop: '20px'}}>Fetching Data</h5>
-        </div>
+        <>
+            <div style={{marginTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <ReactLoading type="spin" color="gray" height="130px" width="130px" delay={100} />            
+            </div>
+            <div style={{marginTop: '20px', width: '100%', textAlign: 'center'}}>
+                <h5>Fetching Data</h5>
+            </div>
+        </>
     )
 
 }
