@@ -4,9 +4,10 @@ import { useSets } from '../providers/SetsProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useParams } from "react-router-dom";
-import DataTable from 'react-data-table-component';
 import { Container, Badge, Row, Col, Card } from "react-bootstrap";
-import { EDITIONS_COLS } from '../config/editions-columns';
+import { AG_EDITION_COLS } from '../config/editions-columns';
+import { getEditionGridData } from '../utils/edition.utils';
+import { AgGrid } from "../components/AgGrid.comp";
 
 export function Editions() {
 
@@ -28,7 +29,7 @@ export function Editions() {
             <Badge pill bg="danger">Locked</Badge>;
     }
 
-    const gridData = [];
+    let gridData = [];
     let numMintedMoments = 0;
 
     if (!!editions && !!plays) {
@@ -36,28 +37,15 @@ export function Editions() {
             return e.seriesID === seriesID && e.setID === setID
         });
 
-        filteredEditions.forEach(e => {
-            const { id, playID, tier, numMinted, maxMintSize } = e;
-            const play = plays.get(playID);
-            if (play != null) {
-                gridData.push({
-                    id,
-                    tier,
-                    numMinted,
-                    maxMintSize,
-                    ...play
-                });
-                numMintedMoments += +numMinted;
-            }
-        });
-    }
+        gridData = getEditionGridData(filteredEditions, plays);
+        numMintedMoments = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
 
-    const numEditions = gridData.length;
+    }
 
     return (
         <Container>
             <Row style={{margin: '20px 5px 30px 5px'}}>
-                {[["Status", badge], ["Num Editions", numEditions.toLocaleString()],
+                {[["Status", badge], ["Num Editions", (gridData.length).toLocaleString()],
                     ["Minted Moments", numMintedMoments.toLocaleString()]].map((data, i) => {
                         const [header, body] = data;
                         return (
@@ -70,16 +58,12 @@ export function Editions() {
                         )
                 })}
             </Row>
-            <DataTable
-                title={title}
-                columns={EDITIONS_COLS}
-                data={gridData}
-                defaultSortFieldId={1}
-                fixedHeader
-                highlightOnHover
-                progressPending={gridData.length === 0}
-                pagination
-            />
+            {gridData.length > 0 && 
+                <>
+                    <h4>{title}</h4>
+                    <AgGrid columnDefs={AG_EDITION_COLS} rowData={gridData} />
+                </>
+            }
         </Container>
     )
 

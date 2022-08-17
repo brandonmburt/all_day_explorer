@@ -7,7 +7,6 @@ export const AG_PLAYS_COLS = [
     {
         headerName: 'Player',
         field: 'player',
-        filter: true,
     },
     {
         headerName: 'Team',

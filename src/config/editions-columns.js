@@ -1,42 +1,35 @@
-export const EDITIONS_COLS = [
+export const AG_EDITION_COLS = [
     {
-        name: 'Edition ID',
-        selector: row => +row.id,
-        sortable: true,
+        headerName: 'ID',
+        field: 'id',
+        minWidth: 85
     },
     {
-        name: 'Player',
-        selector: row => [row.metadata.playerFirstName, row.metadata.playerLastName].join(' '),
-        sortable: true,
+        headerName: 'Player',
+        field: 'player',
     },
     {
-        name: 'Team',
-        selector: row => row.metadata.teamName,
-        sortable: true,
+        headerName: 'Team',
+        field: 'metadata.teamName',
     },
     {
-        name: 'Position',
-        selector: row => row.metadata.playerPosition,
-        sortable: true,
+        headerName: 'Position',
+        field: 'metadata.playerPosition',
     },
     {
-        name: 'Play Type',
-        selector: row => row.classification === "PLAYER_GAME" ? row.metadata.playType : "Team Melt",
-        sortable: true,
+        headerName: 'Play Type',
+        field: 'playType',
     },
     {
-        name: 'Tier',
-        selector: row => row.tier,
-        sortable: true,
+        headerName: 'Tier',
+        field: 'tier',
     },
     {
-        name: 'Num Minted',
-        selector: row => row.numMinted,
-        sortable: true,
+        headerName: 'Num Minted',
+        field: 'numMinted',
     },
     {
-        name: 'Max Mint Size',
-        selector: row => row.maxMintSize,
-        sortable: true,
-    }
-];
+        headerName: 'Max Mint Size',
+        field: 'maxMintSize',
+    },
+]

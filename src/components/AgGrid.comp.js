@@ -1,7 +1,7 @@
 import React, { useRef, useState, useMemo } from "react";
 import { Row } from "react-bootstrap";
 import { AgGridReact } from 'ag-grid-react';
-import { DEFAULT_COLS } from '../utils/ag-grid.utils';
+import { DEFAULT_COLS } from '../config/ag-grid-columns';
 
 export function AgGrid(props) {
 
@@ -10,7 +10,7 @@ export function AgGrid(props) {
     const colDefs = useMemo(() => props.columnDefs);
     const defaultColDefs = useMemo(() => DEFAULT_COLS);
 
-    if (props.rowData.length > 0 && rowData.length === 0) {
+    if (props.rowData != rowData) {
         setRowData(props.rowData);
     }
 
