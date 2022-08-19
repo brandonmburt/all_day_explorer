@@ -4,7 +4,7 @@ export const DEFAULT_COLS = {
     minWidth: 150,
     resizable: true,
     filterParams: {
-        buttons: ['reset'],
+        buttons: ['clear'],
         closeOnApply: true
     }
 };
