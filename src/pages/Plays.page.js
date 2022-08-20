@@ -6,14 +6,17 @@ import StackedBarChart from '../components/d3/StackedBarChart.comp';
 import { Loading } from '../components/Loading.comp';
 import { getPlaysGridData } from '../utils/plays.utils';
 import { AgGrid } from '../components/AgGrid.comp';
+import { numPlaysByTypeAndTeam, getUniquePlayTypes } from '../utils/plays.utils';
 
 export function Plays() {
 
     const { plays } = usePlays();
 
-    let rowData = [];
+    let rowData = [], playsByTeam = [], playTypes = [];
     if (!!plays && rowData.length === 0) {
         rowData = getPlaysGridData(plays);
+        playsByTeam = numPlaysByTypeAndTeam(plays);
+        playTypes = getUniquePlayTypes(playsByTeam);
     }
 
     return (
@@ -25,7 +28,9 @@ export function Plays() {
                 <>
                     <Row>
                         <h6 style={{margin: '20px 0px 0px 20px'}}>Plays Per Team</h6>
-                        <StackedBarChart plays={plays} />
+                        {playsByTeam.length > 0 && playTypes.length > 0 &&
+                            <StackedBarChart data={playsByTeam} types={playTypes} />
+                        }
                     </Row>
                     {rowData.length > 0 && 
                         <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
