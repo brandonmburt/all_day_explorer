@@ -13,6 +13,8 @@ import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { AG_COLLECTION_COLS } from '../config/collection-columns';
 import { AgGrid } from '../components/AgGrid.comp';
+import PieChart from '../components/d3/PieChart.comp.js';
+import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier } from '../utils/account.utils';
 
 export function Account() {
 
@@ -23,6 +25,8 @@ export function Account() {
 
     const [address, setAddress] = useState(null);
     const [editionIDs, setEditionIDs] = useState([]);
+    const [momentsBySeriesAndTier, setMomentsBySeriesAndTier] = useState([]);
+    const [editionsBySeriesAndTier, setEditionsBySeriesAndTier] = useState([]);
 
     let editionsMap = null;
     if (!!editions && editionsMap === null) {
@@ -63,7 +67,11 @@ export function Account() {
         }).catch(() => console.log("Error occured getting collection moments"));
         let collection = getDescriptiveMoments(moments, editionsMap, plays, series, sets);
         setColectionMoments(collection);
-        setEditionIDs(getUniqueEditions(moments));
+        let ids = getUniqueEditions(moments);
+        setEditionIDs(ids);
+
+        setMomentsBySeriesAndTier(getNumMomentsBySeriesAndTier(series, collection));
+        setEditionsBySeriesAndTier(getNumEditionsBySeriesAndTier(series, ids, editionsMap));
     }
 
     const [collectionIDs, setColectionIDs] = useState([]);
@@ -92,13 +100,37 @@ export function Account() {
                             const [header, body] = data;
                             return (
                                 <Col key={i} md={true}>
-                                    <Card style={{margin: '20px 10px 0px'}}>
+                                    <Card className="shadow" style={{margin: '20px 10px 0px'}}>
                                         <Card.Header as="h6">{header}</Card.Header>
                                         <Card.Body as="h5" style={{textAlign: 'center'}}>{body}</Card.Body>
                                     </Card>
                                 </Col>
                             )
                     })}
+                </Row>
+            }
+            {momentsBySeriesAndTier.length > 0 && editionsBySeriesAndTier.length > 0 &&
+                <Row style={{margin: "5px"}}>
+                    <Col lg={true} style={{marginBottom: "15px"}}>
+                        <Card className="shadow" style={{margin: '30px 10px'}}>
+                            <Card.Header as="h5">Moments</Card.Header>
+                            <Card.Body>
+                                <PieChart data={momentsBySeriesAndTier.map(s => {
+                                    return { name: s.name, value: s.TOTAL };
+                                })} />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col lg={true} style={{marginBottom: "15px"}}>
+                        <Card className="shadow" style={{margin: '30px 10px'}}>
+                            <Card.Header as="h5">Editions</Card.Header>
+                            <Card.Body>
+                                <PieChart data={editionsBySeriesAndTier.map(s => {
+                                    return { name: s.name, value: s.TOTAL };
+                                })} />
+                            </Card.Body>
+                        </Card>
+                    </Col>
                 </Row>
             }
             {collectionMoments.length > 0 &&
