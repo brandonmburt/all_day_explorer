@@ -30,7 +30,7 @@ export function Home() {
                 <Loading />
             }
             {(!!series && !!editions) &&
-                <><Card style={{margin: '20px 10px 0px'}}>
+                <><Card className="shadow" style={{margin: '30px 10px'}}>
                     <Card.Header as="h5">Moments</Card.Header>
                     <Card.Body>
                         <Row>
@@ -58,7 +58,7 @@ export function Home() {
                         </Row>
                     </Card.Body>
                 </Card>
-                <Card style={{margin: '20px 10px'}}>
+                <Card className="shadow" style={{margin: '30px 10px'}}>
                     <Card.Header as="h5">Editions</Card.Header>
                     <Card.Body>
                         <Row>

@@ -50,7 +50,7 @@ export function Editions() {
                         const [header, body] = data;
                         return (
                             <Col key={i} md={true}>
-                                <Card style={{margin: '20px 10px 0px'}}>
+                                <Card className="shadow" style={{margin: '20px 10px 0px'}}>
                                     <Card.Header as="h6">{header}</Card.Header>
                                     <Card.Body as="h5" style={{textAlign: 'center'}}>{body}</Card.Body>
                                 </Card>
