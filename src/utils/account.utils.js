@@ -1,3 +1,5 @@
+import { getTeamAbbreviations, getPlayTypeArray } from './plays.utils';
+
 export const getNumMomentsBySeriesAndTier = (series, moments) => {
 
     const myMap = new Map();
@@ -58,5 +60,44 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
     });
 
     return data;
+
+}
+
+export const numMomentsByTypeAndTeam = (collectionMoments, plays) => {
+    const teamAbbreviations = getTeamAbbreviations();
+    const playTypeArr = getPlayTypeArray(plays);
+    const playTypeByTeam = new Map();
+    
+    teamAbbreviations.forEach((v, k) => {
+        playTypeArr.forEach(type => {
+            playTypeByTeam.set((k + ";" + type), {count: 0});
+        });
+    });
+    //console.log(collectionMoments);
+    // Current implementation is looping through plays twice
+    collectionMoments.forEach(moment => {
+        const { teamName, playType, tier } = moment;
+        const key = teamName + ";" + (playType === "" ? "Team Melt" : playType);
+        if (!playTypeByTeam.has(key)) {
+            // this condition should never be met
+            playTypeByTeam.set(key, {count: 0});
+        }
+        playTypeByTeam.get(key).count += 1;
+    });
+
+
+    let playObjs = [];
+    playTypeByTeam.forEach((v, k) => {
+        const [ team, playType ] = k.split(";");
+        const abbreviation = teamAbbreviations.has(team) ? teamAbbreviations.get(team) : team;
+        playObjs.push({
+            team: abbreviation,
+            type: playType,
+            count: v.count
+        });
+    });
+
+    // console.log(playObjs)
+    return playObjs;
 
 }

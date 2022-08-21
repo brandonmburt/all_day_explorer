@@ -20,7 +20,7 @@ class StackedBarChart extends React.Component {
             colors: d3.schemeSpectral[this.props.types.length],
             colorLength: this.props.types.length,
             height: 500,
-            width: 1325
+            width: 1300
         });
 
         d3.select(this.myRef.current).node().appendChild(chart);

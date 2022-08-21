@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { query } from "@onflow/fcl";
 import { GET_COLLECTION_IDS } from "../scripts/get-collection-ids.script";
@@ -15,6 +15,9 @@ import { AG_COLLECTION_COLS } from '../config/collection-columns';
 import { AgGrid } from '../components/AgGrid.comp';
 import PieChart from '../components/d3/PieChart.comp.js';
 import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier } from '../utils/account.utils';
+import StackedBarChart from '../components/d3/StackedBarChart.comp';
+import { numMomentsByTypeAndTeam } from '../utils/account.utils';
+import { getUniquePlayTypes } from '../utils/plays.utils';
 
 export function Account() {
 
@@ -27,6 +30,8 @@ export function Account() {
     const [editionIDs, setEditionIDs] = useState([]);
     const [momentsBySeriesAndTier, setMomentsBySeriesAndTier] = useState([]);
     const [editionsBySeriesAndTier, setEditionsBySeriesAndTier] = useState([]);
+    const [momentsByTeamAndTier, setMomentsByTeamAndTier] = useState([]);
+    const [playTypes, setPlayTypes] = useState([]);
 
     let editionsMap = null;
     if (!!editions && editionsMap === null) {
@@ -72,6 +77,10 @@ export function Account() {
 
         setMomentsBySeriesAndTier(getNumMomentsBySeriesAndTier(series, collection));
         setEditionsBySeriesAndTier(getNumEditionsBySeriesAndTier(series, ids, editionsMap));
+        let momentsData = numMomentsByTypeAndTeam(collection, plays)
+        setMomentsByTeamAndTier(momentsData);
+        setPlayTypes(getUniquePlayTypes(momentsData));
+        //console.log(getUniquePlayTypes(momentsData));
     }
 
     const [collectionIDs, setColectionIDs] = useState([]);
@@ -131,6 +140,16 @@ export function Account() {
                             </Card.Body>
                         </Card>
                     </Col>
+                </Row>
+            }
+            {momentsByTeamAndTier.length > 0 && playTypes.length > 0 &&
+                <Row>
+                    <Card className="shadow">
+                        <Card.Header as="h5">Moment Distribution</Card.Header>
+                        <Card.Body>
+                            <StackedBarChart data={momentsByTeamAndTier} types={playTypes} />
+                        </Card.Body>
+                    </Card>
                 </Row>
             }
             {collectionMoments.length > 0 &&

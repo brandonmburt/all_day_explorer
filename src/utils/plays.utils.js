@@ -38,7 +38,7 @@ export const numPlaysByTypeAndTeam = (plays) => {
 
 }
 
-const getPlayTypeArray = (plays) => {
+export const getPlayTypeArray = (plays) => {
 
     const playTypeSet = new Set();
     plays.forEach(p => {
