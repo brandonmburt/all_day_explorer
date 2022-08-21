@@ -7,6 +7,7 @@ import { Loading } from '../components/Loading.comp';
 import { getPlaysGridData } from '../utils/plays.utils';
 import { AgGrid } from '../components/AgGrid.comp';
 import { numPlaysByTypeAndTeam } from '../utils/plays.utils';
+import { TEAMS } from '../constants/teams';
 
 export function Plays() {
 
@@ -15,7 +16,7 @@ export function Plays() {
     let rowData = [], playsByTeam = [];
     if (!!playsMap && rowData.length === 0) {
         rowData = getPlaysGridData(playsMap);
-        playsByTeam = numPlaysByTypeAndTeam(playsMap, playTypes);
+        playsByTeam = numPlaysByTypeAndTeam(playsMap, playTypes, TEAMS);
     }
 
     return (

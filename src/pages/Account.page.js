@@ -17,6 +17,7 @@ import PieChart from '../components/d3/PieChart.comp.js';
 import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier } from '../utils/account.utils';
 import StackedBarChart from '../components/d3/StackedBarChart.comp';
 import { numMomentsByTypeAndTeam } from '../utils/account.utils';
+import { TEAMS } from '../constants/teams';
 
 export function Account() {
 
@@ -75,7 +76,7 @@ export function Account() {
 
         setMomentsBySeriesAndTier(getNumMomentsBySeriesAndTier(series, collection));
         setEditionsBySeriesAndTier(getNumEditionsBySeriesAndTier(series, ids, editionsMap));
-        let momentsData = numMomentsByTypeAndTeam(collection, playTypes)
+        let momentsData = numMomentsByTypeAndTeam(collection, playTypes, TEAMS)
         setMomentsByTeamAndTier(momentsData);
     }
 

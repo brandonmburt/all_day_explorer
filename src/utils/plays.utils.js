@@ -1,9 +1,8 @@
-export const numPlaysByTypeAndTeam = (plays, playTypes) => {
+export const numPlaysByTypeAndTeam = (plays, playTypes, teams) => {
     
-    const teamAbbreviations = getTeamAbbreviations();
     const playTypeByTeam = new Map();
     
-    teamAbbreviations.forEach((v, k) => {
+    teams.forEach((v, k) => {
         playTypes.forEach(type => {
             playTypeByTeam.set((k + ";" + type), {count: 0});
         });
@@ -25,7 +24,7 @@ export const numPlaysByTypeAndTeam = (plays, playTypes) => {
     let playObjs = [];
     playTypeByTeam.forEach((v, k) => {
         const [ team, playType ] = k.split(";");
-        const abbreviation = teamAbbreviations.has(team) ? teamAbbreviations.get(team) : team;
+        const abbreviation = teams.has(team) ? teams.get(team) : team;
         playObjs.push({
             team: abbreviation,
             type: playType,
@@ -58,48 +57,5 @@ export const getPlaysGridData = (plays) => {
         })
     });
     return gridData;
-
-}
-
-export const getTeamAbbreviations = () => {
-
-    return new Map([
-        ["Arizona Cardinals", "ARI"],
-        ["Los Angeles Rams", "LAR"],
-        ["Kansas City Chiefs", "KC"],
-        ["Cincinnati Bengals", "CIN"],
-        ["Green Bay Packers", "GB"],
-        ["San Francisco 49ers", "SF"],
-        ["Tampa Bay Buccaneers", "TB"],
-        ["Buffalo Bills", "BUF"],
-        ["Dallas Cowboys", "DAL"],
-        ["Los Angeles Chargers", "LAC"],
-        ["Pittsburgh Steelers", "PIT"],
-        ["Denver Broncos", "DEN"],
-        ["Miami Dolphins", "MIA"],
-        ["Minnesota Vikings", "MIN"],
-        ["Chicago Bears", "CHI"],
-        ["Detroit Lions", "DET"],
-        ["Atlanta Falcons", "ATL"],
-        ["Philadelphia Eagles", "PHI"],
-        ["Seattle Seahawks", "SEA"],
-        ["New England Patriots", "NE"],
-        ["Indianapolis Colts", "IND"],
-        ["Las Vegas Raiders", "LV"],
-        ["Washington Football Team", "WFT"],
-        ["New York Jets", "NYJ"],
-        ["New Orleans Saints", "NO"],
-        ["Baltimore Ravens", "BAL"],
-        ["Jacksonville Jaguars", "JAX"],
-        ["New York Giants", "NYG"],
-        ["Tennessee Titans", "TEN"],
-        ["Cleveland Browns", "CLE"],
-        ["Houston Texans", "HOU"],
-        ["Carolina Panthers", "CAR"],
-        ["Phoenix Cardinals", "PHX"],
-        ["Tennessee Oilers", "OIL"],
-        ["Oakland Raiders", "OAK"],
-        ["Los Angeles Raiders", "RAI"]
-    ]);
 
 }

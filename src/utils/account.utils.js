@@ -1,5 +1,3 @@
-import { getTeamAbbreviations } from './plays.utils';
-
 export const getNumMomentsBySeriesAndTier = (series, moments) => {
 
     const myMap = new Map();
@@ -63,11 +61,10 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
 
 }
 
-export const numMomentsByTypeAndTeam = (collectionMoments, playTypes) => {
-    const teamAbbreviations = getTeamAbbreviations();
+export const numMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) => {
     const playTypeByTeam = new Map();
     
-    teamAbbreviations.forEach((v, k) => {
+    teams.forEach((v, k) => {
         playTypes.forEach(type => {
             playTypeByTeam.set((k + ";" + type), {count: 0});
         });
@@ -88,7 +85,7 @@ export const numMomentsByTypeAndTeam = (collectionMoments, playTypes) => {
     let playObjs = [];
     playTypeByTeam.forEach((v, k) => {
         const [ team, playType ] = k.split(";");
-        const abbreviation = teamAbbreviations.has(team) ? teamAbbreviations.get(team) : team;
+        const abbreviation = teams.has(team) ? teams.get(team) : team;
         playObjs.push({
             team: abbreviation,
             type: playType,
