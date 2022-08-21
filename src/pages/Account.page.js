@@ -17,12 +17,11 @@ import PieChart from '../components/d3/PieChart.comp.js';
 import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier } from '../utils/account.utils';
 import StackedBarChart from '../components/d3/StackedBarChart.comp';
 import { numMomentsByTypeAndTeam } from '../utils/account.utils';
-import { getUniquePlayTypes } from '../utils/plays.utils';
 
 export function Account() {
 
     const { editions } = useEditions();
-    const { plays } = usePlays();
+    const { playsMap, playTypes } = usePlays();
     const { series } = useSeries();
     const { sets } = useSets();
 
@@ -31,7 +30,6 @@ export function Account() {
     const [momentsBySeriesAndTier, setMomentsBySeriesAndTier] = useState([]);
     const [editionsBySeriesAndTier, setEditionsBySeriesAndTier] = useState([]);
     const [momentsByTeamAndTier, setMomentsByTeamAndTier] = useState([]);
-    const [playTypes, setPlayTypes] = useState([]);
 
     let editionsMap = null;
     if (!!editions && editionsMap === null) {
@@ -70,17 +68,15 @@ export function Account() {
             cadence: GET_COLLECTION_MOMENTS,
             args: (arg, t) => [arg(address, t.Address), arg(momentIDs, t.Array(t.UInt64))]
         }).catch(() => console.log("Error occured getting collection moments"));
-        let collection = getDescriptiveMoments(moments, editionsMap, plays, series, sets);
+        let collection = getDescriptiveMoments(moments, editionsMap, playsMap, series, sets);
         setColectionMoments(collection);
         let ids = getUniqueEditions(moments);
         setEditionIDs(ids);
 
         setMomentsBySeriesAndTier(getNumMomentsBySeriesAndTier(series, collection));
         setEditionsBySeriesAndTier(getNumEditionsBySeriesAndTier(series, ids, editionsMap));
-        let momentsData = numMomentsByTypeAndTeam(collection, plays)
+        let momentsData = numMomentsByTypeAndTeam(collection, playTypes)
         setMomentsByTeamAndTier(momentsData);
-        setPlayTypes(getUniquePlayTypes(momentsData));
-        //console.log(getUniquePlayTypes(momentsData));
     }
 
     const [collectionIDs, setColectionIDs] = useState([]);

@@ -4,11 +4,12 @@ import useAllPlays from '../hooks/use-all-plays.hook';
 const PlaysContext = createContext()
 
 export default function PlaysProvider({ children }) {
-  const [ plays ] = useAllPlays();
+  const [ playsMap, playTypes ] = useAllPlays();
 
   return (
     <PlaysContext.Provider value={{
-      plays
+      playsMap,
+      playTypes
     }}>
       {children}
     </PlaysContext.Provider>

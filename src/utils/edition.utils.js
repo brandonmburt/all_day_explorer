@@ -23,7 +23,7 @@ export const getEditionGridData = (editions, plays) => {
                 numMinted,
                 maxMintSize,
                 player: [play.metadata.playerFirstName, play.metadata.playerLastName].join(' '),
-                playType: play.classification === "PLAYER_GAME" ? play.metadata.playType : "Team Melt",
+                playType: play.metadata.playType,
                 ...play
             });
         }

@@ -16,7 +16,7 @@ export function Editions() {
     const { series } = useSeries();
     const { sets } = useSets();
     const { editions } = useEditions();
-    const { plays } = usePlays();
+    const { playsMap } = usePlays();
 
     let title = "", badge = "";
     if (!!series & !!sets) {
@@ -32,12 +32,12 @@ export function Editions() {
     let gridData = [];
     let numMintedMoments = 0;
 
-    if (!!editions && !!plays) {
+    if (!!editions && !!playsMap) {
         const filteredEditions = editions.filter(e => {
             return e.seriesID === seriesID && e.setID === setID
         });
 
-        gridData = getEditionGridData(filteredEditions, plays);
+        gridData = getEditionGridData(filteredEditions, playsMap);
         numMintedMoments = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
 
     }

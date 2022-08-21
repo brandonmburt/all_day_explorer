@@ -1,11 +1,10 @@
-export const numPlaysByTypeAndTeam = (plays) => {
+export const numPlaysByTypeAndTeam = (plays, playTypes) => {
     
     const teamAbbreviations = getTeamAbbreviations();
-    const playTypeArr = getPlayTypeArray(plays);
     const playTypeByTeam = new Map();
     
     teamAbbreviations.forEach((v, k) => {
-        playTypeArr.forEach(type => {
+        playTypes.forEach(type => {
             playTypeByTeam.set((k + ";" + type), {count: 0});
         });
     });
@@ -14,7 +13,7 @@ export const numPlaysByTypeAndTeam = (plays) => {
     plays.forEach(play => {
         const { metadata } = play;
         const { teamName, playType } = metadata;
-        const key = teamName + ";" + (playType === "" ? "Team Melt" : playType);
+        const key = teamName + ";" + playType;
         if (!playTypeByTeam.has(key)) {
             // this condition should never be met
             playTypeByTeam.set(key, {count: 0});
@@ -38,30 +37,10 @@ export const numPlaysByTypeAndTeam = (plays) => {
 
 }
 
-export const getPlayTypeArray = (plays) => {
-
-    const playTypeSet = new Set();
-    plays.forEach(p => {
-        const { metadata } = p;
-        let { playType } = metadata;
-        playTypeSet.add(playType === "" ? "Team Melt" : playType);
-    });
-    return Array.from(playTypeSet);
-    
-}
-
-export const getUniquePlayTypes = (playsByTeam) => {
-
-    const mySet = new Set();
-    playsByTeam.forEach(p => mySet.add(p.type));
-    return Array.from(mySet);
-
-}
-
 export const getPlaysGridData = (plays) => {
 
     let gridData = [];
-    plays.forEach((val, key) => {
+    plays.forEach(val => {
         let { id, classification, metadata } = val;
         let { playerPosition, playerFirstName, playerLastName, teamName, playType, gameDate, awayTeamName, homeTeamName } = metadata;
         gridData.push({
@@ -73,7 +52,7 @@ export const getPlaysGridData = (plays) => {
             teamName,
             opponent: homeTeamName === teamName ? awayTeamName : homeTeamName,
             homeGame: homeTeamName === teamName ? 'Yes' : 'No',
-            playType: classification === "PLAYER_GAME" ? playType : "Team Melt",
+            playType,
             gameDate,
             player: [playerFirstName, playerLastName].join(' ')
         })

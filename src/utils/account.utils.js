@@ -1,4 +1,4 @@
-import { getTeamAbbreviations, getPlayTypeArray } from './plays.utils';
+import { getTeamAbbreviations } from './plays.utils';
 
 export const getNumMomentsBySeriesAndTier = (series, moments) => {
 
@@ -63,21 +63,20 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
 
 }
 
-export const numMomentsByTypeAndTeam = (collectionMoments, plays) => {
+export const numMomentsByTypeAndTeam = (collectionMoments, playTypes) => {
     const teamAbbreviations = getTeamAbbreviations();
-    const playTypeArr = getPlayTypeArray(plays);
     const playTypeByTeam = new Map();
     
     teamAbbreviations.forEach((v, k) => {
-        playTypeArr.forEach(type => {
+        playTypes.forEach(type => {
             playTypeByTeam.set((k + ";" + type), {count: 0});
         });
     });
-    //console.log(collectionMoments);
+
     // Current implementation is looping through plays twice
     collectionMoments.forEach(moment => {
         const { teamName, playType, tier } = moment;
-        const key = teamName + ";" + (playType === "" ? "Team Melt" : playType);
+        const key = teamName + ";" + playType;
         if (!playTypeByTeam.has(key)) {
             // this condition should never be met
             playTypeByTeam.set(key, {count: 0});
