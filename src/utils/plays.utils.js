@@ -1,21 +1,19 @@
 export const numPlaysByTypeAndTeam = (plays, playTypes, teams) => {
     
     const playTypeByTeam = new Map();
-    
     teams.forEach((v, k) => {
         playTypes.forEach(type => {
-            playTypeByTeam.set((k + ";" + type), {count: 0});
+            playTypeByTeam.set((k + ";" + type), { count: 0 });
         });
     });
 
-    // Current implementation is looping through plays twice
     plays.forEach(play => {
         const { metadata } = play;
         const { teamName, playType } = metadata;
         const key = teamName + ";" + playType;
         if (!playTypeByTeam.has(key)) {
-            // this condition should never be met
-            playTypeByTeam.set(key, {count: 0});
+            console.error("Unidentified team found");
+            playTypeByTeam.set(key, { count: 0 });
         }
         playTypeByTeam.get(key).count += 1;
     });

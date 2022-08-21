@@ -1,16 +1,12 @@
+// Might want to just combine these functions into one and add a parameter
+// for evaluating moments or editions
+
 export const getSupplyPerSeriesAndTier = (series, editions) => {
 
     const myMap = new Map();
     series.forEach(s => {
-        let id = s.id;
-        let name = s.name;
-        myMap.set(id, {
-            name,
-            COMMON: 0,
-            RARE: 0,
-            LEGENDARY: 0,
-            ULTIMATE: 0
-        });
+        const { id, name } = s;
+        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
     });
 
     editions.forEach(e => {
@@ -19,10 +15,9 @@ export const getSupplyPerSeriesAndTier = (series, editions) => {
     });
 
     let data = [];
-    myMap.forEach(val => {
-        const { COMMON, RARE, LEGENDARY, ULTIMATE } = val;
-        const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
-        data.push({TOTAL: TOT, ...val});
+    myMap.forEach(v => {
+        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
+        data.push({TOTAL: TOT, ...v});
     });
 
     return data;
@@ -33,15 +28,8 @@ export const getNumEditionsPerSeriesAndTier = (series, editions) => {
 
     const myMap = new Map();
     series.forEach(s => {
-        let id = s.id;
-        let name = s.name;
-        myMap.set(id, {
-            name,
-            COMMON: 0,
-            RARE: 0,
-            LEGENDARY: 0,
-            ULTIMATE: 0
-        });
+        const { id, name } = s;
+        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
     });
 
     editions.forEach(e => {
@@ -50,10 +38,9 @@ export const getNumEditionsPerSeriesAndTier = (series, editions) => {
     });
 
     let data = [];
-    myMap.forEach(val => {
-        const { COMMON, RARE, LEGENDARY, ULTIMATE } = val;
-        const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
-        data.push({TOTAL: TOT, ...val});
+    myMap.forEach(v => {
+        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
+        data.push({TOTAL: TOT, ...v});
     });
 
     return data;

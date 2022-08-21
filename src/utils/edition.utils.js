@@ -12,7 +12,6 @@ export const getEditionsMap = (editions) => {
 export const getEditionGridData = (editions, plays) => {
     
     let gridData = [];
-
     editions.forEach(edition => {
         const { id, maxMintSize, numMinted, playID, tier } = edition;
         const play = plays.get(playID);

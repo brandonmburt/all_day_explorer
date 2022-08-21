@@ -1,9 +1,7 @@
 export const getUniqueEditions = (moments) => {
 
     const editions = new Set();
-    moments.forEach(m => {
-        editions.add(m.editionID);
-    });
+    moments.forEach(m => editions.add(m.editionID));
     return Array.from(editions);
     
 }

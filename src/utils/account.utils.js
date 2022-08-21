@@ -2,15 +2,8 @@ export const getNumMomentsBySeriesAndTier = (series, moments) => {
 
     const myMap = new Map();
     series.forEach(s => {
-        let id = s.id;
-        let name = s.name;
-        myMap.set(id, {
-            name,
-            COMMON: 0,
-            RARE: 0,
-            LEGENDARY: 0,
-            ULTIMATE: 0
-        });
+        const { id, name } = s;
+        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
     });
 
     moments.forEach(m => {
@@ -19,10 +12,9 @@ export const getNumMomentsBySeriesAndTier = (series, moments) => {
     });
 
     let data = [];
-    myMap.forEach(val => {
-        const { COMMON, RARE, LEGENDARY, ULTIMATE } = val;
-        const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
-        data.push({TOTAL: TOT, ...val});
+    myMap.forEach(v => {
+        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
+        data.push({TOTAL: TOT, ...v});
     });
 
     return data;
@@ -33,15 +25,8 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
 
     const myMap = new Map();
     series.forEach(s => {
-        let id = s.id;
-        let name = s.name;
-        myMap.set(id, {
-            name,
-            COMMON: 0,
-            RARE: 0,
-            LEGENDARY: 0,
-            ULTIMATE: 0
-        });
+        const { id, name } = s;
+        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
     });
 
     editionIDs.forEach(id => {
@@ -51,10 +36,9 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
     });
 
     let data = [];
-    myMap.forEach(val => {
-        const { COMMON, RARE, LEGENDARY, ULTIMATE } = val;
-        const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
-        data.push({TOTAL: TOT, ...val});
+    myMap.forEach(v => {
+        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
+        data.push({TOTAL: TOT, ...v});
     });
 
     return data;
@@ -62,25 +46,23 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
 }
 
 export const numMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) => {
+
     const playTypeByTeam = new Map();
-    
     teams.forEach((v, k) => {
         playTypes.forEach(type => {
-            playTypeByTeam.set((k + ";" + type), {count: 0});
+            playTypeByTeam.set((k + ";" + type), { count: 0 });
         });
     });
 
-    // Current implementation is looping through plays twice
     collectionMoments.forEach(moment => {
         const { teamName, playType, tier } = moment;
         const key = teamName + ";" + playType;
         if (!playTypeByTeam.has(key)) {
-            // this condition should never be met
-            playTypeByTeam.set(key, {count: 0});
+            console.error("Unidentified team found");
+            playTypeByTeam.set(key, { count: 0 });
         }
         playTypeByTeam.get(key).count += 1;
     });
-
 
     let playObjs = [];
     playTypeByTeam.forEach((v, k) => {
@@ -93,7 +75,6 @@ export const numMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) => 
         });
     });
 
-    // console.log(playObjs)
     return playObjs;
 
 }
