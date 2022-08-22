@@ -1,7 +1,7 @@
 import React from "react"
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { Container, Row } from "react-bootstrap";
-import { AG_PLAYS_COLS } from '../config/plays-columns';
+import { AG_PLAYS_COLS } from '../constants/ag-grid/plays-columns';
 import StackedBarChart from '../components/d3/StackedBarChart.comp';
 import { Loading } from '../components/Loading.comp';
 import { getPlaysGridData } from '../utils/plays.utils';

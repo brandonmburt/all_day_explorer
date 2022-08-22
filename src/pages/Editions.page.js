@@ -5,7 +5,7 @@ import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useParams } from "react-router-dom";
 import { Container, Badge, Row, Col, Card } from "react-bootstrap";
-import { AG_EDITION_COLS } from '../config/editions-columns';
+import { AG_EDITION_COLS } from '../constants/ag-grid/editions-columns';
 import { getEditionGridData } from '../utils/edition.utils';
 import { AgGrid } from "../components/AgGrid.comp";
 

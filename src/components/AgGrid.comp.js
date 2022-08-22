@@ -1,7 +1,7 @@
 import React, { useRef, useState, useMemo } from "react";
 import { Row } from "react-bootstrap";
 import { AgGridReact } from 'ag-grid-react';
-import { DEFAULT_COLS } from '../config/ag-grid-columns';
+import { DEFAULT_COLS } from '../constants/ag-grid/ag-grid-columns';
 
 export function AgGrid(props) {
 

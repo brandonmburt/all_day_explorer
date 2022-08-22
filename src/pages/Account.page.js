@@ -11,7 +11,7 @@ import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
-import { AG_COLLECTION_COLS } from '../config/collection-columns';
+import { AG_COLLECTION_COLS } from '../constants/ag-grid/collection-columns';
 import { AgGrid } from '../components/AgGrid.comp';
 import PieChart from '../components/d3/PieChart.comp.js';
 import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier } from '../utils/account.utils';
