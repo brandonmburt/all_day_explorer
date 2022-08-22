@@ -18,7 +18,7 @@ export function SeriesNav(props) {
             {Array.from(props.sets).map((set) => {
                 const [id, name] = set.split(":");
                 return (
-                    <LinkContainer key={id} to={"/editions/" + props.id + "/" + id}>
+                    <LinkContainer key={id} to={"/set/" + props.id + "/" + id}>
                         <NavDropdown.Item>
                             {id}: {name}
                         </NavDropdown.Item>

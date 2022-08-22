@@ -9,7 +9,7 @@ import { AG_EDITION_COLS } from '../constants/ag-grid/editions-columns';
 import { getEditionGridData } from '../utils/edition.utils';
 import { AgGrid } from "../components/AgGrid.comp";
 
-export function Editions() {
+export function Set() {
 
     const { seriesID, setID } = useParams();
 
