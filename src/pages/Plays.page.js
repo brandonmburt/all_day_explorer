@@ -35,7 +35,7 @@ export function Plays() {
                     {rowData.length > 0 && 
                         <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
                     }
-                    </>
+                </>
             }
         </Container>
     )

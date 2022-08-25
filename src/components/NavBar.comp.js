@@ -31,6 +31,9 @@ export function NavBar() {
                         <LinkContainer to="/plays">
                             <Nav.Link>Plays</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/editions">
+                            <Nav.Link>Editions</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/account">
                             <Nav.Link>Account</Nav.Link>
                         </LinkContainer>
