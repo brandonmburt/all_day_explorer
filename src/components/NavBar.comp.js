@@ -34,6 +34,9 @@ export function NavBar() {
                         <LinkContainer to="/editions">
                             <Nav.Link>Editions</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/moments">
+                            <Nav.Link>Moments</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/account">
                             <Nav.Link>Account</Nav.Link>
                         </LinkContainer>

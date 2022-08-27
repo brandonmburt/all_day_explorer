@@ -41,3 +41,69 @@ export const getDescriptiveMoments = (moments, editionsMap, playsMap, seriesMap,
     return descriptiveMoments;
 
 }
+
+export const getAgNumMomentsByTypeAndTeam = (editions, playsMap, playTypes, teams) => {
+
+    const typesObj = {total: 0};
+    playTypes.forEach(type => typesObj[type] = 0);
+
+    const teamObjMap = new Map();
+    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
+
+    editions.forEach(edition => {
+        const { playID, numMinted } = edition;
+        const play = playsMap.get(playID);
+        const { metadata } = play; 
+        const { teamName, playType } = metadata;
+        if (!teamObjMap.has(teamName)) {
+            console.error("Unidentified team found");
+            teamObjMap.set(teamName, {...typesObj});
+        }
+        teamObjMap.get(teamName)[playType] += +numMinted;
+        teamObjMap.get(teamName).total += +numMinted;
+    });
+
+    let objsArr = [];
+    teamObjMap.forEach((v, k) => {
+        objsArr.push({
+            name: teams.has(k) ? teams.get(k) : k,
+            ...v
+        });
+    });
+
+    return objsArr.sort((a, b) => b.total - a.total);
+
+}
+
+export const getAgNumMomentsByTierAndTeam = (editions, playsMap, tiers, teams) => {
+
+    const tiersObj = {total: 0};
+    tiers.forEach(tier => tiersObj[tier] = 0);
+
+    const teamObjMap = new Map();
+    teams.forEach((v, k) => teamObjMap.set(k, {...tiersObj}));
+
+    editions.forEach(edition => {
+        const { playID, numMinted, tier } = edition;
+        const play = playsMap.get(playID);
+        const { metadata } = play; 
+        const { teamName } = metadata;
+        if (!teamObjMap.has(teamName)) {
+            console.error("Unidentified team found");
+            teamObjMap.set(teamName, {...tiersObj});
+        }
+        teamObjMap.get(teamName)[tier] += +numMinted;
+        teamObjMap.get(teamName).total += +numMinted;
+    });
+
+    let objsArr = [];
+    teamObjMap.forEach((v, k) => {
+        objsArr.push({
+            name: teams.has(k) ? teams.get(k) : k,
+            ...v
+        });
+    });
+
+    return objsArr.sort((a, b) => b.total - a.total);
+
+}
