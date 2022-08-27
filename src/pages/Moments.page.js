@@ -1,7 +1,7 @@
-import React from "react"
-import { usePlays } from "../providers/PlaysProvider.comp";
-import { useEditions } from "../providers/EditionsProvider.comp";
-import { Container, Row } from "react-bootstrap";
+import React from 'react';
+import { usePlays } from '../providers/PlaysProvider.comp';
+import { useEditions } from '../providers/EditionsProvider.comp';
+import { Container, Row } from 'react-bootstrap';
 import { Loading } from '../components/Loading.comp';
 import { TEAMS } from '../constants/teams';
 import { TIERS } from '../constants/tiers';

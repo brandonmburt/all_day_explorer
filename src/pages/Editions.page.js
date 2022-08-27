@@ -1,7 +1,7 @@
-import React from "react"
-import { usePlays } from "../providers/PlaysProvider.comp";
-import { useEditions } from "../providers/EditionsProvider.comp";
-import { Container, Row } from "react-bootstrap";
+import React from 'react';
+import { usePlays } from '../providers/PlaysProvider.comp';
+import { useEditions } from '../providers/EditionsProvider.comp';
+import { Container, Row } from 'react-bootstrap';
 import { AG_EDITION_COLS } from '../constants/ag-grid/editions-columns';
 import { Loading } from '../components/Loading.comp';
 import { AgGrid } from '../components/AgGrid.comp';
@@ -9,7 +9,7 @@ import { getAgNumEditionsByTypeAndTeam, getAgNumEditionsByTierAndTeam } from '..
 import { TEAMS } from '../constants/teams';
 import { getEditionGridData } from '../utils/edition.utils';
 import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
-import { TIERS } from "../constants/tiers";
+import { TIERS } from '../constants/tiers';
 
 export function Editions() {
 

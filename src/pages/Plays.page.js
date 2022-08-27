@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { usePlays } from '../providers/PlaysProvider.comp';
 import { Container, Row } from 'react-bootstrap';
 import { AG_PLAYS_COLS } from '../constants/ag-grid/plays-columns';
