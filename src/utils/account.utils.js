@@ -45,36 +45,32 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
 
 }
 
-export const numMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) => {
+export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) => {
 
-    const playTypeByTeam = new Map();
-    teams.forEach((v, k) => {
-        playTypes.forEach(type => {
-            playTypeByTeam.set((k + ";" + type), { count: 0 });
-        });
-    });
+    const typesObj = {total: 0};
+    playTypes.forEach(type => typesObj[type] = 0);
+
+    const teamObjMap = new Map();
+    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
 
     collectionMoments.forEach(moment => {
         const { teamName, playType, tier } = moment;
-        const key = teamName + ";" + playType;
-        if (!playTypeByTeam.has(key)) {
+        if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found");
-            playTypeByTeam.set(key, { count: 0 });
+            teamObjMap.set(teamName, {...typesObj});
         }
-        playTypeByTeam.get(key).count += 1;
+        teamObjMap.get(teamName)[playType] += 1;
+        teamObjMap.get(teamName).total += 1;
     });
 
-    let playObjs = [];
-    playTypeByTeam.forEach((v, k) => {
-        const [ team, playType ] = k.split(";");
-        const abbreviation = teams.has(team) ? teams.get(team) : team;
-        playObjs.push({
-            team: abbreviation,
-            type: playType,
-            count: v.count
+    let objsArr = [];
+    teamObjMap.forEach((v, k) => {
+        objsArr.push({
+            name: teams.has(k) ? teams.get(k) : k,
+            ...v
         });
     });
 
-    return playObjs;
+    return objsArr.sort((a, b) => b.total - a.total);
 
 }

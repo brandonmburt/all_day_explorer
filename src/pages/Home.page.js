@@ -4,11 +4,11 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
-import PieChart from '../components/d3/PieChart.comp.js';
 import { SupplyTable } from '../components/SupplyTable.comp.js';
 import { getSupplyPerSeriesAndTier, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
 import { Loading } from '../components/Loading.comp';
 import { RADIOS } from '../constants/radio-buttons';
+import AgPieChart from '../components/ag-charts/PieChart.comp';
 
 export function Home() {
 
@@ -38,16 +38,18 @@ export function Home() {
                                 <ToggleButtonGroup size="sm" style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
                                     type="radio" name="momentButtons" value={momentRadio} onChange={(v) => setMomentRadio(v)}>
                                     {RADIOS.map((radio, id) => (
-                                        <ToggleButton style={{padding: "5px"}} key={id} id={`moment-${id}`} variant="outline-secondary" value={radio.value} >
+                                        <ToggleButton className="tier-toggle-btn" style={{padding: "5px"}} key={id} id={`moment-${id}`} variant="outline-secondary" value={radio.value} >
                                             {radio.name}
                                         </ToggleButton>
                                     ))}
                                 </ToggleButtonGroup>
                                 {seriesTiersSupply !== null &&
-                                    <PieChart data={seriesTiersSupply.map(s => {
-                                        let radio = RADIOS.find(r => r.value === momentRadio);
-                                        return { name: s.name, value: s[radio.key] };
-                                    })} />
+                                    <div style={{height: "400px"}}>
+                                        <AgPieChart data={seriesTiersSupply.map(s => {
+                                            let radio = RADIOS.find(r => r.value === momentRadio);
+                                            return { label: s.name, value: s[radio.key] };
+                                        })} />
+                                    </div>
                                 }
                             </Col>
                             <Col lg={true}>
@@ -66,16 +68,18 @@ export function Home() {
                                 <ToggleButtonGroup size="sm" style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
                                     type="radio" name="editionButtons" value={editionRadio} onChange={(v) => setEditionRadio(v)}>
                                     {RADIOS.map((radio, id) => (
-                                        <ToggleButton style={{padding: "5px"}} key={id} id={`edition-${id}`} variant="outline-secondary" value={radio.value} >
+                                        <ToggleButton className="tier-toggle-btn" style={{padding: "5px"}} key={id} id={`edition-${id}`} variant="outline-secondary" value={radio.value} >
                                             {radio.name}
                                         </ToggleButton>
                                     ))}
                                 </ToggleButtonGroup>
                                 {editionTiersPerSeries !== null &&
-                                    <PieChart data={editionTiersPerSeries.map(e => {
-                                        let radio = RADIOS.find(r => r.value === editionRadio);
-                                        return { name: e.name, value: e[radio.key] };
-                                    })} />
+                                    <div style={{height: "400px"}}>
+                                        <AgPieChart data={editionTiersPerSeries.map(e => {
+                                            let radio = RADIOS.find(r => r.value === editionRadio);
+                                            return { label: e.name, value: e[radio.key] };
+                                        })} />
+                                    </div>
                                 }
                             </Col>
                             <Col lg={true}>

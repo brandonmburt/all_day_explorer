@@ -13,11 +13,11 @@ import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { AG_COLLECTION_COLS } from '../constants/ag-grid/collection-columns';
 import { AgGrid } from '../components/AgGrid.comp';
-import PieChart from '../components/d3/PieChart.comp.js';
 import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier } from '../utils/account.utils';
-import StackedBarChart from '../components/d3/StackedBarChart.comp';
-import { numMomentsByTypeAndTeam } from '../utils/account.utils';
+import { getAgMomentsByTypeAndTeam } from '../utils/account.utils';
 import { TEAMS } from '../constants/teams';
+import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
+import AgPieChart from '../components/ag-charts/PieChart.comp';
 
 export function Account() {
 
@@ -30,7 +30,7 @@ export function Account() {
     const [editionIDs, setEditionIDs] = useState([]);
     const [momentsBySeriesAndTier, setMomentsBySeriesAndTier] = useState([]);
     const [editionsBySeriesAndTier, setEditionsBySeriesAndTier] = useState([]);
-    const [momentsByTeamAndTier, setMomentsByTeamAndTier] = useState([]);
+    const [momentsByTypeAndTeam, setMomentsByTypeAndTeam] = useState([]);
 
     let editionsMap = null;
     if (!!editions && editionsMap === null) {
@@ -76,8 +76,8 @@ export function Account() {
 
         setMomentsBySeriesAndTier(getNumMomentsBySeriesAndTier(series, collection));
         setEditionsBySeriesAndTier(getNumEditionsBySeriesAndTier(series, ids, editionsMap));
-        let momentsData = numMomentsByTypeAndTeam(collection, playTypes, TEAMS)
-        setMomentsByTeamAndTier(momentsData);
+        let momentsData = getAgMomentsByTypeAndTeam(collection, playTypes, TEAMS)
+        setMomentsByTypeAndTeam(momentsData);
     }
 
     const [collectionIDs, setColectionIDs] = useState([]);
@@ -118,35 +118,24 @@ export function Account() {
             {momentsBySeriesAndTier.length > 0 && editionsBySeriesAndTier.length > 0 &&
                 <Row style={{margin: "5px"}}>
                     <Col lg={true} style={{marginBottom: "15px"}}>
-                        <Card className="shadow" style={{margin: '30px 10px'}}>
-                            <Card.Header as="h5">Moments</Card.Header>
-                            <Card.Body>
-                                <PieChart data={momentsBySeriesAndTier.map(s => {
-                                    return { name: s.name, value: s.TOTAL };
-                                })} />
-                            </Card.Body>
-                        </Card>
+                        <div style={{height: "400px"}}>
+                            <AgPieChart title={'Moments'} data={momentsBySeriesAndTier.map(s => {
+                                return { label: s.name, value: s.TOTAL };
+                            })} />
+                        </div>
                     </Col>
                     <Col lg={true} style={{marginBottom: "15px"}}>
-                        <Card className="shadow" style={{margin: '30px 10px'}}>
-                            <Card.Header as="h5">Editions</Card.Header>
-                            <Card.Body>
-                                <PieChart data={editionsBySeriesAndTier.map(s => {
-                                    return { name: s.name, value: s.TOTAL };
-                                })} />
-                            </Card.Body>
-                        </Card>
+                        <div style={{height: "400px"}}>
+                            <AgPieChart title={'Editions'} data={editionsBySeriesAndTier.map(s => {
+                                return { label: s.name, value: s.TOTAL };
+                            })} />
+                        </div>
                     </Col>
                 </Row>
             }
-            {momentsByTeamAndTier.length > 0 && playTypes.length > 0 &&
-                <Row>
-                    <Card className="shadow">
-                        <Card.Header as="h5">Moment Distribution</Card.Header>
-                        <Card.Body>
-                            <StackedBarChart data={momentsByTeamAndTier} types={playTypes} />
-                        </Card.Body>
-                    </Card>
+            {momentsByTypeAndTeam.length > 0 &&
+                <Row style={{height: '600px'}}>
+                    <AgStackedBarChart data={momentsByTypeAndTeam} yKeys={playTypes} title={'Moment Distribution'} />
                 </Row>
             }
             {collectionMoments.length > 0 &&

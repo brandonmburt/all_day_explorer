@@ -1,39 +1,3 @@
-export const numPlaysByTypeAndTeam = (plays, playTypes, teams) => {
-    
-    const playTypeByTeam = new Map();
-    teams.forEach((v, k) => {
-        playTypes.forEach(type => {
-            playTypeByTeam.set((k + ";" + type), { count: 0 });
-        });
-    });
-
-    plays.forEach(play => {
-        const { metadata } = play;
-        const { teamName, playType } = metadata;
-        const key = teamName + ";" + playType;
-        if (!playTypeByTeam.has(key)) {
-            console.error("Unidentified team found");
-            playTypeByTeam.set(key, { count: 0 });
-        }
-        playTypeByTeam.get(key).count += 1;
-    });
-
-
-    let playObjs = [];
-    playTypeByTeam.forEach((v, k) => {
-        const [ team, playType ] = k.split(";");
-        const abbreviation = teams.has(team) ? teams.get(team) : team;
-        playObjs.push({
-            team: abbreviation,
-            type: playType,
-            count: v.count
-        });
-    });
-
-    return playObjs;
-
-}
-
 export const getPlaysGridData = (plays) => {
 
     let gridData = [];
@@ -55,5 +19,36 @@ export const getPlaysGridData = (plays) => {
         })
     });
     return gridData;
+
+}
+
+export const getAgPlaysByTypeAndTeam = (plays, playTypes, teams) => {
+
+    const typesObj = {total: 0};
+    playTypes.forEach(type => typesObj[type] = 0);
+
+    const teamObjMap = new Map();
+    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
+
+    plays.forEach(play => {
+        const { metadata } = play;
+        const { teamName, playType } = metadata;
+        if (!teamObjMap.has(teamName)) {
+            console.error("Unidentified team found");
+            teamObjMap.set(teamName, {...typesObj});
+        }
+        teamObjMap.get(teamName)[playType] += 1;
+        teamObjMap.get(teamName).total += 1;
+    });
+
+    let objsArr = [];
+    teamObjMap.forEach((v, k) => {
+        objsArr.push({
+            name: teams.has(k) ? teams.get(k) : k,
+            ...v
+        });
+    });
+
+    return objsArr.sort((a, b) => b.total - a.total);
 
 }
