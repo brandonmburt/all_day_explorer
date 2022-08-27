@@ -1,33 +1,22 @@
+import { getSeriesTiersMap, convertSeriesTiersMapToArr, generateTeamObjArr,
+    generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
+
 export const getNumMomentsBySeriesAndTier = (series, moments) => {
 
-    const myMap = new Map();
-    series.forEach(s => {
-        const { id, name } = s;
-        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
-    });
+    const myMap = getSeriesTiersMap(series);
 
     moments.forEach(m => {
         const { seriesID, tier } = m;
         myMap.get(seriesID)[tier] += 1;
     });
 
-    let data = [];
-    myMap.forEach(v => {
-        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
-        data.push({TOTAL: TOT, ...v});
-    });
-
-    return data;
+    return convertSeriesTiersMapToArr(myMap);
 
 }
 
 export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) => {
 
-    const myMap = new Map();
-    series.forEach(s => {
-        const { id, name } = s;
-        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
-    });
+    const myMap = getSeriesTiersMap(series);
 
     editionIDs.forEach(id => {
         const edition = editionsMap.get(id);
@@ -35,23 +24,13 @@ export const getNumEditionsBySeriesAndTier = (series, editionIDs, editionsMap) =
         myMap.get(seriesID)[tier] += 1;
     });
 
-    let data = [];
-    myMap.forEach(v => {
-        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
-        data.push({TOTAL: TOT, ...v});
-    });
-
-    return data;
+    return convertSeriesTiersMapToArr(myMap);
 
 }
 
 export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) => {
 
-    const typesObj = {total: 0};
-    playTypes.forEach(type => typesObj[type] = 0);
-
-    const teamObjMap = new Map();
-    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
+    const [teamObjMap, typesObj] = generateTeamObjMapByType(playTypes, teams);
 
     collectionMoments.forEach(moment => {
         const { teamName, playType, tier } = moment;
@@ -63,14 +42,6 @@ export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) =
         teamObjMap.get(teamName).total += 1;
     });
 
-    let objsArr = [];
-    teamObjMap.forEach((v, k) => {
-        objsArr.push({
-            name: teams.has(k) ? teams.get(k) : k,
-            ...v
-        });
-    });
-
-    return objsArr.sort((a, b) => b.total - a.total);
+    return generateTeamObjArr(teamObjMap, teams);
 
 }

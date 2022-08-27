@@ -1,3 +1,5 @@
+import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
+
 export const getEditionsMap = (editions) => {
 
     const myMap = new Map();
@@ -34,11 +36,7 @@ export const getEditionGridData = (editions, playsMap) => {
 
 export const getAgNumEditionsByTypeAndTeam = (editions, playsMap, playTypes, teams) => {
 
-    const typesObj = {total: 0};
-    playTypes.forEach(type => typesObj[type] = 0);
-
-    const teamObjMap = new Map();
-    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
+    const [teamObjMap, typesObj] = generateTeamObjMapByType(playTypes, teams);
 
     editions.forEach(edition => {
         const { playID } = edition;
@@ -53,25 +51,13 @@ export const getAgNumEditionsByTypeAndTeam = (editions, playsMap, playTypes, tea
         teamObjMap.get(teamName).total += 1;
     });
 
-    let objsArr = [];
-    teamObjMap.forEach((v, k) => {
-        objsArr.push({
-            name: teams.has(k) ? teams.get(k) : k,
-            ...v
-        });
-    });
-
-    return objsArr.sort((a, b) => b.total - a.total);
+    return generateTeamObjArr(teamObjMap, teams);
 
 }
 
 export const getAgNumEditionsByTierAndTeam = (editions, playsMap, tiers, teams) => {
 
-    const tiersObj = {total: 0};
-    tiers.forEach(type => tiersObj[type] = 0);
-
-    const teamObjMap = new Map();
-    teams.forEach((v, k) => teamObjMap.set(k, {...tiersObj}));
+    const [teamObjMap, tiersObj] = generateTeamObjMapByTier(tiers, teams);
 
     editions.forEach(edition => {
         const { playID, tier } = edition;
@@ -86,14 +72,6 @@ export const getAgNumEditionsByTierAndTeam = (editions, playsMap, tiers, teams) 
         teamObjMap.get(teamName).total += 1;
     });
 
-    let objsArr = [];
-    teamObjMap.forEach((v, k) => {
-        objsArr.push({
-            name: teams.has(k) ? teams.get(k) : k,
-            ...v
-        });
-    });
-
-    return objsArr.sort((a, b) => b.total - a.total);
+    return generateTeamObjArr(teamObjMap, teams);
 
 }

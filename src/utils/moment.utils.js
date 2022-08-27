@@ -1,3 +1,5 @@
+import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
+
 export const getUniqueEditions = (moments) => {
 
     const editions = new Set();
@@ -44,11 +46,7 @@ export const getDescriptiveMoments = (moments, editionsMap, playsMap, seriesMap,
 
 export const getAgNumMomentsByTypeAndTeam = (editions, playsMap, playTypes, teams) => {
 
-    const typesObj = {total: 0};
-    playTypes.forEach(type => typesObj[type] = 0);
-
-    const teamObjMap = new Map();
-    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
+    const [teamObjMap, typesObj] = generateTeamObjMapByType(playTypes, teams);
 
     editions.forEach(edition => {
         const { playID, numMinted } = edition;
@@ -63,25 +61,13 @@ export const getAgNumMomentsByTypeAndTeam = (editions, playsMap, playTypes, team
         teamObjMap.get(teamName).total += +numMinted;
     });
 
-    let objsArr = [];
-    teamObjMap.forEach((v, k) => {
-        objsArr.push({
-            name: teams.has(k) ? teams.get(k) : k,
-            ...v
-        });
-    });
-
-    return objsArr.sort((a, b) => b.total - a.total);
+    return generateTeamObjArr(teamObjMap, teams);
 
 }
 
 export const getAgNumMomentsByTierAndTeam = (editions, playsMap, tiers, teams) => {
 
-    const tiersObj = {total: 0};
-    tiers.forEach(tier => tiersObj[tier] = 0);
-
-    const teamObjMap = new Map();
-    teams.forEach((v, k) => teamObjMap.set(k, {...tiersObj}));
+    const [teamObjMap, tiersObj] = generateTeamObjMapByTier(tiers, teams);
 
     editions.forEach(edition => {
         const { playID, numMinted, tier } = edition;
@@ -96,14 +82,6 @@ export const getAgNumMomentsByTierAndTeam = (editions, playsMap, tiers, teams) =
         teamObjMap.get(teamName).total += +numMinted;
     });
 
-    let objsArr = [];
-    teamObjMap.forEach((v, k) => {
-        objsArr.push({
-            name: teams.has(k) ? teams.get(k) : k,
-            ...v
-        });
-    });
-
-    return objsArr.sort((a, b) => b.total - a.total);
+    return generateTeamObjArr(teamObjMap, teams);
 
 }

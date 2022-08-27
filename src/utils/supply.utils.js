@@ -1,48 +1,24 @@
-// Might want to just combine these functions into one and add a parameter
-// for evaluating moments or editions
+import { getSeriesTiersMap, convertSeriesTiersMapToArr } from './general.utils';
 
-export const getSupplyPerSeriesAndTier = (series, editions) => {
+export const getSupplyPerSeriesAndTier = (series, editions, type) => {
 
-    const myMap = new Map();
-    series.forEach(s => {
-        const { id, name } = s;
-        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
-    });
+    const myMap = getSeriesTiersMap(series);
 
-    editions.forEach(e => {
-        const { seriesID, numMinted, tier } = e;
-        myMap.get(seriesID)[tier] += +numMinted;
-    });
+    if (type === 'moments') {
+        editions.forEach(e => {
+            const { seriesID, numMinted, tier } = e;
+            myMap.get(seriesID)[tier] += +numMinted;
+        });
+    } else if (type === 'editions') {
+        editions.forEach(e => {
+            const { seriesID, tier } = e;
+            myMap.get(seriesID)[tier] += 1;
+        });
+    } else {
+        console.error("No Type Provided");
+        return [];
+    }
 
-    let data = [];
-    myMap.forEach(v => {
-        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
-        data.push({TOTAL: TOT, ...v});
-    });
-
-    return data;
-
-}
-
-export const getNumEditionsPerSeriesAndTier = (series, editions) => {
-
-    const myMap = new Map();
-    series.forEach(s => {
-        const { id, name } = s;
-        myMap.set(id, { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 });
-    });
-
-    editions.forEach(e => {
-        const { seriesID, tier } = e;
-        myMap.get(seriesID)[tier] += 1;
-    });
-
-    let data = [];
-    myMap.forEach(v => {
-        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
-        data.push({TOTAL: TOT, ...v});
-    });
-
-    return data;
+    return convertSeriesTiersMapToArr(myMap);
 
 }

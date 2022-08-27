@@ -3,7 +3,7 @@ import { Container, Row, Col, ToggleButton, ToggleButtonGroup } from 'react-boot
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
 import { SupplyTable } from '../components/SupplyTable.comp.js';
-import { getSupplyPerSeriesAndTier, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
+import { getSupplyPerSeriesAndTier } from '../utils/supply.utils.js';
 import { Loading } from '../components/Loading.comp';
 import { RADIOS } from '../constants/radio-buttons';
 import AgPieChart from '../components/ag-charts/PieChart.comp';
@@ -19,8 +19,8 @@ export function Home() {
 
     let seriesSupply = null, editionsSupply = null;
     if (!!series && !!editions) {
-        seriesSupply = getSupplyPerSeriesAndTier(series, editions);
-        editionsSupply = getNumEditionsPerSeriesAndTier(series, editions);
+        seriesSupply = getSupplyPerSeriesAndTier(series, editions, 'moments');
+        editionsSupply = getSupplyPerSeriesAndTier(series, editions, 'editions');
     }
 
     const createButtons = (type, val, func) => {

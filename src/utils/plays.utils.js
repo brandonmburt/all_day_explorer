@@ -1,3 +1,5 @@
+import { generateTeamObjArr, generateTeamObjMapByType } from './general.utils';
+
 export const getPlaysGridData = (plays) => {
 
     let gridData = [];
@@ -24,11 +26,7 @@ export const getPlaysGridData = (plays) => {
 
 export const getAgPlaysByTypeAndTeam = (plays, playTypes, teams) => {
 
-    const typesObj = {total: 0};
-    playTypes.forEach(type => typesObj[type] = 0);
-
-    const teamObjMap = new Map();
-    teams.forEach((v, k) => teamObjMap.set(k, {...typesObj}));
+    const [teamObjMap, typesObj] = generateTeamObjMapByType(playTypes, teams);
 
     plays.forEach(play => {
         const { metadata } = play;
@@ -41,14 +39,6 @@ export const getAgPlaysByTypeAndTeam = (plays, playTypes, teams) => {
         teamObjMap.get(teamName).total += 1;
     });
 
-    let objsArr = [];
-    teamObjMap.forEach((v, k) => {
-        objsArr.push({
-            name: teams.has(k) ? teams.get(k) : k,
-            ...v
-        });
-    });
-
-    return objsArr.sort((a, b) => b.total - a.total);
+    return generateTeamObjArr(teamObjMap, teams);
 
 }

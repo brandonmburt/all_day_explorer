@@ -1,9 +1,3 @@
-/*
-    GOAL: Determine which Sets have Editions within a Series
-
-    This wont be scalable long term. Brute force for now
-*/
-
 export const getSetsWithinSeries = (series, sets, editions) => {
 
     const myMap = new Map();
