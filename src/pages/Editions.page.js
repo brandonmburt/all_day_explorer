@@ -28,23 +28,21 @@ export function Editions() {
             {!editions && 
                 <Loading />
             }
-            {!!editions &&
-                <>
-                    {editionsByTeamAndType.length > 0 && playTypes.length > 0 &&
-                        <Row style={{height: '600px', marginTop: '30px', marginBottom: '30px'}}>
-                            <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} />
-                        </Row>
-                    }
-                    {editionsByTeamAndTier.length > 0 &&
-                        <Row style={{height: '600px', marginTop: '30px', marginBottom: '30px'}}>
-                            <AgStackedBarChart data={editionsByTeamAndTier} yKeys={TIERS} title={'Editions Per Team & Tier'} />
-                        </Row>
-                    }
-                    {rowData.length > 0 && 
-                        <AgGrid columnDefs={AG_EDITION_COLS} rowData={rowData} />
-                    }
-                </>
-            }
+            {!!editions && <>
+                {editionsByTeamAndType.length > 0 && playTypes.length > 0 &&
+                    <Row className='bar-chart-container'>
+                        <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} />
+                    </Row>
+                }
+                {editionsByTeamAndTier.length > 0 &&
+                    <Row className='bar-chart-container'>
+                        <AgStackedBarChart data={editionsByTeamAndTier} yKeys={TIERS} title={'Editions Per Team & Tier'} />
+                    </Row>
+                }
+                {rowData.length > 0 && 
+                    <AgGrid columnDefs={AG_EDITION_COLS} rowData={rowData} />
+                }
+            </>}
         </Container>
     )
 

@@ -134,7 +134,7 @@ export function Account() {
                 </Row>
             }
             {momentsByTypeAndTeam.length > 0 &&
-                <Row style={{height: '600px'}}>
+                <Row className='bar-chart-container'>
                     <AgStackedBarChart data={momentsByTypeAndTeam} yKeys={playTypes} title={'Moment Distribution'} />
                 </Row>
             }

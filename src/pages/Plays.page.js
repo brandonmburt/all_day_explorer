@@ -1,6 +1,6 @@
-import React from "react"
-import { usePlays } from "../providers/PlaysProvider.comp";
-import { Container, Row } from "react-bootstrap";
+import React from 'react'
+import { usePlays } from '../providers/PlaysProvider.comp';
+import { Container, Row } from 'react-bootstrap';
 import { AG_PLAYS_COLS } from '../constants/ag-grid/plays-columns';
 import { Loading } from '../components/Loading.comp';
 import { getPlaysGridData } from '../utils/plays.utils';
@@ -24,18 +24,16 @@ export function Plays() {
             {!playsMap && 
                 <Loading />
             }
-            {!!playsMap &&
-                <>
-                    {playsByTeam.length > 0 && playTypes.length > 0 &&
-                        <Row style={{height: '600px', marginTop: '30px', marginBottom: '30px'}}>
-                            <AgStackedBarChart data={playsByTeam} yKeys={playTypes} title={'Plays Per Team & Type'} />
-                        </Row>
-                    }
-                    {rowData.length > 0 && 
-                        <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
-                    }
-                </>
-            }
+            {!!playsMap && <>
+                {playsByTeam.length > 0 && playTypes.length > 0 &&
+                    <Row className='bar-chart-container'>
+                        <AgStackedBarChart data={playsByTeam} yKeys={playTypes} title={'Plays Per Team & Type'} />
+                    </Row>
+                }
+                {rowData.length > 0 && 
+                    <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
+                }
+            </>}
         </Container>
     )
 

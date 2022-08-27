@@ -24,20 +24,18 @@ export function Moments() {
             {!editions && 
                 <Loading />
             }
-            {!!editions &&
-                <>
-                    {momentsByTeamAndType.length > 0 && playTypes.length > 0 &&
-                        <Row style={{height: '600px', marginTop: '30px', marginBottom: '30px'}}>
-                            <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} />
-                        </Row>
-                    }
-                    {momentsByTeamAndTier.length > 0 &&
-                        <Row style={{height: '600px', marginTop: '30px', marginBottom: '30px'}}>
-                            <AgStackedBarChart data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
-                        </Row>
-                    }
-                </>
-            }
+            {!!editions && <>
+                {momentsByTeamAndType.length > 0 && playTypes.length > 0 &&
+                    <Row className='bar-chart-container'>
+                        <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} />
+                    </Row>
+                }
+                {momentsByTeamAndTier.length > 0 &&
+                    <Row className='bar-chart-container'>
+                        <AgStackedBarChart data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
+                    </Row>
+                }
+            </>}
         </Container>
     )
 
