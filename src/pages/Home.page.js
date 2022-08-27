@@ -1,14 +1,13 @@
-import React, { useState } from "react"
-import { Container, Row, Col, Card } from "react-bootstrap";
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import React, { useState } from 'react';
+import { Container, Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useSeries } from '../providers/SeriesProvider.comp';
-import { useEditions } from "../providers/EditionsProvider.comp";
+import { useEditions } from '../providers/EditionsProvider.comp';
 import { SupplyTable } from '../components/SupplyTable.comp.js';
 import { getSupplyPerSeriesAndTier, getNumEditionsPerSeriesAndTier } from '../utils/supply.utils.js';
 import { Loading } from '../components/Loading.comp';
 import { RADIOS } from '../constants/radio-buttons';
 import AgPieChart from '../components/ag-charts/PieChart.comp';
+import { CardComp } from '../components/Card.comp';
 
 export function Home() {
 
@@ -18,79 +17,71 @@ export function Home() {
     const { series } = useSeries();
     const { editions } = useEditions();
 
-    let seriesTiersSupply = null, editionTiersPerSeries = null;
+    let seriesSupply = null, editionsSupply = null;
     if (!!series && !!editions) {
-        seriesTiersSupply = getSupplyPerSeriesAndTier(series, editions);
-        editionTiersPerSeries = getNumEditionsPerSeriesAndTier(series, editions);
+        seriesSupply = getSupplyPerSeriesAndTier(series, editions);
+        editionsSupply = getNumEditionsPerSeriesAndTier(series, editions);
+    }
+
+    const createButtons = (type, val, func) => {
+        return (
+            <ToggleButtonGroup
+                size='sm'
+                className='toggle-style'
+                type='radio'
+                name={type + 'Buttons'}
+                value={val}
+                onChange={(v) => func(v)}>
+                    {RADIOS.map((r, id) => (
+                        <ToggleButton
+                            className='tier-toggle-btn'
+                            key={id}
+                            id={`${type}-${id}`}
+                            variant='outline-secondary'
+                            value={r.value}>
+                                {r.name}
+                        </ToggleButton>
+                    ))}
+            </ToggleButtonGroup>
+        );
+    }
+
+    const filterSupplyArr = (arr, radioVal) => {
+        const radio = RADIOS.find(r => r.value === radioVal);
+        return arr.map(x => { return {label: x.name, value: x[radio.key]} });
     }
 
     return (
         <Container>
-            {(!series || !editions) &&
-                <Loading />
-            }
-            {(!!series && !!editions) &&
-                <><Card className="shadow" style={{margin: '30px 10px'}}>
-                    <Card.Header as="h5">Moments</Card.Header>
-                    <Card.Body>
+            {(!series || !editions) && <Loading />}
+            {!!series && !!editions && <>
+                {!!seriesSupply &&
+                    <CardComp header={'Moments'} body={
                         <Row>
-                            <Col lg={true} style={{marginBottom: "15px"}}>
-                                <ToggleButtonGroup size="sm" style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
-                                    type="radio" name="momentButtons" value={momentRadio} onChange={(v) => setMomentRadio(v)}>
-                                    {RADIOS.map((radio, id) => (
-                                        <ToggleButton className="tier-toggle-btn" style={{padding: "5px"}} key={id} id={`moment-${id}`} variant="outline-secondary" value={radio.value} >
-                                            {radio.name}
-                                        </ToggleButton>
-                                    ))}
-                                </ToggleButtonGroup>
-                                {seriesTiersSupply !== null &&
-                                    <div style={{height: "400px"}}>
-                                        <AgPieChart data={seriesTiersSupply.map(s => {
-                                            let radio = RADIOS.find(r => r.value === momentRadio);
-                                            return { label: s.name, value: s[radio.key] };
-                                        })} />
-                                    </div>
-                                }
+                            <Col lg={true}>
+                                {createButtons('moment', momentRadio, setMomentRadio)}
+                                <AgPieChart data={filterSupplyArr(seriesSupply, momentRadio)} />
                             </Col>
                             <Col lg={true}>
-                                {seriesTiersSupply !== null &&
-                                    <SupplyTable rows={seriesTiersSupply} />
-                                }
+                                <SupplyTable rows={seriesSupply} />
                             </Col>
                         </Row>
-                    </Card.Body>
-                </Card>
-                <Card className="shadow" style={{margin: '30px 10px'}}>
-                    <Card.Header as="h5">Editions</Card.Header>
-                    <Card.Body>
+                    } />
+                }
+                {!!editionsSupply &&
+                    <CardComp header={'Editions'} body={
                         <Row>
-                            <Col lg={true} style={{marginBottom: "15px"}}>
-                                <ToggleButtonGroup size="sm" style={{width: "100%", textAlign: 'center', marginBottom: "15px"}}
-                                    type="radio" name="editionButtons" value={editionRadio} onChange={(v) => setEditionRadio(v)}>
-                                    {RADIOS.map((radio, id) => (
-                                        <ToggleButton className="tier-toggle-btn" style={{padding: "5px"}} key={id} id={`edition-${id}`} variant="outline-secondary" value={radio.value} >
-                                            {radio.name}
-                                        </ToggleButton>
-                                    ))}
-                                </ToggleButtonGroup>
-                                {editionTiersPerSeries !== null &&
-                                    <div style={{height: "400px"}}>
-                                        <AgPieChart data={editionTiersPerSeries.map(e => {
-                                            let radio = RADIOS.find(r => r.value === editionRadio);
-                                            return { label: e.name, value: e[radio.key] };
-                                        })} />
-                                    </div>
-                                }
+                            <Col lg={true}>
+                                {createButtons('edition', editionRadio, setEditionRadio)}
+                                <AgPieChart data={filterSupplyArr(editionsSupply, editionRadio)} />
                             </Col>
                             <Col lg={true}>
-                                {editionTiersPerSeries !== null &&
-                                    <SupplyTable rows={editionTiersPerSeries} />
-                                }
+                                <SupplyTable rows={editionsSupply} />
                             </Col>
                         </Row>
-                    </Card.Body>
-                </Card></>
-            }
+                    } />
+                }
+            </>}
         </Container>
     )
 

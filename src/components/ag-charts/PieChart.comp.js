@@ -43,7 +43,9 @@ export default class AgPieChart extends Component {
 
     render() {
         return (
-            <AgChartsReact options={this.state.options} />
+            <div style={{height: '400px'}}>
+                <AgChartsReact options={this.state.options} />
+            </div>
         )
     }
 }

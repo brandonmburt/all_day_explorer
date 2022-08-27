@@ -14,4 +14,11 @@ code {
 
 .tier-toggle-btn {
   box-shadow: none !important;
+  padding: 5px;
+}
+
+.toggle-style {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
 }
