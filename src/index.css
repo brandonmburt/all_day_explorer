@@ -32,3 +32,8 @@ code {
 .three-card-col {
   margin: 20px 5px 30px 5px;
 }
+
+.account-form {
+  margin: 30px 15px 0px !important;
+  width: 350px !important;
+}

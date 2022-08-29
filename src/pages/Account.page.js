@@ -3,7 +3,6 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { query } from "@onflow/fcl";
 import { GET_COLLECTION_IDS } from "../scripts/get-collection-ids.script";
 import { GET_COLLECTION_MOMENTS } from "../scripts/get-collection-moments.script";
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { getUniqueEditions, getDescriptiveMoments } from '../utils/moment.utils';
 import { getEditionsMap } from "../utils/edition.utils";
@@ -18,6 +17,7 @@ import { getAgMomentsByTypeAndTeam } from '../utils/account.utils';
 import { TEAMS } from '../constants/teams';
 import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
 import AgPieChart from '../components/ag-charts/PieChart.comp';
+import { AccountForm } from "../components/AccountForm.comp";
 
 export function Account() {
 
@@ -38,8 +38,6 @@ export function Account() {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
         const addr = event.currentTarget.addr.value;
         if (addr.length === 18 && addr.substr(0,2) === "0x") {
             setAddress(addr);
@@ -48,7 +46,7 @@ export function Account() {
             setAddress("0x" + addr);
             getCollectionIDs("0x" + addr);
         } else {
-            event.currentTarget.addr.value = '';
+            console.error('Invalid flow address');
         }
     };
 
@@ -83,22 +81,24 @@ export function Account() {
     const [collectionIDs, setColectionIDs] = useState([]);
     const [collectionMoments, setColectionMoments] = useState([]);
 
+    const resetForm = () => {
+        setAddress(null);
+        setEditionIDs([]);
+        setMomentsBySeriesAndTier([]);
+        setEditionsBySeriesAndTier([]);
+        setMomentsByTypeAndTeam([]);
+        setColectionIDs([]);
+        setColectionMoments([]);
+    }
+
     return (
         <Container>
-            <Row>
-                <Form style={{margin: '30px 15px 0px', width: "350px"}} onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="addr">
-                        <Form.Label>Flow Address</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Address" />
-                        <Form.Text className="text-muted">
-                            Ex: 0x1e2af8107033fc12 or 1f357456f8615df2
-                        </Form.Text>
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-            </Row>
+            {address === null &&
+                <AccountForm onSubmit={handleSubmit} />
+            }
+            {address !== null &&
+                <div><Button onClick={resetForm} style={{margin:'30px 30px 0'}} variant='outline-primary'>Look Up Different Address</Button></div>
+            }
             {collectionIDs.length > 0 &&
                 <Row style={{margin: '20px 5px 30px 5px'}}>
                     {[["Flow Address", address], ["Moments Owned", collectionIDs.length.toLocaleString()],
