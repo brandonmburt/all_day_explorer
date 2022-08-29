@@ -4,11 +4,11 @@ import useAllEditions from '../hooks/use-all-editions.hook';
 const EditionsContext = createContext()
 
 export default function EditionsProvider({ children }) {
-  const [ editions ] = useAllEditions();
+  const [ editionsMap ] = useAllEditions();
 
   return (
     <EditionsContext.Provider value={{
-      editions
+      editionsMap
     }}>
       {children}
     </EditionsContext.Provider>

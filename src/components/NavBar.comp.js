@@ -11,11 +11,11 @@ export function NavBar() {
 
     const { series } = useSeries();
     const { sets } = useSets();
-    const { editions } = useEditions();
+    const { editionsMap } = useEditions();
 
     let seriesSets = null;
-    if (!!series && !!sets && !!editions) {
-        seriesSets = getSetsWithinSeries(series, sets, editions);
+    if (!!series && !!sets && !!editionsMap) {
+        seriesSets = getSetsWithinSeries(series, sets, editionsMap);
     }
 
     return (

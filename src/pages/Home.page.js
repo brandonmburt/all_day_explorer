@@ -15,12 +15,12 @@ export function Home() {
     const [editionRadio, setEditionRadio] = useState('1');
 
     const { series } = useSeries();
-    const { editions } = useEditions();
+    const { editionsMap } = useEditions();
 
     let seriesSupply = null, editionsSupply = null;
-    if (!!series && !!editions) {
-        seriesSupply = getSupplyPerSeriesAndTier(series, editions, 'moments');
-        editionsSupply = getSupplyPerSeriesAndTier(series, editions, 'editions');
+    if (!!series && !!editionsMap) {
+        seriesSupply = getSupplyPerSeriesAndTier(series, editionsMap, 'moments');
+        editionsSupply = getSupplyPerSeriesAndTier(series, editionsMap, 'editions');
     }
 
     const createButtons = (type, val, func) => {
@@ -53,8 +53,8 @@ export function Home() {
 
     return (
         <Container>
-            {(!series || !editions) && <Loading />}
-            {!!series && !!editions && <>
+            {(!series || !editionsMap) && <Loading />}
+            {!!series && !!editionsMap && <>
                 {!!seriesSupply &&
                     <CardComp header={'Moments'} body={
                         <Row>

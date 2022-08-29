@@ -5,7 +5,6 @@ import { GET_COLLECTION_IDS } from "../scripts/get-collection-ids.script";
 import { GET_COLLECTION_MOMENTS } from "../scripts/get-collection-moments.script";
 import Button from 'react-bootstrap/Button';
 import { getUniqueEditions, getDescriptiveMoments } from '../utils/moment.utils';
-import { getEditionsMap } from "../utils/edition.utils";
 import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useSeries } from '../providers/SeriesProvider.comp';
@@ -18,10 +17,11 @@ import { TEAMS } from '../constants/teams';
 import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
 import AgPieChart from '../components/ag-charts/PieChart.comp';
 import { AccountForm } from "../components/AccountForm.comp";
+import { numFormat } from '../utils/num.utils';
 
 export function Account() {
 
-    const { editions } = useEditions();
+    const { editionsMap } = useEditions();
     const { playsMap, playTypes } = usePlays();
     const { series } = useSeries();
     const { sets } = useSets();
@@ -31,11 +31,6 @@ export function Account() {
     const [momentsBySeriesAndTier, setMomentsBySeriesAndTier] = useState([]);
     const [editionsBySeriesAndTier, setEditionsBySeriesAndTier] = useState([]);
     const [momentsByTypeAndTeam, setMomentsByTypeAndTeam] = useState([]);
-
-    let editionsMap = null;
-    if (!!editions && editionsMap === null) {
-        editionsMap = getEditionsMap(editions);
-    }
 
     const handleSubmit = (event) => {
         const addr = event.currentTarget.addr.value;
@@ -101,8 +96,8 @@ export function Account() {
             }
             {collectionIDs.length > 0 &&
                 <Row style={{margin: '20px 5px 30px 5px'}}>
-                    {[["Flow Address", address], ["Moments Owned", collectionIDs.length.toLocaleString()],
-                        ["Editions Owned", editionIDs.length.toLocaleString()]].map((data, i) => {
+                    {[["Flow Address", address], ["Moments Owned", numFormat(collectionIDs.length)],
+                        ["Editions Owned", numFormat(editionIDs.length)]].map((data, i) => {
                             const [header, body] = data;
                             return (
                                 <Col key={i} md={true}>

@@ -11,20 +11,20 @@ import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
 export function Moments() {
 
     const { playsMap, playTypes } = usePlays();
-    const { editions } = useEditions();
+    const { editionsMap } = useEditions();
 
     let momentsByTeamAndType = [], momentsByTeamAndTier = [];
-    if (!!editions && !!playsMap && momentsByTeamAndType.length === 0 && momentsByTeamAndTier.length === 0) {
-        momentsByTeamAndType = getAgNumMomentsByTypeAndTeam(editions, playsMap, playTypes, TEAMS);
-        momentsByTeamAndTier = getAgNumMomentsByTierAndTeam(editions, playsMap, TIERS, TEAMS);
+    if (!!editionsMap && !!playsMap && momentsByTeamAndType.length === 0 && momentsByTeamAndTier.length === 0) {
+        momentsByTeamAndType = getAgNumMomentsByTypeAndTeam(editionsMap, playsMap, playTypes, TEAMS);
+        momentsByTeamAndTier = getAgNumMomentsByTierAndTeam(editionsMap, playsMap, TIERS, TEAMS);
     }
 
     return (
         <Container>
-            {!editions && 
+            {!editionsMap && 
                 <Loading />
             }
-            {!!editions && <>
+            {!!editionsMap && <>
                 {momentsByTeamAndType.length > 0 && playTypes.length > 0 &&
                     <Row className='bar-chart-container'>
                         <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} />

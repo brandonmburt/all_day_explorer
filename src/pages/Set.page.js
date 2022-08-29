@@ -16,7 +16,7 @@ export function Set() {
 
     const { series } = useSeries();
     const { sets } = useSets();
-    const { editions } = useEditions();
+    const { editionsMap } = useEditions();
     const { playsMap } = usePlays();
 
     let title = '', badge = '';
@@ -31,8 +31,8 @@ export function Set() {
     }
 
     let gridData = [], numMintedMoments = 0, cardItems = [];
-    if (!!editions && !!playsMap) {
-        const filteredEditions = editions.filter(e => e.seriesID === seriesID && e.setID === setID);
+    if (!!editionsMap && !!playsMap) {
+        const filteredEditions = [...editionsMap.values()].filter(e => e.seriesID === seriesID && e.setID === setID);
         gridData = getEditionGridData(filteredEditions, playsMap);
         numMintedMoments = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
         cardItems = [

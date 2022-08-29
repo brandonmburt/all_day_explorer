@@ -14,21 +14,21 @@ import { TIERS } from '../constants/tiers';
 export function Editions() {
 
     const { playsMap, playTypes } = usePlays();
-    const { editions } = useEditions();
+    const { editionsMap } = useEditions();
 
     let rowData = [], editionsByTeamAndType = [], editionsByTeamAndTier = [];
-    if (!!editions && !!playsMap && rowData.length === 0) {
-        rowData = getEditionGridData(editions, playsMap);
-        editionsByTeamAndType = getAgNumEditionsByTypeAndTeam(editions, playsMap, playTypes, TEAMS);
-        editionsByTeamAndTier = getAgNumEditionsByTierAndTeam(editions, playsMap, TIERS, TEAMS);
+    if (!!editionsMap && !!playsMap && rowData.length === 0) {
+        rowData = getEditionGridData(editionsMap, playsMap);
+        editionsByTeamAndType = getAgNumEditionsByTypeAndTeam(editionsMap, playsMap, playTypes, TEAMS);
+        editionsByTeamAndTier = getAgNumEditionsByTierAndTeam(editionsMap, playsMap, TIERS, TEAMS);
     }
 
     return (
         <Container>
-            {!editions && 
+            {!editionsMap && 
                 <Loading />
             }
-            {!!editions && <>
+            {!!editionsMap && <>
                 {editionsByTeamAndType.length > 0 && playTypes.length > 0 &&
                     <Row className='bar-chart-container'>
                         <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} />
