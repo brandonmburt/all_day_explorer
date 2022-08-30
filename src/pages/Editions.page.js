@@ -30,7 +30,7 @@ export function Editions() {
             }
             {!!editionsMap && <>
                 {editionsByTeamAndType.length > 0 && playTypes.length > 0 &&
-                    <Row className='bar-chart-container'>
+                    <Row style={{minWidth: '700px'}} className='bar-chart-container'>
                         <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} />
                     </Row>
                 }

@@ -9,14 +9,13 @@ export function AccountForm(props) {
         event.preventDefault();
         event.stopPropagation();
         const addr = event.currentTarget.addr.value;
-        if (addr.length === 18 || addr.length === 16) {
-            // TODO: Might want to check the chain here
-            props.onSubmit(event)
+        // TODO: Might want to check the chain here
+        if (addr.length === 18 && addr.substr(0,2) === "0x") {
+            props.processSubmit(addr)
         } else {
             setIsInvalid(true);
             event.currentTarget.addr.value = '';
         }
-        
     };
 
     return (
@@ -29,7 +28,7 @@ export function AccountForm(props) {
                         Please enter a valid Flow Address
                     </Form.Control.Feedback>
                     <Form.Text className='text-muted'>
-                        Ex: 0x1e2af8107033fc12 or 1f357456f8615df2
+                        Ex: 0x1e2af8107033fc12 or 0x1f357456f8615df2
                     </Form.Text>
                 </Form.Group>
                 <Button variant='primary' type='submit'>

@@ -1,16 +1,5 @@
 import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
 
-export const getEditionsMap = (editions) => {
-
-    const myMap = new Map();
-    editions.forEach(e => {
-        myMap.set(e.id, e);
-    });
-
-    return myMap;
-
-}
-
 export const getEditionGridData = (editions, playsMap) => {
     
     let gridData = [];
