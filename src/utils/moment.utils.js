@@ -54,7 +54,7 @@ export const getAgNumMomentsByTypeAndTeam = (editions, playsMap, playTypes, team
         const { metadata } = play; 
         const { teamName, playType } = metadata;
         if (!teamObjMap.has(teamName)) {
-            console.error("Unidentified team found");
+            console.error("Unidentified team found: " + teamName);
             teamObjMap.set(teamName, {...typesObj});
         }
         teamObjMap.get(teamName)[playType] += +numMinted;
@@ -75,7 +75,7 @@ export const getAgNumMomentsByTierAndTeam = (editions, playsMap, tiers, teams) =
         const { metadata } = play; 
         const { teamName } = metadata;
         if (!teamObjMap.has(teamName)) {
-            console.error("Unidentified team found");
+            console.error("Unidentified team found: " + teamName);
             teamObjMap.set(teamName, {...tiersObj});
         }
         teamObjMap.get(teamName)[tier] += +numMinted;

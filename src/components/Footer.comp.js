@@ -3,15 +3,13 @@ import { NavDropdown, Badge } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Row } from "react-bootstrap";
 
-
 export function Footer() {
 
-
     return (
-        <div>
+        <div className='footer bg-light'>
             <Container>
                 <Row>
-                    {/* <h1>TO DO</h1> */}
+                    <h1></h1>
                 </Row>
             </Container>
         </div>

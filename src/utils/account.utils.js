@@ -35,7 +35,7 @@ export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) =
     collectionMoments.forEach(moment => {
         const { teamName, playType, tier } = moment;
         if (!teamObjMap.has(teamName)) {
-            console.error("Unidentified team found");
+            console.error("Unidentified team found: " + teamName);
             teamObjMap.set(teamName, {...typesObj});
         }
         teamObjMap.get(teamName)[playType] += 1;

@@ -7,14 +7,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
+.footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
 .tier-toggle-btn {
   box-shadow: none !important;
-  padding: 5px;
+  padding: 8px 5px !important;
 }
 
 .toggle-style {
@@ -25,6 +38,12 @@ code {
 
 .bar-chart-container {
   height: 600px;
+  margin-top: 30px !important;
+  margin-bottom: 30px;
+}
+
+.bar-chart-container-mobile {
+  height: 400px;
   margin-top: 30px !important;
   margin-bottom: 30px;
 }
