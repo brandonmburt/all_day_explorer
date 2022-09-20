@@ -9,7 +9,7 @@ export function Footer() {
         <div className='footer bg-light'>
             <Container>
                 <Row>
-                    <h1></h1>
+                    <h1><br /></h1>
                 </Row>
             </Container>
         </div>
