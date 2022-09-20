@@ -8,6 +8,8 @@ import { AgGrid } from '../components/AgGrid.comp';
 import { getAgPlaysByTypeAndTeam } from '../utils/plays.utils';
 import { TEAMS } from '../constants/teams';
 import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
+import { Accordian } from '../components/Accordian.comp';
+import { isMobile } from '../utils/general.utils';
 
 export function Plays() {
 
@@ -26,10 +28,11 @@ export function Plays() {
             }
             {!!playsMap && <>
                 {playsByTeam.length > 0 && playTypes.length > 0 &&
-                    <Row className='bar-chart-container'>
-                        <AgStackedBarChart data={playsByTeam} yKeys={playTypes} title={'Plays Per Team & Type'} />
-                    </Row>
+                    <AgStackedBarChart data={playsByTeam} yKeys={playTypes} title={'Plays Per Team & Type'} mobileTitle={'Plays Per Team'} />
                 }
+                {/* {isMobile() &&
+                    <Accordian items={[['My header', 'My body']]} />
+                } */}
                 {rowData.length > 0 && 
                     <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
                 }

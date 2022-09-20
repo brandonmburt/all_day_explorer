@@ -32,9 +32,7 @@ export function AccountCharts(props) {
                 </Row>
             }
             {momentsByTypeAndTeam.length > 0 &&
-                <Row className='bar-chart-container'>
-                    <AgStackedBarChart data={momentsByTypeAndTeam} yKeys={props.playTypes} title={'Moment Distribution'} />
-                </Row>
+                <AgStackedBarChart data={momentsByTypeAndTeam} yKeys={props.playTypes} title={'Moment Distribution'} mobileTitle={'Moment Distribution'} />
             }
         </>
     )

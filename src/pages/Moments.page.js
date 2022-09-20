@@ -7,6 +7,7 @@ import { TEAMS } from '../constants/teams';
 import { TIERS } from '../constants/tiers';
 import { getAgNumMomentsByTypeAndTeam, getAgNumMomentsByTierAndTeam } from '../utils/moment.utils';
 import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
+import { isMobile } from '../utils/general.utils';
 
 export function Moments() {
 
@@ -26,14 +27,10 @@ export function Moments() {
             }
             {!!editionsMap && <>
                 {momentsByTeamAndType.length > 0 && playTypes.length > 0 &&
-                    <Row className='bar-chart-container'>
-                        <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} />
-                    </Row>
+                        <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} mobileTitle={'Moments Per Team'} />
                 }
-                {momentsByTeamAndTier.length > 0 &&
-                    <Row className='bar-chart-container'>
+                {momentsByTeamAndTier.length > 0 && !isMobile() &&
                         <AgStackedBarChart data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
-                    </Row>
                 }
             </>}
         </Container>

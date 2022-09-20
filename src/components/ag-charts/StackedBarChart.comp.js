@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
+import { isMobile } from '../../utils/general.utils';
+import { Row } from 'react-bootstrap';
 
 export default class AgStackedBarChart extends Component {
 
     constructor(props) {
         super(props);
 
+        const mobile = isMobile();
+        const title = mobile ? this.props.mobileTitle ?? '' : this.props.title ?? '';
+
         let seriesDefs = [];
-        this.props.yKeys.forEach(k => {
+        if (!mobile) {
+            this.props.yKeys.forEach(k => {
+                seriesDefs.push({
+                    type: 'column',
+                    xKey: 'name',
+                    yKey: k,
+                    stacked: true,
+                });
+            });
+        } else {
             seriesDefs.push({
                 type: 'column',
                 xKey: 'name',
-                yKey: k,
-                stacked: true,
+                yKey: 'total',
             });
-        });
+        }
 
         this.state = {
             options: {
@@ -22,20 +35,30 @@ export default class AgStackedBarChart extends Component {
                 series: seriesDefs,
                 legend: {
                     position: 'bottom',
+                    enabled: !mobile
                 },
                 title: {
-                    text: this.props.title ?? ''
+                    text: title
                 },
                 theme: {
                     // baseTheme: 'ag-default-dark'
+                },
+                navigator: {
+                    enabled: mobile,
                 }
             }
         }
+
+        this.state.className = !mobile ? 'bar-chart-container' : 'bar-chart-container-mobile';
+
+
     }
 
     render() {
         return (
-            <AgChartsReact options={this.state.options} />
+            <Row className={this.state.className}>
+                <AgChartsReact options={this.state.options} />
+            </Row>
         )
     }
 }

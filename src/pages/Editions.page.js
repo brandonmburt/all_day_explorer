@@ -10,6 +10,7 @@ import { TEAMS } from '../constants/teams';
 import { getEditionGridData } from '../utils/edition.utils';
 import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
 import { TIERS } from '../constants/tiers';
+import { isMobile } from '../utils/general.utils';
 
 export function Editions() {
 
@@ -30,14 +31,10 @@ export function Editions() {
             }
             {!!editionsMap && <>
                 {editionsByTeamAndType.length > 0 && playTypes.length > 0 &&
-                    <Row style={{minWidth: '700px'}} className='bar-chart-container'>
-                        <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} />
-                    </Row>
+                    <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} mobileTitle={'Editions Per Team'} />
                 }
-                {editionsByTeamAndTier.length > 0 &&
-                    <Row className='bar-chart-container'>
-                        <AgStackedBarChart data={editionsByTeamAndTier} yKeys={TIERS} title={'Editions Per Team & Tier'} />
-                    </Row>
+                {editionsByTeamAndTier.length > 0 && !isMobile() &&
+                    <AgStackedBarChart data={editionsByTeamAndTier} yKeys={TIERS} title={'Editions Per Team & Tier'} />
                 }
                 {rowData.length > 0 && 
                     <AgGrid columnDefs={AG_EDITION_COLS} rowData={rowData} />
