@@ -9,9 +9,9 @@ export function Accordian(props) {
                 {props.items.map((item, i) => {
                     const [header, body] = item;
                     return (
-                        <Accordion.Item eventKey={i}>
+                        <Accordion.Item key={i} eventKey={i}>
                             <Accordion.Header>{header}</Accordion.Header>
-                            <Accordion.Body>{body}</Accordion.Body>
+                            <Accordion.Body style={{margin: 0, padding: 0}}>{body}</Accordion.Body>
                         </Accordion.Item>
                     )
                 })}
