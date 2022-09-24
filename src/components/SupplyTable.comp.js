@@ -4,12 +4,14 @@ import { numFormat } from '../utils/num.utils';
 
 export function SupplyTable(props) {
 
+    let rows = [];
     const headers = ['Series', 'Common', 'Rare', 'Legendary', 'Ultimate', 'Total'];
 
     if (props.rows) {
+        rows = [...props.rows]
         let totalsRow = { name: "Totals", COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0, TOTAL: 0 };
         
-        props.rows.forEach(row => {
+        rows.forEach(row => {
             const { COMMON, RARE, LEGENDARY, ULTIMATE } = row;
             const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;    
             totalsRow.COMMON += COMMON;
@@ -19,7 +21,7 @@ export function SupplyTable(props) {
             totalsRow.TOTAL += TOT;
         });
         
-        props.rows.push(totalsRow);
+        rows.push(totalsRow);
     }
     
     return (
@@ -32,11 +34,11 @@ export function SupplyTable(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.rows.map((row, i) => {
+                {rows.map((row, i) => {
                     return (
                     <tr key={i}>
                         {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
-                            return i === props.rows.length-1 ? <td key={j}><strong>{numFormat(data)}</strong></td> : <td key={j}>{numFormat(data)}</td>
+                            return i === rows.length-1 ? <td key={j}><strong>{numFormat(data)}</strong></td> : <td key={j}>{numFormat(data)}</td>
                         })}
                     </tr>
                     )

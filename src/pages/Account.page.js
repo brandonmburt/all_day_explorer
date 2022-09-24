@@ -48,7 +48,7 @@ export function Account() {
                 <AccountForm processSubmit={processSubmit} />
             }
             {address !== null &&
-                <div><Button onClick={resetForm} style={{margin:'30px 30px 0'}} variant='outline-primary'>Look Up Different Address</Button></div>
+                <div><Button onClick={resetForm} style={{margin:'25px 10px 10px'}} variant='outline-primary'>Look Up Different Address</Button></div>
             }
             {collectionMoments.length > 0 &&
                 <Row className='three-card-col'>
