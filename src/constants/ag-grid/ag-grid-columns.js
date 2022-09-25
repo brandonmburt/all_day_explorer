@@ -3,6 +3,7 @@ export const DEFAULT_COLS = {
     sortable: true,
     minWidth: 150,
     resizable: true,
+    suppressMovable: true,
     filterParams: {
         buttons: ['clear'],
         closeOnApply: true
