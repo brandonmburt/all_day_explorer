@@ -27,8 +27,8 @@ export function AccountForm(props) {
                     <Form.Control.Feedback type="invalid">
                         Please enter a valid Flow Address
                     </Form.Control.Feedback>
-                    <Form.Text className='text-muted'>
-                        Ex: 0x1e2af8107033fc12 or 0x1f357456f8615df2
+                    <Form.Text className='text-muted' style={{fontSize: '12px'}}>
+                        Ex: 0xed8707e2ae5bba5a or 0x64afebe42165be6e
                     </Form.Text>
                 </Form.Group>
                 <Button variant='primary' type='submit'>
