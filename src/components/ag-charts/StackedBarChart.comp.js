@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 import { isMobile } from '../../utils/general.utils';
 import { Row } from 'react-bootstrap';
+import { numFormat } from '../../utils/num.utils';
+
+function renderer(params) {
+    return {
+        title: params.yKey === 'total' ? params.xValue : params.xValue + ': ' + params.yKey,
+        content: numFormat(params.yValue),
+    };
+}
 
 export default class AgStackedBarChart extends Component {
 
@@ -19,6 +27,7 @@ export default class AgStackedBarChart extends Component {
                     xKey: 'name',
                     yKey: k,
                     stacked: true,
+                    tooltip: { renderer: renderer }
                 });
             });
         } else {
@@ -26,6 +35,7 @@ export default class AgStackedBarChart extends Component {
                 type: 'column',
                 xKey: 'name',
                 yKey: 'total',
+                tooltip: { renderer: renderer }
             });
         }
 

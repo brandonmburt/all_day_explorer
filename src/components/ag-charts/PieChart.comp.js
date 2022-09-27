@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
+import { numFormat } from '../../utils/num.utils';
+
+function renderer(params) {
+    return {
+        title: params.datum.label,
+        content: numFormat(params.datum.value),
+    };
+}
 
 export default class AgPieChart extends Component {
 
@@ -14,6 +22,7 @@ export default class AgPieChart extends Component {
                       type: 'pie',
                       angleKey: 'value',
                       labelKey: 'label',
+                      tooltip: { renderer: renderer }
                     }
                 ],
                 legend: {
