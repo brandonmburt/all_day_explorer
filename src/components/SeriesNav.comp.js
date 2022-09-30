@@ -6,7 +6,7 @@ export function SeriesNav(props) {
 
     let badge = props.active ?
         <Badge pill bg="success">Active</Badge> :
-        <Badge pill bg="danger">Locked</Badge>;
+        <Badge pill bg="danger">Closed</Badge>;
     
 
     return (

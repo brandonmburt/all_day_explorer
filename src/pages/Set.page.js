@@ -27,7 +27,7 @@ export function Set() {
         title = seriesInfo.name + ': ' + setInfo.name;
         badge = seriesInfo.active ?
             <Badge pill bg='success'>Active</Badge> :
-            <Badge pill bg='danger'>Locked</Badge>;
+            <Badge pill bg='danger'>Closed</Badge>;
     }
 
     let gridData = [], numMintedMoments = 0, cardItems = [];
