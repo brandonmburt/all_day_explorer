@@ -37,5 +37,6 @@ export const TEAMS = new Map([
     ["Oakland Raiders", "OAK"],
     ["Los Angeles Raiders", "RAI"],
     ["St. Louis Rams", "STR"],
-    ["Washington Commanders", "WAS"]
+    ["Washington Commanders", "WAS"],
+    ["San Diego Chargers", "SDC"]
 ]);
