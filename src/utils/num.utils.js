@@ -1,1 +1,0 @@
-export const numFormat = (num) => num.toLocaleString();
