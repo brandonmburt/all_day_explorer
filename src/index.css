@@ -14,13 +14,22 @@ body {
   justify-content: flex-start;
 }
 
+.App-dark, .App-light {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content {
+    flex: 1;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .footer {
-  margin-top: auto;
   width: 100%;
   text-align: center;
 }

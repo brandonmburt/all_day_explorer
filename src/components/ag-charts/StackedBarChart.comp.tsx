@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 import { isMobile } from '../../utils/general.utils';
 import { Row } from 'react-bootstrap';
 import { numFormat } from '../../utils/num.utils';
+import { useTheme } from '../../providers/ThemeProvider.comp';
 
 function renderer(params) {
     return {
@@ -11,37 +11,44 @@ function renderer(params) {
     };
 }
 
-export default class AgStackedBarChart extends Component<any, any> {
+interface StackedBarChartProps {
+    data: any[];
+    yKeys: string[];
+    title?: string;
+    mobileTitle?: string;
+}
 
-    constructor(props) {
-        super(props);
+export default function AgStackedBarChart(props: StackedBarChartProps) {
 
-        const mobile = isMobile();
-        const title = mobile ? this.props.mobileTitle ?? '' : this.props.title ?? '';
+    const { theme } = useTheme();
 
-        let seriesDefs = [];
-        if (!mobile) {
-            this.props.yKeys.forEach(k => {
-                seriesDefs.push({
-                    type: 'column',
-                    xKey: 'name',
-                    yKey: k,
-                    stacked: true,
-                    tooltip: { renderer: renderer }
-                });
-            });
-        } else {
+    const mobile = isMobile();
+    const title = mobile ? props.mobileTitle ?? '' : props.title ?? '';
+
+    let seriesDefs = [];
+    if (!mobile) {
+        props.yKeys.forEach(k => {
             seriesDefs.push({
                 type: 'column',
                 xKey: 'name',
-                yKey: 'total',
+                yKey: k,
+                stacked: true,
                 tooltip: { renderer: renderer }
             });
-        }
+        });
+    } else {
+        seriesDefs.push({
+            type: 'column',
+            xKey: 'name',
+            yKey: 'total',
+            tooltip: { renderer: renderer }
+        });
+    }
 
-        this.state = {
-            options: {
-                data: this.props.data,
+    return (
+        <Row className={!mobile ? 'bar-chart-container' : 'bar-chart-container-mobile'}>
+            <AgChartsReact options={{
+                data: props.data,
                 series: seriesDefs,
                 legend: {
                     position: 'bottom',
@@ -51,25 +58,13 @@ export default class AgStackedBarChart extends Component<any, any> {
                     text: title
                 },
                 theme: {
-                    // baseTheme: 'ag-default-dark'
+                    baseTheme: theme === 'light' ? 'ag-default-theme' : 'ag-default-dark'
                 },
                 navigator: {
                     enabled: mobile,
                 },
-                className: !mobile ? 'bar-chart-container' : 'bar-chart-container-mobile'
-            }
-        }
-
-        // this.state.className = !mobile ? 'bar-chart-container' : 'bar-chart-container-mobile';
-
-
-    }
-
-    render() {
-        return (
-            <Row className={this.state.className}>
-                <AgChartsReact options={this.state.options} />
-            </Row>
-        )
-    }
+                // className: !mobile ? 'bar-chart-container' : 'bar-chart-container-mobile'
+            }} />
+        </Row>
+    )
 }

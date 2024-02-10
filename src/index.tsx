@@ -13,16 +13,16 @@ import { Footer } from './components/Footer.comp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Providers>
-      <NavBar />
-      <NavRoutes />
-      <Footer />
+        <div id='content'>
+            <NavBar />
+            <NavRoutes />
+        </div>
+        <Footer />
     </Providers>
-  // </React.StrictMode>
+  </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
+// Uncomment to start measuring application performance 
+// reportWebVitals(console.log);
