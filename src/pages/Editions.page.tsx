@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePlays } from '../providers/PlaysProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
 import { useSeries } from '../providers/SeriesProvider.comp';
@@ -51,7 +50,7 @@ export function Editions() {
                 {isMobile() && !!playTypeTable && !!tierTable &&
                     <Accordian items={[['Editions Per Team & Type', playTypeTable], ['Editions Per Team & Tier', tierTable]]} />
                 }
-                {rowData.length > 0 && 
+                {rowData.length > 0 &&
                     <AgGrid columnDefs={AG_DETAILED_EDITION_COLS} rowData={rowData} />
                 }
             </>}

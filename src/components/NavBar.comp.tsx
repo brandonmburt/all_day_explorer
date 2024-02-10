@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
@@ -13,13 +12,13 @@ export function NavBar() {
     const { sets } = useSets();
     const { editionsMap } = useEditions();
 
-    let seriesSets = null;
+    let seriesSets: Map<number, Set<string>> = null;
     if (!!series && !!sets && !!editionsMap) {
         seriesSets = getSetsWithinSeries(series, sets, editionsMap);
     }
 
     return (
-        <Navbar bg="light" expand="lg" collapseOnSelect>
+        <Navbar expand="lg" collapseOnSelect>
             <Container>
                 <Navbar.Brand>All Day Tools</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

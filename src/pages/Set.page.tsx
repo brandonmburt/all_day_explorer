@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
@@ -37,7 +36,7 @@ export function Set() {
         numMintedMoments = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
         cardItems = [
             ['Status', badge],
-            ['Num Editions', numFormat(gridData.length)],
+            ['Editions', numFormat(gridData.length)],
             ['Minted Moments', numFormat(numMintedMoments)]
         ];
     }

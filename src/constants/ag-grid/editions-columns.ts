@@ -39,8 +39,9 @@ export const AG_EDITION_COLS: AgEditionCols[] = [
         field: 'tier',
     },
     {
-        headerName: 'Num Minted',
+        headerName: 'Minted Moments',
         field: 'numMinted',
+        minWidth: 180
     },
     {
         headerName: 'Max Mint Size',
@@ -83,8 +84,9 @@ export const AG_DETAILED_EDITION_COLS: AgDetailedEditionCols[] = [
         field: 'tier',
     },
     {
-        headerName: 'Num Minted',
+        headerName: 'Minted Moments',
         field: 'numMinted',
+        minWidth: 180
     },
     {
         headerName: 'Max Mint Size',

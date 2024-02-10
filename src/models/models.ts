@@ -1,4 +1,30 @@
+export interface Moment {
+    editionID: number;
+    id: number;
+    mintingDate: number;
+    serialNumber: number;
+    uuid: number;
+}
 
+export interface DescriptiveMoment {
+    momentID: number;
+    editionID: number;
+    seriesID: number;
+    setID: number;
+    series: string;
+    set: string;
+    playID: number;
+    serialNumber: number;
+    tier: string;
+    classification: string;
+    playerFirstName: string;
+    playerLastName: string;
+    name: string;
+    teamName: string;
+    playerPosition: string;
+    playType: string;
+    gameDate: string;
+}
 
 // TODO: this isn't a good solution, but it works for now
 export interface TeamObj {

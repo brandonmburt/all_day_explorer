@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
