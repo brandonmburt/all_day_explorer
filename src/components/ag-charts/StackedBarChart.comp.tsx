@@ -63,6 +63,9 @@ export default function AgStackedBarChart(props: StackedBarChartProps) {
                 navigator: {
                     enabled: mobile,
                 },
+                background: {
+                    fill: 'transparent',
+                },
                 // className: !mobile ? 'bar-chart-container' : 'bar-chart-container-mobile'
             }} />
         </Row>

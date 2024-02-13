@@ -6,20 +6,19 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 export function Footer() {
 
     const { theme, toggleTheme } = useTheme();
-    const classes = theme === 'light' ? 'footer bg-light' : 'footer bg-dark';
     const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
-
+    const logoURL = theme === 'light' ? 'logo/secondary-light-theme.png' : 'logo/secondary-dark-theme.png';
     const toggleDarkMode = (checked: boolean) => {
         setIsDarkMode(checked);
         toggleTheme();
     };
 
     return (
-        <div className={classes}>
+        <div className='footer'>
             <Container>
                 <Row>
                     <div style={{marginTop: '20px', marginBottom: '20px'}}>
-                        All Day Tools
+                        <img src={logoURL} alt="All Day Tools" style={{ width: '120px' }} />
                         <DarkModeSwitch
                             style={{ marginLeft: '1rem' }}
                             checked={isDarkMode}

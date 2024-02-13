@@ -12,7 +12,7 @@ export const useTheme = () => {
 };
 
 export default function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); // Default to light
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark'); // Default to dark
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';

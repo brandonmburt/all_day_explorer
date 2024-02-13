@@ -23,7 +23,7 @@ export function Set() {
         const seriesInfo = series.get(+seriesID);
         const setInfo = sets.get(+setID);
 
-        title = seriesInfo.name + ': ' + setInfo.name;
+        title = seriesInfo.name + ' > ' + setInfo.name;
         badge = seriesInfo.active ?
             <Badge pill bg='success'>Active</Badge> :
             <Badge pill bg='danger'>Closed</Badge>;
@@ -43,6 +43,7 @@ export function Set() {
 
     return (
         <Container>
+            <h4>{title}</h4>
             <Row className='three-card-col'>
                 {cardItems.length > 0 &&
                     cardItems.map((data, i) => {
@@ -58,10 +59,7 @@ export function Set() {
                     })
                 }
             </Row>
-            {gridData.length > 0 && <>
-                <h4>{title}</h4>
-                <AgGrid columnDefs={AG_EDITION_COLS} rowData={gridData} />
-            </>}
+            {gridData.length > 0 && <AgGrid columnDefs={AG_EDITION_COLS} rowData={gridData} /> }
         </Container>
     )
 

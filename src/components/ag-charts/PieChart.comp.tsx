@@ -41,6 +41,9 @@ export default function AgPieChart(props: Props) {
                 padding: {
                     bottom: 30
                 },
+                background: {
+                    fill: 'transparent',
+                },
             }} />
         </div>
     )
