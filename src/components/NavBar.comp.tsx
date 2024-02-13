@@ -3,11 +3,13 @@ import { useSets } from '../providers/SetsProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
 import { getSetsWithinSeries } from '../utils/nav.utils';
 import { SeriesNav } from "./SeriesNav.comp";
-import { Navbar, Nav, Container } from "react-bootstrap"
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
+import { useTheme } from '../providers/ThemeProvider.comp';
 
 export function NavBar() {
 
+    const { theme } = useTheme();
     const { series } = useSeries();
     const { sets } = useSets();
     const { editionsMap } = useEditions();
@@ -17,38 +19,70 @@ export function NavBar() {
         seriesSets = getSetsWithinSeries(series, sets, editionsMap);
     }
 
+    const MAIN_LINKS: [path: string, label: string][] = [
+        ['/', 'Home'],
+        ['/account', 'Account'],
+    ];
+
+    const EVALUATE_LINKS: [path: string, label: string][] = [
+        ['/moments', 'Moments'],
+        ['/editions', 'Editions'],
+        ['/plays', 'Plays'],
+    ];
+
+    const LOGO_URL = theme === 'light' ? '/logo/primary-light-theme.png' : '/logo/primary-dark-theme.png';
+
     return (
-        <Navbar expand="lg" collapseOnSelect>
+        <Navbar style={{ position: 'sticky' }} className='nav-styles' expand="lg" collapseOnSelect>
             <Container>
-                <Navbar.Brand>All Day Tools</Navbar.Brand>
+                <Navbar.Brand>
+                    <img src={LOGO_URL} alt="All Day Tools" style={{ width: '100px' }} />
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <LinkContainer to="/">
-                            <Nav.Link>Dashboard</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/plays">
-                            <Nav.Link>Plays</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/editions">
-                            <Nav.Link>Editions</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/moments">
-                            <Nav.Link>Moments</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/account">
-                            <Nav.Link>Account</Nav.Link>
-                        </LinkContainer>
+                        {MAIN_LINKS.map(([path, label], i) => {
+                            return (
+                                <LinkContainer key={i} to={path}>
+                                    <Nav.Link>{label}</Nav.Link>
+                                </LinkContainer>
+                            )
+                        })}
+                        <NavDropdown title={'Evaluate'} id="basic-nav-dropdown">
+                                {EVALUATE_LINKS.map(([path, label], i) => {
+                                    return (
+                                        <LinkContainer key={i} to={path}>
+                                            <NavDropdown.Item>
+                                                {label}
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                    )
+                                })}
+                        </NavDropdown>
                         {seriesSets !== null &&
                             Array.from(seriesSets).map(([key, val]) => {
                                 const s = series.get(key);
-                                return <SeriesNav key={key} id={s.id} name={s.name} active={s.active} sets={val} />
+                                return <SeriesNav key={key} id={s.id} name={s.name} active={s.active} sets={val} />;
                             })
-                        } 
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     )
+    /*
+        <NavDropdown title={'Evaluate'} id="basic-nav-dropdown">
+            {Array.from(props.sets).map((set) => {
+                const [id, name] = set.split(":");
+                return (
+                    <LinkContainer key={id} to={"/set/" + props.id + "/" + id}>
+                        <NavDropdown.Item>
+                            {id}: {name}
+                        </NavDropdown.Item>
+                    </LinkContainer>
+                )
+            })}
+        </NavDropdown>
+    */
 
 }

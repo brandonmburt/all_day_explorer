@@ -61,7 +61,47 @@ code {
   margin: 20px 5px 30px 5px;
 }
 
-.account-form {
-  margin: 30px 15px 0px !important;
-  width: 350px !important;
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .account-form {
+    margin: auto;
+    margin: 30px 15px 0px !important;
+    width: 350px !important;
+} */
+
+.nav-styles {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Set to the top of the viewport */
+    z-index: 1000; /* Ensure the header is above other content */
+    margin-bottom: 50px;
+}
+  
+.icon {
+    color: #4f616c;
+}
+
+.App-light {
+    background-color: #eeeeee;
+    .nav-styles {
+        background-color: #dddddd;
+        border-bottom: 1px solid #374249;
+    }
+    .footer {
+        background-color: #dddddd;
+    }
+}
+
+.App-dark {
+    .nav-styles {
+        background-color: #282B2F;
+        border-bottom: 1px solid #374249;
+    }
+    .footer {
+        background-color: #282B2F;
+    }
 }

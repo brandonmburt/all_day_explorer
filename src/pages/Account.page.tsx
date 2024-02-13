@@ -11,6 +11,7 @@ import { AccountForm } from "../components/AccountForm.comp";
 import { numFormat } from '../utils/num.utils';
 import { getCollectionIDs, getCollectionMoments } from '../services/account.service';
 import { AccountCharts } from '../components/AccountCharts.comp';
+import { DescriptiveMoment, Moment } from "../models/models";
 
 export function Account() {
 
@@ -19,24 +20,39 @@ export function Account() {
     const { series } = useSeries();
     const { sets } = useSets();
 
-    const [address, setAddress] = useState(null);
-    const [editionIDs, setEditionIDs] = useState([]);
-    const [collectionMoments, setCollectionMoments] = useState([]);
+    const [address, setAddress] = useState<string>(null);
+    const [editionIDs, setEditionIDs] = useState<number[]>([]);
+    const [collectionMoments, setCollectionMoments] = useState<DescriptiveMoment[]>([]);
+    const [submissionInProgress, setSubmissionInProgress] = useState<boolean>(false);
 
-    const processSubmit = async (address) => {
+    const handleSubmit = async (address: string) => {
         setAddress(address);
-        const momentIDs = await getCollectionIDs(address);
-        if (momentIDs.length === 0) {
-            console.error('No Moments??');
-            return;
+        setSubmissionInProgress(true);
+        try {
+            const momentIDs: string[] = await getCollectionIDs(address);
+            if (momentIDs.length === 0) {
+                console.error('No Moments??');
+                return;
+            }
+            const moments: Moment[] = (await getCollectionMoments(address, momentIDs)).map(m => {
+                return {
+                    editionID: +m.editionID,
+                    id: +m.id,
+                    mintingDate: Math.floor(+m.mintingDate),
+                    serialNumber: +m.serialNumber,
+                    uuid: +m.uuid,
+                }
+            });
+            let collection: DescriptiveMoment[] = getDescriptiveMoments(moments, editionsMap, playsMap, series, sets);
+            setCollectionMoments(collection);
+            setEditionIDs(getUniqueEditions(collection));
+        } catch (e) {
+            console.error(e);   
         }
-        const moments = await getCollectionMoments(address, momentIDs);
-        let collection = getDescriptiveMoments(moments, editionsMap, playsMap, series, sets);
-        setCollectionMoments(collection);
-        setEditionIDs(getUniqueEditions(collection));
+        setSubmissionInProgress(false);
     };
 
-    const resetForm = () => {
+    const handleResetForm = () => {
         setAddress(null);
         setEditionIDs([]);
         setCollectionMoments([]);
@@ -44,12 +60,13 @@ export function Account() {
 
     return (
         <Container>
-            {address === null &&
-                <AccountForm processSubmit={processSubmit} />
-            }
-            {address !== null &&
-                <div><Button onClick={resetForm} style={{margin:'25px 10px 10px'}} variant='outline-primary'>Look Up Different Address</Button></div>
-            }
+            {address === null || submissionInProgress ? (
+                <AccountForm submissionInProgress={submissionInProgress} handleSubmit={handleSubmit} />
+            ) : (
+                <div>
+                    <Button onClick={handleResetForm} style={{margin:'25px 10px 10px'}} variant='outline-primary'>Return to Account Lookup</Button>
+                </div>
+            )}
             {collectionMoments.length > 0 &&
                 <Row className='three-card-col'>
                     {[["Flow Address", address], ["Moments Owned", numFormat(collectionMoments.length)],
