@@ -16,6 +16,7 @@ interface StackedBarChartProps {
     yKeys: string[];
     title?: string;
     mobileTitle?: string;
+    mb?: string;
 }
 
 export default function AgStackedBarChart(props: StackedBarChartProps) {
@@ -24,6 +25,7 @@ export default function AgStackedBarChart(props: StackedBarChartProps) {
 
     const mobile = isMobile();
     const title = mobile ? props.mobileTitle ?? '' : props.title ?? '';
+    const styles = { marginBottom: props.mb || '30px' };
 
     let seriesDefs = [];
     if (!mobile) {
@@ -46,7 +48,7 @@ export default function AgStackedBarChart(props: StackedBarChartProps) {
     }
 
     return (
-        <Row className={!mobile ? 'bar-chart-container' : 'bar-chart-container-mobile'}>
+        <Row className={!mobile ? 'bar-chart-container' : 'bar-chart-container-mobile'} style={styles}>
             <AgChartsReact options={{
                 data: props.data,
                 series: seriesDefs,
@@ -55,6 +57,7 @@ export default function AgStackedBarChart(props: StackedBarChartProps) {
                     enabled: !mobile
                 },
                 title: {
+                    color: theme === 'light' ? '#374249' : '#b4dffd',
                     text: title
                 },
                 theme: {

@@ -69,7 +69,7 @@ export function Home() {
                     } />
                 }
                 {!!editionsSupply &&
-                    <CardComp header={'Editions'} body={
+                    <CardComp mb='0' header={'Editions'} body={
                         <Row>
                             <Col lg={true}>
                                 {createButtons('edition', editionRadio, setEditionRadio)}

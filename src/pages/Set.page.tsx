@@ -8,6 +8,7 @@ import { AG_EDITION_COLS } from '../constants/ag-grid/editions-columns';
 import { getEditionGridData } from '../utils/edition.utils';
 import { AgGrid } from '../components/AgGrid.comp';
 import { numFormat } from '../utils/num.utils';
+import { Series, Set as MySet, Edition } from '../models/models';
 
 export function Set() {
 
@@ -18,32 +19,26 @@ export function Set() {
     const { editionsMap } = useEditions();
     const { playsMap } = usePlays();
 
-    let title = '', badge = null;
-    if (!!series && !!sets) {
-        const seriesInfo = series.get(+seriesID);
-        const setInfo = sets.get(+setID);
+    if (!series || !sets || !editionsMap || !playsMap) return (<></>)
 
-        title = seriesInfo.name + ' > ' + setInfo.name;
-        badge = seriesInfo.active ?
-            <Badge pill bg='success'>Active</Badge> :
-            <Badge pill bg='danger'>Closed</Badge>;
-    }
+    const seriesInfo: Series = series.get(+seriesID);
+    const setInfo: MySet = sets.get(+setID);
 
-    let gridData = [], numMintedMoments = 0, cardItems = [];
-    if (!!editionsMap && !!playsMap) {
-        const filteredEditions = Array.from(editionsMap.values()).filter(e => e.seriesID === +seriesID && e.setID === +setID);
-        gridData = getEditionGridData(filteredEditions, playsMap);
-        numMintedMoments = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
-        cardItems = [
-            ['Status', badge],
-            ['Editions', numFormat(gridData.length)],
-            ['Minted Moments', numFormat(numMintedMoments)]
-        ];
-    }
+    const TITLE = seriesInfo.name + ' > ' + setInfo.name;
+    const BADGE = seriesInfo.active ? <Badge pill bg='success'>Active</Badge> : <Badge pill bg='danger'>Closed</Badge>;
+
+    const filteredEditions: Edition[] = Array.from(editionsMap.values()).filter(e => e.seriesID === +seriesID && e.setID === +setID);
+    const gridData = getEditionGridData(filteredEditions, playsMap);
+    const numMintedMoments: number = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
+    const cardItems = [
+        ['Status', BADGE],
+        ['Editions', numFormat(gridData.length)],
+        ['Minted Moments', numFormat(numMintedMoments)]
+    ];
 
     return (
         <Container>
-            <h4>{title}</h4>
+            <h4 className='header-color' style={{ marginLeft: '10px' }}>{TITLE}</h4>
             <Row className='three-card-col'>
                 {cardItems.length > 0 &&
                     cardItems.map((data, i) => {
@@ -51,7 +46,7 @@ export function Set() {
                         return (
                             <Col key={i} md={true}>
                                 <Card className='shadow' style={{ margin: '20px 10px 0px' }}>
-                                    <Card.Header as='h6'>{header}</Card.Header>
+                                    <Card.Header className='header-color' as='h6'>{header}</Card.Header>
                                     <Card.Body as='h5' style={{ textAlign: 'center' }}>{body}</Card.Body>
                                 </Card>
                             </Col>

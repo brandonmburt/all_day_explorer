@@ -21,7 +21,7 @@ export function AgGrid(props) {
     }
 
     return (
-        <Row style={{ margin: '25px 0px' }}>
+        <Row style={{ margin: '0px' }}>
             <div className={theme === 'light' ? 'ag-theme-alpine' : 'ag-theme-alpine-dark'} style={{ height: 600, width: '100%' }}>
                 <AgGridReact
                     ref={gridRef} // Ref for accessing Grid's API

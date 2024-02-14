@@ -33,6 +33,7 @@ code {
 .footer {
     width: 100%;
     text-align: center;
+    margin-top: 50px;
 }
 
 .tier-toggle-btn {
@@ -48,7 +49,7 @@ code {
 
 .bar-chart-container {
     height: 600px;
-    margin-top: 30px !important;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -62,27 +63,30 @@ code {
     margin: 20px 5px 30px 5px;
 }
 
+.ex-address {
+    font-weight: bold;
+}
+
 .centered {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* .account-form {
-    margin: auto;
-    margin: 30px 15px 0px !important;
-    width: 350px !important;
-} */
+#account-form {
+    max-width: 350px;
+}
+
+#account-reset-btn {
+    margin: 10px 0 20px 10px;
+}
 
 .nav-styles {
     position: -webkit-sticky;
-    /* For Safari */
     position: sticky;
     top: 0;
-    /* Set to the top of the viewport */
     z-index: 1000;
-    /* Ensure the header is above other content */
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .icon {
@@ -100,6 +104,14 @@ code {
     .footer {
         background-color: #dddddd;
     }
+
+    .ex-address {
+        color: #374249;
+    }
+
+    .header-color {
+        color: #374249;
+    }
 }
 
 .App-dark {
@@ -110,5 +122,13 @@ code {
 
     .footer {
         background-color: #282B2F;
+    }
+
+    .ex-address {
+        color: #b4dffd;
+    }
+
+    .header-color {
+        color: #b4dffd;
     }
 }

@@ -47,3 +47,7 @@ export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) =
     return generateTeamObjArr(teamObjMap, teams);
 
 }
+
+export const addressIsValid = (address: string): boolean => {
+    return address.length === 18 && address.startsWith("0x");
+}

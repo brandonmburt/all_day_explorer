@@ -36,7 +36,7 @@ export function Moments() {
                     <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} mobileTitle={'Moments Per Team'} />
                 }
                 {momentsByTeamAndTier.length > 0 && !isMobile() &&
-                    <AgStackedBarChart data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
+                    <AgStackedBarChart mb={'0px'} data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
                 }
                 {isMobile() && !!playTypeTable && !!tierTable &&
                     <Accordian items={[['Moments Per Team & Type', playTypeTable], ['Moments Per Team & Tier', tierTable]]} />

@@ -33,7 +33,7 @@ export function NavBar() {
     const LOGO_URL = theme === 'light' ? '/logo/primary-light-theme.png' : '/logo/primary-dark-theme.png';
 
     return (
-        <Navbar style={{ position: 'sticky' }} className='nav-styles' expand="lg" collapseOnSelect>
+        <Navbar sticky='top' className='nav-styles' expand="lg" collapseOnSelect>
             <Container>
                 <Navbar.Brand>
                     <img src={LOGO_URL} alt="All Day Tools" style={{ width: '100px' }} />
