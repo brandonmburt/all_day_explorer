@@ -1,5 +1,7 @@
-import { getSeriesTiersMap, convertSeriesTiersMapToArr, generateTeamObjArr,
-    generateTeamObjMapByType } from './general.utils';
+import {
+    getSeriesTiersMap, convertSeriesTiersMapToArr, generateTeamObjArr,
+    generateTeamObjMapByType
+} from './general.utils';
 
 export const getNumMomentsBySeriesAndTier = (series, moments) => {
 
@@ -36,7 +38,7 @@ export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) =
         const { teamName, playType } = moment;
         if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found: " + teamName);
-            teamObjMap.set(teamName, {...typesObj});
+            teamObjMap.set(teamName, { ...typesObj });
         }
         teamObjMap.get(teamName)[playType] += 1;
         teamObjMap.get(teamName).total += 1;
@@ -45,5 +47,3 @@ export const getAgMomentsByTypeAndTeam = (collectionMoments, playTypes, teams) =
     return generateTeamObjArr(teamObjMap, teams);
 
 }
-
-// export const 

@@ -31,7 +31,7 @@ export interface TeamObj {
     [key: string]: number | string; // Allow any other field with numeric values
     name: string;
     total?: number;
-  }
+}
 
 export interface SeriesTiers {
     name: string,
@@ -71,18 +71,18 @@ export interface Play {
     id: number,
     classification: string,
     metadata: {
-      awayTeamName: string,
-      awayTeamScore: number,
-      description: string,
-      gameDate: string,
-      homeTeamName: string,
-      homeTeamScore: number,
-      playType: string,
-      playerFirstName: string,
-      playerLastName: string,
-      playerNumber: number,
-      playerPosition: string,
-      teamName: string
+        awayTeamName: string,
+        awayTeamScore: number,
+        description: string,
+        gameDate: string,
+        homeTeamName: string,
+        homeTeamScore: number,
+        playType: string,
+        playerFirstName: string,
+        playerLastName: string,
+        playerNumber: number,
+        playerPosition: string,
+        teamName: string
     }
 }
 

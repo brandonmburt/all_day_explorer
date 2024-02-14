@@ -35,7 +35,7 @@ export const getAgPlaysByTypeAndTeam = (plays: Map<Number, Play>, playTypes: str
         const { teamName, playType } = metadata;
         if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found: " + teamName);
-            teamObjMap.set(teamName, {...typesObj});
+            teamObjMap.set(teamName, { ...typesObj });
         }
         teamObjMap.get(teamName)[playType] += 1;
         teamObjMap.get(teamName).total += 1;

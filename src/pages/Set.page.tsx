@@ -50,16 +50,16 @@ export function Set() {
                         const [header, body] = data;
                         return (
                             <Col key={i} md={true}>
-                                <Card className='shadow' style={{margin: '20px 10px 0px'}}>
+                                <Card className='shadow' style={{ margin: '20px 10px 0px' }}>
                                     <Card.Header as='h6'>{header}</Card.Header>
-                                    <Card.Body as='h5' style={{textAlign: 'center'}}>{body}</Card.Body>
+                                    <Card.Body as='h5' style={{ textAlign: 'center' }}>{body}</Card.Body>
                                 </Card>
                             </Col>
                         )
                     })
                 }
             </Row>
-            {gridData.length > 0 && <AgGrid columnDefs={AG_EDITION_COLS} rowData={gridData} /> }
+            {gridData.length > 0 && <AgGrid columnDefs={AG_EDITION_COLS} rowData={gridData} />}
         </Container>
     )
 

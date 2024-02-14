@@ -13,15 +13,15 @@ import { Footer } from './components/Footer.comp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Providers>
-        <div id='content'>
-            <NavBar />
-            <NavRoutes />
-        </div>
-        <Footer />
-    </Providers>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Providers>
+            <div id='content'>
+                <NavBar />
+                <NavRoutes />
+            </div>
+            <Footer />
+        </Providers>
+    </React.StrictMode>
 );
 
 // Uncomment to start measuring application performance 

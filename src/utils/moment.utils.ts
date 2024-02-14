@@ -6,12 +6,12 @@ export const getUniqueEditions = (moments: DescriptiveMoment[]): number[] => {
     const editions = new Set<number>();
     moments.forEach(({ editionID }) => editions.add(editionID));
     return Array.from(editions);
-    
+
 }
 
 export const getDescriptiveMoments = (moments: Moment[], editionsMap: Map<number, Edition>, playsMap: Map<number, Play>, seriesMap: Map<number, Series>, setsMap: Map<number, MySet>): DescriptiveMoment[] => {
     // Moment objects have id, editionID, and serialNumber (all strings)
-    
+
     let descriptiveMoments: DescriptiveMoment[] = [];
     moments.forEach(m => {
         const { id, editionID, serialNumber } = m;
@@ -55,7 +55,7 @@ export const getAgNumMomentsByTypeAndTeam = (editions: Map<number, Edition>, pla
         const { teamName, playType } = metadata;
         if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found: " + teamName);
-            teamObjMap.set(teamName, {...typesObj});
+            teamObjMap.set(teamName, { ...typesObj });
         }
         teamObjMap.get(teamName)[playType] += numMinted;
         teamObjMap.get(teamName).total += numMinted;
@@ -75,7 +75,7 @@ export const getAgNumMomentsByTierAndTeam = (editions: Map<number, Edition>, pla
         const { teamName } = metadata;
         if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found: " + teamName);
-            teamObjMap.set(teamName, {...tiersObj});
+            teamObjMap.set(teamName, { ...tiersObj });
         }
         teamObjMap.get(teamName)[tier] += numMinted;
         teamObjMap.get(teamName).total += numMinted;

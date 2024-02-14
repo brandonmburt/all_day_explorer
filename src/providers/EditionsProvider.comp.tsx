@@ -1,21 +1,19 @@
-import React, { createContext, useContext } from 'react'
+import { createContext, useContext } from 'react'
 import useAllEditions from '../hooks/use-all-editions.hook';
 import { Edition } from '../models/models';
 
 const EditionsContext = createContext<{ editionsMap: Map<number, Edition> }>(null)
 
 export default function EditionsProvider({ children }) {
-  const [ editionsMap ] = useAllEditions();
+    const [editionsMap] = useAllEditions();
 
-  return (
-    <EditionsContext.Provider value={{
-      editionsMap
-    }}>
-      {children}
-    </EditionsContext.Provider>
-  )
+    return (
+        <EditionsContext.Provider value={{ editionsMap }}>
+            {children}
+        </EditionsContext.Provider>
+    )
 }
 
 export const useEditions = () => {
-  return useContext(EditionsContext)
+    return useContext(EditionsContext)
 }

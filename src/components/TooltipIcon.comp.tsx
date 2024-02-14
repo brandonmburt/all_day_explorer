@@ -15,16 +15,16 @@ export function TooltipIcon(props: TooltipIconProps) {
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
-          {message}
+            {message}
         </Tooltip>
-      );
+    );
 
     return (
         <OverlayTrigger
             placement="right"
             delay={{ show: 250, hide: 400 }}
             overlay={renderTooltip}
-            >
+        >
             <Button size='sm' variant="secondary"
                 style={{
                     width: pixels,

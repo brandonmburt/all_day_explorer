@@ -8,7 +8,7 @@ export function AgGrid(props) {
 
     const { theme } = useTheme();
     const gridRef = useRef(); // Optional - for accessing Grid's API
-    let [ rowData, setRowData ] = useState([]);
+    let [rowData, setRowData] = useState([]);
     const colDefs = useMemo(() => props.columnDefs, [props.columnDefs]);
     const defaultColDefs = useMemo(() => DEFAULT_COLS, []);
 
@@ -21,8 +21,8 @@ export function AgGrid(props) {
     }
 
     return (
-        <Row style={{margin: '25px 0px'}}>
-            <div className={theme === 'light'? 'ag-theme-alpine' : 'ag-theme-alpine-dark'} style={{height: 600, width: '100%'}}>
+        <Row style={{ margin: '25px 0px' }}>
+            <div className={theme === 'light' ? 'ag-theme-alpine' : 'ag-theme-alpine-dark'} style={{ height: 600, width: '100%' }}>
                 <AgGridReact
                     ref={gridRef} // Ref for accessing Grid's API
                     rowData={rowData}

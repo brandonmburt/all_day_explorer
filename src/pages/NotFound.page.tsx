@@ -8,5 +8,4 @@ export function NotFound() {
             </h2>
         </Container>
     )
-
 }

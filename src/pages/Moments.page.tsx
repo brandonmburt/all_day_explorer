@@ -28,15 +28,15 @@ export function Moments() {
 
     return (
         <Container>
-            {!editionsMap && 
+            {!editionsMap &&
                 <Loading />
             }
             {!!editionsMap && <>
                 {momentsByTeamAndType.length > 0 && playTypes.length > 0 &&
-                        <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} mobileTitle={'Moments Per Team'} />
+                    <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} mobileTitle={'Moments Per Team'} />
                 }
                 {momentsByTeamAndTier.length > 0 && !isMobile() &&
-                        <AgStackedBarChart data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
+                    <AgStackedBarChart data={momentsByTeamAndTier} yKeys={TIERS} title={'Moments Per Team & Tier'} />
                 }
                 {isMobile() && !!playTypeTable && !!tierTable &&
                     <Accordian items={[['Moments Per Team & Type', playTypeTable], ['Moments Per Team & Tier', tierTable]]} />

@@ -19,7 +19,7 @@ export default function AgPieChart(props: Props) {
     const { theme } = useTheme();
 
     return (
-        <div style={{height: '350px'}}>
+        <div style={{ height: '350px' }}>
             <AgChartsReact options={{
                 data: props.data,
                 series: [{

@@ -9,16 +9,16 @@ import { Moments } from '../pages/Moments.page';
 
 export function NavRoutes() {
 
-  return (
-    <Routes>
-        <Route index element={<Home />} />
-        <Route path="/plays" element={<Plays />} />
-        <Route path="/set/:seriesID/:setID" element={<Set />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/editions" element={<Editions />} />
-        <Route path="/moments" element={<Moments />} />
-        <Route path ="*" element={<NotFound />} />
-    </Routes>
-  )
+    return (
+        <Routes>
+            <Route index element={<Home />} />
+            <Route path="/plays" element={<Plays />} />
+            <Route path="/set/:seriesID/:setID" element={<Set />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/editions" element={<Editions />} />
+            <Route path="/moments" element={<Moments />} />
+            <Route path="*" element={<NotFound />} />
+        </Routes>
+    )
 
 }

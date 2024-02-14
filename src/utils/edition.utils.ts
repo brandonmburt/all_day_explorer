@@ -1,7 +1,7 @@
 import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
 
 export const getEditionGridData = (editions, playsMap) => {
-    
+
     let gridData = [];
     editions.forEach(edition => {
         const { id, maxMintSize, numMinted, playID, tier, seriesID, setID } = edition;
@@ -45,11 +45,11 @@ export const getAgNumEditionsByTypeAndTeam = (editions, playsMap, playTypes, tea
     editions.forEach(edition => {
         const { playID } = edition;
         const play = playsMap.get(playID);
-        const { metadata } = play; 
+        const { metadata } = play;
         const { teamName, playType } = metadata;
         if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found: " + teamName);
-            teamObjMap.set(teamName, {...typesObj});
+            teamObjMap.set(teamName, { ...typesObj });
         }
         teamObjMap.get(teamName)[playType] += 1;
         teamObjMap.get(teamName).total += 1;
@@ -66,11 +66,11 @@ export const getAgNumEditionsByTierAndTeam = (editions, playsMap, tiers, teams) 
     editions.forEach(edition => {
         const { playID, tier } = edition;
         const play = playsMap.get(playID);
-        const { metadata } = play; 
+        const { metadata } = play;
         const { teamName } = metadata;
         if (!teamObjMap.has(teamName)) {
             console.error("Unidentified team found: " + teamName);
-            teamObjMap.set(teamName, {...tiersObj});
+            teamObjMap.set(teamName, { ...tiersObj });
         }
         teamObjMap.get(teamName)[tier] += 1;
         teamObjMap.get(teamName).total += 1;

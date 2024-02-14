@@ -49,15 +49,15 @@ export function NavBar() {
                             )
                         })}
                         <NavDropdown title={'Evaluate'} id="basic-nav-dropdown">
-                                {EVALUATE_LINKS.map(([path, label], i) => {
-                                    return (
-                                        <LinkContainer key={i} to={path}>
-                                            <NavDropdown.Item>
-                                                {label}
-                                            </NavDropdown.Item>
-                                        </LinkContainer>
-                                    )
-                                })}
+                            {EVALUATE_LINKS.map(([path, label], i) => {
+                                return (
+                                    <LinkContainer key={i} to={path}>
+                                        <NavDropdown.Item>
+                                            {label}
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                )
+                            })}
                         </NavDropdown>
                         {seriesSets !== null &&
                             Array.from(seriesSets).map(([key, val]) => {
@@ -70,19 +70,4 @@ export function NavBar() {
             </Container>
         </Navbar>
     )
-    /*
-        <NavDropdown title={'Evaluate'} id="basic-nav-dropdown">
-            {Array.from(props.sets).map((set) => {
-                const [id, name] = set.split(":");
-                return (
-                    <LinkContainer key={id} to={"/set/" + props.id + "/" + id}>
-                        <NavDropdown.Item>
-                            {id}: {name}
-                        </NavDropdown.Item>
-                    </LinkContainer>
-                )
-            })}
-        </NavDropdown>
-    */
-
 }

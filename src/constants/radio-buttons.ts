@@ -10,4 +10,4 @@ export const RADIOS: RadioBtn[] = [
     { name: 'Rare', value: '3', key: "RARE" },
     { name: 'Legendary', value: '4', key: "LEGENDARY" },
     { name: 'Ultimate', value: '5', key: "ULTIMATE" }
-  ];
+];

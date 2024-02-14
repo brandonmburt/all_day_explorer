@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Row, Col, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import { TEAMS } from '../constants/teams';
 import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier, getAgMomentsByTypeAndTeam } from '../utils/account.utils';
@@ -37,16 +37,16 @@ export function AccountCharts(props) {
                 name={type + 'Buttons'}
                 value={val}
                 onChange={(v) => func(v)}>
-                    {RADIO_BTNS.map((r, id) => (
-                        <ToggleButton
-                            className='tier-toggle-btn'
-                            key={id}
-                            id={`${type}-${id}`}
-                            variant='outline-secondary'
-                            value={r.value}>
-                                {r.name}
-                        </ToggleButton>
-                    ))}
+                {RADIO_BTNS.map((r, id) => (
+                    <ToggleButton
+                        className='tier-toggle-btn'
+                        key={id}
+                        id={`${type}-${id}`}
+                        variant='outline-secondary'
+                        value={r.value}>
+                        {r.name}
+                    </ToggleButton>
+                ))}
             </ToggleButtonGroup>
         );
     }

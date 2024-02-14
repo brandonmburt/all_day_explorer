@@ -27,7 +27,7 @@ export function Plays() {
 
     return (
         <Container>
-            {!playsMap && 
+            {!playsMap &&
                 <Loading />
             }
             {!!playsMap && <>
@@ -37,7 +37,7 @@ export function Plays() {
                 {isMobile() && !!playTypeTable &&
                     <Accordian items={[['Plays Per Team & Type', playTypeTable]]} />
                 }
-                {rowData.length > 0 && 
+                {rowData.length > 0 &&
                     <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
                 }
             </>}

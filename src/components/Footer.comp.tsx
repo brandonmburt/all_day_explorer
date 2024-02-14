@@ -17,7 +17,7 @@ export function Footer() {
         <div className='footer'>
             <Container>
                 <Row>
-                    <div style={{marginTop: '20px', marginBottom: '20px'}}>
+                    <div style={{ marginTop: '20px', marginBottom: '20px' }}>
                         <img src={logoURL} alt="All Day Tools" style={{ width: '120px' }} />
                         <DarkModeSwitch
                             style={{ marginLeft: '1rem' }}

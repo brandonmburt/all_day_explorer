@@ -12,7 +12,7 @@ const ContentWrapper = ({ children }) => {
 
     useEffect(() => {
         document.documentElement.setAttribute('data-bs-theme', theme);
-      }, [theme]);
+    }, [theme]);
 
     return (
         <div className={`App-${theme}`}>
@@ -23,21 +23,21 @@ const ContentWrapper = ({ children }) => {
 
 export default function Providers({ children }) {
 
-  return (
-    <BrowserRouter>
-        <ThemeProvider>
-            <SeriesProvider>
-                <SetsProvider>
-                    <EditionsProvider>
-                        <PlaysProvider>
-                            <ContentWrapper>
-                                {children}
-                            </ContentWrapper>
-                        </PlaysProvider>
-                    </EditionsProvider>
-                </SetsProvider>
-            </SeriesProvider>
-        </ThemeProvider>
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <ThemeProvider>
+                <SeriesProvider>
+                    <SetsProvider>
+                        <EditionsProvider>
+                            <PlaysProvider>
+                                <ContentWrapper>
+                                    {children}
+                                </ContentWrapper>
+                            </PlaysProvider>
+                        </EditionsProvider>
+                    </SetsProvider>
+                </SeriesProvider>
+            </ThemeProvider>
+        </BrowserRouter>
+    )
 }

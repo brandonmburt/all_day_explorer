@@ -32,23 +32,23 @@ export function Home() {
                 name={type + 'Buttons'}
                 value={val}
                 onChange={(v) => func(v)}>
-                    {RADIOS.map((r, id) => (
-                        <ToggleButton
-                            className='tier-toggle-btn'
-                            key={id}
-                            id={`${type}-${id}`}
-                            variant='outline-secondary'
-                            value={r.value}>
-                                {r.name}
-                        </ToggleButton>
-                    ))}
+                {RADIOS.map((r, id) => (
+                    <ToggleButton
+                        className='tier-toggle-btn'
+                        key={id}
+                        id={`${type}-${id}`}
+                        variant='outline-secondary'
+                        value={r.value}>
+                        {r.name}
+                    </ToggleButton>
+                ))}
             </ToggleButtonGroup>
         );
     }
 
     const filterSupplyArr = (arr, radioVal) => {
         const radio = RADIOS.find(r => r.value === radioVal);
-        return arr.map(x => { return {label: x.name, value: x[radio.key]} });
+        return arr.map(x => { return { label: x.name, value: x[radio.key] } });
     }
 
     return (

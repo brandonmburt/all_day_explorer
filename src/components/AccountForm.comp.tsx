@@ -20,7 +20,7 @@ export function AccountForm(props) {
         e.stopPropagation();
         const addr: string = e.currentTarget.addr.value;
         // TODO: Might want to check the chain here
-        if (addr.length === 18 && addr.substring(0,2) === "0x") {
+        if (addr.length === 18 && addr.substring(0, 2) === "0x") {
             props.handleSubmit(addr)
         } else {
             setIsInvalid(true);
@@ -46,7 +46,7 @@ export function AccountForm(props) {
                 </Form.Group>
 
                 <Form.Group className='mb-3'>
-                    <Button disabled={props.submissionInProgress} style={{width: '100%'}} variant='primary' type='submit'>
+                    <Button disabled={props.submissionInProgress} style={{ width: '100%' }} variant='primary' type='submit'>
                         {props.submissionInProgress ? (
                             <Spinner
                                 as="span"

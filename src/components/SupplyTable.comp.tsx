@@ -1,4 +1,3 @@
-import React from "react"
 import { Table } from "react-bootstrap";
 import { numFormat } from '../utils/num.utils';
 
@@ -10,20 +9,20 @@ export function SupplyTable(props) {
     if (props.rows) {
         rows = [...props.rows]
         let totalsRow = { name: "Totals", COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0, TOTAL: 0 };
-        
+
         rows.forEach(row => {
             const { COMMON, RARE, LEGENDARY, ULTIMATE } = row;
-            const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;    
+            const TOT = COMMON + RARE + LEGENDARY + ULTIMATE;
             totalsRow.COMMON += COMMON;
             totalsRow.RARE += RARE;
             totalsRow.LEGENDARY += LEGENDARY;
             totalsRow.ULTIMATE += ULTIMATE;
             totalsRow.TOTAL += TOT;
         });
-        
+
         rows.push(totalsRow);
     }
-    
+
     return (
         <Table striped bordered hover responsive>
             <thead>
@@ -36,11 +35,11 @@ export function SupplyTable(props) {
             <tbody>
                 {rows.map((row, i) => {
                     return (
-                    <tr key={i}>
-                        {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
-                            return i === rows.length-1 ? <td key={j}><strong>{numFormat(data)}</strong></td> : <td key={j}>{numFormat(data)}</td>
-                        })}
-                    </tr>
+                        <tr key={i}>
+                            {[row.name, row.COMMON, row.RARE, row.LEGENDARY, row.ULTIMATE, row.TOTAL].map((data, j) => {
+                                return i === rows.length - 1 ? <td key={j}><strong>{numFormat(data)}</strong></td> : <td key={j}>{numFormat(data)}</td>
+                            })}
+                        </tr>
                     )
                 })}
             </tbody>

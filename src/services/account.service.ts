@@ -7,7 +7,6 @@ export const getCollectionIDs = async (address: string): Promise<any> => {
         cadence: GET_COLLECTION_IDS,
         args: (arg, t) => [arg(address, t.Address)]
     }).catch(() => console.error("Error occured getting collection IDs"));
-    
 }
 
 export const getCollectionMoments = async (address: string, momentIDs: string[]): Promise<any> => {

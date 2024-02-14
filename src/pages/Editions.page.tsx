@@ -37,7 +37,7 @@ export function Editions() {
 
     return (
         <Container>
-            {!editionsMap && 
+            {!editionsMap &&
                 <Loading />
             }
             {!!editionsMap && <>

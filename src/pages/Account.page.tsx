@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { getUniqueEditions, getDescriptiveMoments } from '../utils/moment.utils';
 import { useEditions } from "../providers/EditionsProvider.comp";
@@ -47,7 +47,7 @@ export function Account() {
             setCollectionMoments(collection);
             setEditionIDs(getUniqueEditions(collection));
         } catch (e) {
-            console.error(e);   
+            console.error(e);
         }
         setSubmissionInProgress(false);
     };
@@ -64,22 +64,22 @@ export function Account() {
                 <AccountForm submissionInProgress={submissionInProgress} handleSubmit={handleSubmit} />
             ) : (
                 <div>
-                    <Button onClick={handleResetForm} style={{margin:'25px 10px 10px'}} variant='outline-primary'>Return to Account Lookup</Button>
+                    <Button onClick={handleResetForm} style={{ margin: '25px 10px 10px' }} variant='outline-primary'>Return to Account Lookup</Button>
                 </div>
             )}
             {collectionMoments.length > 0 &&
                 <Row className='three-card-col'>
                     {[["Flow Address", address], ["Moments Owned", numFormat(collectionMoments.length)],
-                        ["Editions Owned", numFormat(editionIDs.length)]].map((data, i) => {
-                            const [header, body] = data;
-                            return (
-                                <Col key={i} md={true}>
-                                    <Card className="shadow" style={{margin: '20px 10px 0px'}}>
-                                        <Card.Header as="h6">{header}</Card.Header>
-                                        <Card.Body as="h5" style={{textAlign: 'center'}}>{body}</Card.Body>
-                                    </Card>
-                                </Col>
-                            )
+                    ["Editions Owned", numFormat(editionIDs.length)]].map((data, i) => {
+                        const [header, body] = data;
+                        return (
+                            <Col key={i} md={true}>
+                                <Card className="shadow" style={{ margin: '20px 10px 0px' }}>
+                                    <Card.Header as="h6">{header}</Card.Header>
+                                    <Card.Body as="h5" style={{ textAlign: 'center' }}>{body}</Card.Body>
+                                </Card>
+                            </Col>
+                        )
                     })}
                 </Row>
             }
