@@ -36,6 +36,7 @@ export interface TeamObj {
 export interface SeriesTiers {
     name: string,
     COMMON: number,
+    UNCOMMON: number,
     RARE: number,
     LEGENDARY: number,
     ULTIMATE: number,

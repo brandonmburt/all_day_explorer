@@ -25,24 +25,27 @@ export function Home() {
 
     const createButtons = (type, val, func) => {
         return (
-            <ToggleButtonGroup
-                size='sm'
-                className='toggle-style'
-                type='radio'
-                name={type + 'Buttons'}
-                value={val}
-                onChange={(v) => func(v)}>
-                {RADIOS.map((r, id) => (
-                    <ToggleButton
-                        className='tier-toggle-btn'
-                        key={id}
-                        id={`${type}-${id}`}
-                        variant='outline-secondary'
-                        value={r.value}>
-                        {r.name}
-                    </ToggleButton>
-                ))}
-            </ToggleButtonGroup>
+            <div style={{ overflowX: 'scroll' }}>
+                <ToggleButtonGroup
+                    size='sm'
+                    className='toggle-style'
+                    type='radio'
+                    name={type + 'Buttons'}
+                    value={val}
+                    onChange={(v) => func(v)}>
+                    {RADIOS.map(({ value, name }, i) => (
+                        <ToggleButton
+                            className='tier-toggle-btn'
+                            key={i}
+                            id={`${type}-${i}`}
+                            variant='outline-secondary'
+                            value={value}
+                        >
+                            {name}
+                        </ToggleButton>
+                    ))}
+                </ToggleButtonGroup>
+            </div>
         );
     }
 
@@ -58,11 +61,11 @@ export function Home() {
                 {!!seriesSupply &&
                     <CardComp header={'Moments'} body={
                         <Row>
-                            <Col lg={true}>
+                            <Col lg={6}>
                                 {createButtons('moment', momentRadio, setMomentRadio)}
                                 <AgPieChart data={filterSupplyArr(seriesSupply, momentRadio)} />
                             </Col>
-                            <Col lg={true}>
+                            <Col lg={6}>
                                 <SupplyTable rows={seriesSupply} />
                             </Col>
                         </Row>
@@ -71,11 +74,11 @@ export function Home() {
                 {!!editionsSupply &&
                     <CardComp mb='0' header={'Editions'} body={
                         <Row>
-                            <Col lg={true}>
+                            <Col lg={6}>
                                 {createButtons('edition', editionRadio, setEditionRadio)}
                                 <AgPieChart data={filterSupplyArr(editionsSupply, editionRadio)} />
                             </Col>
-                            <Col lg={true}>
+                            <Col lg={6}>
                                 <SupplyTable rows={editionsSupply} />
                             </Col>
                         </Row>

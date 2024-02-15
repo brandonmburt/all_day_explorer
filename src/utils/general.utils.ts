@@ -5,7 +5,7 @@ export const getSeriesTiersMap = (series: Map<number, Series>): Map<number, Seri
     const myMap: Map<number, SeriesTiers> = new Map();
     series.forEach(s => {
         const { id, name } = s;
-        const tiers: SeriesTiers = { name, COMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 };
+        const tiers: SeriesTiers = { name, COMMON: 0, UNCOMMON: 0, RARE: 0, LEGENDARY: 0, ULTIMATE: 0 };
         myMap.set(id, tiers);
     });
     return myMap;
@@ -16,7 +16,7 @@ export const convertSeriesTiersMapToArr = (seriesTiersMap: Map<number, SeriesTie
 
     let data: SeriesTiers[] = [];
     seriesTiersMap.forEach(v => {
-        const TOT = v.COMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
+        const TOT = v.COMMON + v.UNCOMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
         data.push({ TOTAL: TOT, ...v });
     });
     return data;
