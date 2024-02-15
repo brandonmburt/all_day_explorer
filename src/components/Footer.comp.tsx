@@ -7,7 +7,7 @@ export function Footer() {
 
     const { theme, toggleTheme } = useTheme();
     const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
-    const logoURL = theme === 'light' ? 'logo/secondary-light-theme.png' : 'logo/secondary-dark-theme.png';
+    const logoURL = theme === 'light' ? '/logo/secondary-light-theme.png' : '/logo/secondary-dark-theme.png';
     const toggleDarkMode = (checked: boolean) => {
         setIsDarkMode(checked);
         toggleTheme();
