@@ -3,12 +3,13 @@ import { useSets } from '../providers/SetsProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
 import { usePlays } from '../providers/PlaysProvider.comp';
 import { useParams } from 'react-router-dom';
-import { Container, Badge, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { AG_EDITION_COLS } from '../constants/ag-grid/editions-columns';
 import { getEditionGridData } from '../utils/edition.utils';
 import { AgGrid } from '../components/AgGrid.comp';
 import { numFormat } from '../utils/num.utils';
 import { Series, Set as MySet, Edition } from '../models/models';
+import { StatusBadge } from "../components/badges/StatusBadge.comp";
 
 export function Set() {
 
@@ -25,13 +26,12 @@ export function Set() {
     const setInfo: MySet = sets.get(+setID);
 
     const TITLE = seriesInfo.name + ' > ' + setInfo.name;
-    const BADGE = seriesInfo.active ? <Badge pill bg='success'>Active</Badge> : <Badge pill bg='danger'>Closed</Badge>;
 
     const filteredEditions: Edition[] = Array.from(editionsMap.values()).filter(e => e.seriesID === +seriesID && e.setID === +setID);
     const gridData = getEditionGridData(filteredEditions, playsMap);
     const numMintedMoments: number = gridData.reduce((acc, row) => acc += +row.numMinted, 0);
     const cardItems = [
-        ['Status', BADGE],
+        ['Status', <StatusBadge active={seriesInfo.active} />],
         ['Editions', numFormat(gridData.length)],
         ['Minted Moments', numFormat(numMintedMoments)]
     ];

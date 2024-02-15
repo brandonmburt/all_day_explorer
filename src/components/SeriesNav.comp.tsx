@@ -1,17 +1,21 @@
-import { NavDropdown, Badge } from "react-bootstrap"
-import { LinkContainer } from 'react-router-bootstrap'
+import { NavDropdown } from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
+import { StatusBadge } from "./badges/StatusBadge.comp";
 
-export function SeriesNav(props: { id: number, name: string, active: boolean, sets: Set<string> }) {
+interface SeriesNavProps {
+    id: number;
+    name: string;
+    active: boolean;
+    sets: Set<string>;
+}
 
-    let badge = props.active ?
-        <Badge pill bg="success">Active</Badge> :
-        <Badge pill bg="danger">Closed</Badge>;
-
+export function SeriesNav(props: SeriesNavProps) {
 
     return (
         <NavDropdown title={props.name} id="basic-nav-dropdown">
             <NavDropdown.Item disabled>
-                Status: {badge}
+                {'Status: '}
+                <StatusBadge active={props.active} />
             </NavDropdown.Item>
             <NavDropdown.Divider />
             {Array.from(props.sets).map((set) => {
