@@ -55,7 +55,7 @@ export function AccountCharts(props) {
         <>
             {momentsBySeriesAndTier.length > 0 && editionsBySeriesAndTier.length > 0 &&
 
-                <CardComp header={'Series Distribution'} body={
+                <CardComp mb={'40px'} header={'Series Distribution'} body={
                     <Row>
                         <Col lg={true}>
                             {createButtons('series', radioBtn, setRadioBtn)}

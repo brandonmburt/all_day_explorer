@@ -89,19 +89,28 @@ export function Account() {
                 </Button>
             )}
 
-            {collectionMoments.length > 0 && editionIDs.length > 0 &&
+            {address !== null && !submissionInProgress && 
                 <>
-                    <div>{DETAILS_CARDS}</div>
-                    <AccountCharts
-                        collection={collectionMoments}
-                        editionIDs={editionIDs}
-                        editionsMap={editionsMap}
-                        series={series}
-                        playTypes={playTypes}
-                    />
-                    <AgGrid columnDefs={AG_COLLECTION_COLS} rowData={collectionMoments} />
+                    {collectionMoments.length > 0 && editionIDs.length > 0 ? (
+                        <div>
+                            {DETAILS_CARDS}
+                            <AccountCharts
+                                collection={collectionMoments}
+                                editionIDs={editionIDs}
+                                editionsMap={editionsMap}
+                                series={series}
+                                playTypes={playTypes}
+                            />
+                            <AgGrid columnDefs={AG_COLLECTION_COLS} rowData={collectionMoments} />
+                        </div>
+                    ) : (
+                        <h4 className="header-color" style={{ marginLeft: '10px' }}>
+                            Error: No Moments Found for Address
+                        </h4>
+                    )}
                 </>
             }
+
         </Container>
     );
 

@@ -3,10 +3,12 @@ import { isMobile } from '../../utils/general.utils';
 import { Row } from 'react-bootstrap';
 import { numFormat } from '../../utils/num.utils';
 import { useTheme } from '../../providers/ThemeProvider.comp';
+import { ABBREVIATION_TO_TEAM_MAP } from '../../constants/teams';
 
 function renderer(params) {
     return {
-        title: params.yKey === 'total' ? params.xValue : params.xValue + ': ' + params.yKey,
+        title: (ABBREVIATION_TO_TEAM_MAP.get(params.xValue) || params.xValue) +
+            (params.yKey === 'total' ? '' :  `: ${params.yKey}`),
         content: numFormat(params.yValue),
     };
 }

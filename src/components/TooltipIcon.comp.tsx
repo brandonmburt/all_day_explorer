@@ -33,7 +33,7 @@ export function TooltipIcon(props: TooltipIconProps) {
                     justifyContent: 'center', // Center content horizontally
                     alignItems: 'center', // Center content vertically
                     padding: '0', // Adjust padding as needed
-                    marginBottom: margin,
+                    marginBottom: 0,
                     marginLeft: margin,
                 }}
             >?</Button>
