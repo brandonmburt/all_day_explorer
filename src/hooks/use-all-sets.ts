@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { GET_ALL_SETS } from "../scripts/get-all-sets.script";
+import { GET_ALL_SETS } from "../scripts/get-all-sets";
 import { Set } from "../models/models";
-import { executeCadenceScript } from "../services/flow.service";
+import { executeCadenceScript } from "../services/flow";
 import { SESSION_KEYS } from "../constants/session-keys";
-import { sessionService as session } from "../services/session.service";
+import { sessionService as session } from "../services/session";
 
 export default function useAllSets() {
     const [sets, setSets] = useState<Map<number, Set>>(null);

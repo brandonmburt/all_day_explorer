@@ -1,6 +1,6 @@
 import { NavDropdown } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
-import { StatusBadge } from "./badges/StatusBadge.comp";
+import { StatusBadge } from "./badges/StatusBadge";
 
 interface SeriesNavProps {
     id: number;

@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
-import { NotFound } from '../pages/NotFound.page';
-import { Home } from '../pages/Home.page';
-import { Set } from '../pages/Set.page';
-import { Plays } from '../pages/Plays.page';
-import { Account } from '../pages/Account.page';
-import { Editions } from '../pages/Editions.page';
-import { Moments } from '../pages/Moments.page';
+import { NotFound } from '../pages/NotFound';
+import { Home } from '../pages/Home';
+import { Set } from '../pages/Set';
+import { Plays } from '../pages/Plays';
+import { Account } from '../pages/Account';
+import { Editions } from '../pages/Editions';
+import { Moments } from '../pages/Moments';
 
 export function NavRoutes() {
 

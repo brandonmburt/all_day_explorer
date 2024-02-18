@@ -1,16 +1,16 @@
 import { useState } from "react"
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { getUniqueEditions, getDescriptiveMoments } from '../utils/moment.utils';
+import { getUniqueEditions, getDescriptiveMoments } from '../utils/moment';
 import { useEditions } from "../providers/EditionsProvider.comp";
 import { usePlays } from "../providers/PlaysProvider.comp";
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { AG_COLLECTION_COLS } from '../constants/ag-grid/collection-columns';
-import { AgGrid } from '../components/AgGrid.comp';
-import { AccountForm } from "../components/AccountForm.comp";
-import { numFormat } from '../utils/num.utils';
-import { getCollectionIDs, getCollectionMoments } from '../services/account.service';
-import { AccountCharts } from '../components/AccountCharts.comp';
+import { AgGrid } from '../components/AgGrid';
+import { AccountForm } from "../components/AccountForm";
+import { numFormat } from '../utils/num';
+import { getCollectionIDs, getCollectionMoments } from '../services/account';
+import { AccountCharts } from '../components/AccountCharts';
 import { DescriptiveMoment, Moment } from "../models/models";
 
 export function Account() {

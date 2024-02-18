@@ -1,15 +1,15 @@
 import { usePlays } from '../providers/PlaysProvider.comp';
 import { Container } from 'react-bootstrap';
 import { AG_PLAYS_COLS } from '../constants/ag-grid/plays-columns';
-import { Loading } from '../components/Loading.comp';
-import { getPlaysGridData } from '../utils/plays.utils';
-import { AgGrid } from '../components/AgGrid.comp';
-import { getAgPlaysByTypeAndTeam } from '../utils/plays.utils';
+import { Loading } from '../components/Loading';
+import { getPlaysGridData } from '../utils/plays';
+import { AgGrid } from '../components/AgGrid';
+import { getAgPlaysByTypeAndTeam } from '../utils/plays';
 import { TEAMS } from '../constants/teams';
-import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
-import { Accordian } from '../components/Accordian.comp';
-import { isMobile } from '../utils/general.utils';
-import { TeamTable } from '../components/TeamTable.comp';
+import AgStackedBarChart from '../components/ag-charts/StackedBarChart';
+import { Accordian } from '../components/Accordian';
+import { isMobile } from '../utils/general';
+import { TeamTable } from '../components/TeamTable';
 
 export function Plays() {
 

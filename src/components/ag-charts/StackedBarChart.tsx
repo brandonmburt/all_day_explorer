@@ -1,7 +1,7 @@
 import { AgChartsReact } from 'ag-charts-react';
-import { isMobile } from '../../utils/general.utils';
+import { isMobile } from '../../utils/general';
 import { Row } from 'react-bootstrap';
-import { numFormat } from '../../utils/num.utils';
+import { numFormat } from '../../utils/num';
 import { useTheme } from '../../providers/ThemeProvider.comp';
 import { ABBREVIATION_TO_TEAM_MAP } from '../../constants/teams';
 

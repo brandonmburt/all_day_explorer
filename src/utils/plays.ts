@@ -1,4 +1,4 @@
-import { generateTeamObjArr, generateTeamObjMapByType } from './general.utils';
+import { generateTeamObjArr, generateTeamObjMapByType } from './general';
 import { Play, PlayGridData } from '../models/models';
 
 export const getPlaysGridData = (plays: Map<Number, Play>): PlayGridData[] => {

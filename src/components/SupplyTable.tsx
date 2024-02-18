@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import { numFormat } from '../utils/num.utils';
+import { numFormat } from '../utils/num';
 
 export function SupplyTable(props) {
 

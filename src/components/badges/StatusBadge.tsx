@@ -1,5 +1,5 @@
 import { Badge } from 'react-bootstrap';
-import { TooltipWrapper } from '../TooltipWrapper.comp';
+import { TooltipWrapper } from '../TooltipWrapper';
 
 interface StatusBadgeProps {
     active: boolean;

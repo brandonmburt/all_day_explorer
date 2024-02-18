@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Row, Form, Button, Spinner } from 'react-bootstrap';
-import { TooltipIcon } from './TooltipIcon.comp';
-import { addressIsValid } from '../utils/account.utils';
+import { TooltipIcon } from './TooltipIcon';
+import { addressIsValid } from '../utils/account';
 
 interface AccountFormProps {
     submissionInProgress: boolean;

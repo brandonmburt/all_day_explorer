@@ -1,5 +1,5 @@
 import { AgChartsReact } from 'ag-charts-react';
-import { numFormat } from '../../utils/num.utils';
+import { numFormat } from '../../utils/num';
 import { useTheme } from '../../providers/ThemeProvider.comp';
 
 function renderer(params) {

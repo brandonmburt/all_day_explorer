@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import useAllSets from '../hooks/use-all-sets.hook';
+import useAllSets from '../hooks/use-all-sets';
 import { Set } from '../models/models';
 
 const SetsContext = createContext<{ sets: Map<number, Set> }>(null)

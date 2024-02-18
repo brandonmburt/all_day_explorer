@@ -1,4 +1,4 @@
-import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
+import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general';
 
 export const getEditionGridData = (editions, playsMap) => {
 

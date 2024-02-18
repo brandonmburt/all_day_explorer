@@ -1,7 +1,7 @@
 import {
     getSeriesTiersMap, convertSeriesTiersMapToArr, generateTeamObjArr,
     generateTeamObjMapByType
-} from './general.utils';
+} from './general';
 
 export const getNumMomentsBySeriesAndTier = (series, moments) => {
 

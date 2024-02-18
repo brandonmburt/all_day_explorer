@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import useAllPlays from '../hooks/use-all-plays.hook';
+import useAllPlays from '../hooks/use-all-plays';
 import { Play } from '../models/models';
 
 const PlaysContext = createContext<({ playsMap: Map<number, Play>, playTypes: string[] })>(null)

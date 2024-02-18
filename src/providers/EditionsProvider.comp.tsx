@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import useAllEditions from '../hooks/use-all-editions.hook';
+import useAllEditions from '../hooks/use-all-editions';
 import { Edition } from '../models/models';
 
 const EditionsContext = createContext<{ editionsMap: Map<number, Edition> }>(null)

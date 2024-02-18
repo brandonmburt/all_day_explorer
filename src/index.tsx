@@ -4,12 +4,12 @@ import './index.css';
 // import reportWebVitals from './reportWebVitals';
 import './config/config';
 import Providers from './providers/Providers.comp';
-import { NavBar } from './components/NavBar.comp';
-import { NavRoutes } from './components/Routes.comp';
+import { NavBar } from './components/NavBar';
+import { NavRoutes } from './components/Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-import { Footer } from './components/Footer.comp';
+import { Footer } from './components/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

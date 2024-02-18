@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Container, Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
-import { SupplyTable } from '../components/SupplyTable.comp';
-import { getSupplyPerSeriesAndTier } from '../utils/supply.utils';
-import { Loading } from '../components/Loading.comp';
+import { SupplyTable } from '../components/SupplyTable';
+import { getSupplyPerSeriesAndTier } from '../utils/supply';
+import { Loading } from '../components/Loading';
 import { RADIOS } from '../constants/radio-buttons';
-import AgPieChart from '../components/ag-charts/PieChart.comp';
-import { CardComp } from '../components/Card.comp';
+import AgPieChart from '../components/ag-charts/PieChart';
+import { CardComp } from '../components/Card';
 
 export function Home() {
 

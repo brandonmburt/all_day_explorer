@@ -1,5 +1,5 @@
-import { GET_COLLECTION_IDS } from "../scripts/get-collection-ids.script";
-import { GET_COLLECTION_MOMENTS } from '../scripts/get-collection-moments.script';
+import { GET_COLLECTION_IDS } from "../scripts/get-collection-ids";
+import { GET_COLLECTION_MOMENTS } from '../scripts/get-collection-moments';
 import { query } from "@onflow/fcl";
 
 export const getCollectionIDs = async (address: string): Promise<any> => {

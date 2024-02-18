@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { Row, Col, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import { TEAMS } from '../constants/teams';
-import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier, getAgMomentsByTypeAndTeam } from '../utils/account.utils';
-import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
-import AgPieChart from '../components/ag-charts/PieChart.comp';
-import { CardComp } from '../components/Card.comp';
-import { SupplyTable } from './SupplyTable.comp';
-import { Accordian } from '../components/Accordian.comp';
-import { isMobile } from '../utils/general.utils';
-import { TeamTable } from '../components/TeamTable.comp';
+import { getNumMomentsBySeriesAndTier, getNumEditionsBySeriesAndTier, getAgMomentsByTypeAndTeam } from '../utils/account';
+import AgStackedBarChart from './ag-charts/StackedBarChart';
+import AgPieChart from './ag-charts/PieChart';
+import { CardComp } from './Card';
+import { SupplyTable } from './SupplyTable';
+import { Accordian } from './Accordian';
+import { isMobile } from '../utils/general';
+import { TeamTable } from './TeamTable';
 
 export function AccountCharts(props) {
 

@@ -1,4 +1,4 @@
-import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general.utils';
+import { generateTeamObjArr, generateTeamObjMapByType, generateTeamObjMapByTier } from './general';
 import { Moment, DescriptiveMoment, Play, Edition, Series, Set as MySet } from '../models/models';
 
 export const getUniqueEditions = (moments: DescriptiveMoment[]): number[] => {

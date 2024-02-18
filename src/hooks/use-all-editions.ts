@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { GET_ALL_EDITIONS } from "../scripts/get-all-editions.script";
+import { GET_ALL_EDITIONS } from "../scripts/get-all-editions";
 import { Edition } from "../models/models";
-import { executeCadenceScript } from "../services/flow.service";
+import { executeCadenceScript } from "../services/flow";
 import { SESSION_KEYS } from "../constants/session-keys";
-import { sessionService as session } from "../services/session.service";
+import { sessionService as session } from "../services/session";
 
 export default function useAllEditions() {
     const [editionsMap, setEditionsMap] = useState<Map<number, Edition>>(null);

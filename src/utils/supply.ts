@@ -1,4 +1,4 @@
-import { getSeriesTiersMap, convertSeriesTiersMapToArr } from './general.utils';
+import { getSeriesTiersMap, convertSeriesTiersMapToArr } from './general';
 import { SeriesTiers, Edition, Series } from '../models/models';
 
 export const getSupplyPerSeriesAndTier = (series: Map<number, Series>, editions: Map<number, Edition>, type: string): SeriesTiers[] => {

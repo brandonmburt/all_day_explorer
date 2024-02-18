@@ -4,16 +4,16 @@ import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { Container } from 'react-bootstrap';
 import { AG_DETAILED_EDITION_COLS } from '../constants/ag-grid/editions-columns';
-import { Loading } from '../components/Loading.comp';
-import { AgGrid } from '../components/AgGrid.comp';
-import { getAgNumEditionsByTypeAndTeam, getAgNumEditionsByTierAndTeam } from '../utils/edition.utils';
+import { Loading } from '../components/Loading';
+import { AgGrid } from '../components/AgGrid';
+import { getAgNumEditionsByTypeAndTeam, getAgNumEditionsByTierAndTeam } from '../utils/edition';
 import { TEAMS } from '../constants/teams';
-import { getEditionGridData, addSeriesAndSetInfo } from '../utils/edition.utils';
-import AgStackedBarChart from '../components/ag-charts/StackedBarChart.comp';
+import { getEditionGridData, addSeriesAndSetInfo } from '../utils/edition';
+import AgStackedBarChart from '../components/ag-charts/StackedBarChart';
 import { TIERS } from '../constants/tiers';
-import { Accordian } from '../components/Accordian.comp';
-import { isMobile } from '../utils/general.utils';
-import { TeamTable } from '../components/TeamTable.comp';
+import { Accordian } from '../components/Accordian';
+import { isMobile } from '../utils/general';
+import { TeamTable } from '../components/TeamTable';
 
 export function Editions() {
 

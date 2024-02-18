@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import useAllSeries from '../hooks/use-all-series.hook'
+import useAllSeries from '../hooks/use-all-series'
 import { Series } from '../models/models'
 
 const SeriesContext = createContext<{ series: Map<number, Series> }>(null)

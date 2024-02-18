@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { GET_ALL_PLAYS } from "../scripts/get-all-plays.script";
+import { GET_ALL_PLAYS } from "../scripts/get-all-plays";
 import { Play } from "../models/models";
-import { executeCadenceScript } from "../services/flow.service";
+import { executeCadenceScript } from "../services/flow";
 import { SESSION_KEYS } from "../constants/session-keys";
-import { sessionService as session } from "../services/session.service";
+import { sessionService as session } from "../services/session";
 
 type ReturnVals = readonly [Map<number, Play>, string[]]; // TODO
 

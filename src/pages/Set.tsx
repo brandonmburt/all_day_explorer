@@ -5,11 +5,11 @@ import { usePlays } from '../providers/PlaysProvider.comp';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { AG_EDITION_COLS } from '../constants/ag-grid/editions-columns';
-import { getEditionGridData } from '../utils/edition.utils';
-import { AgGrid } from '../components/AgGrid.comp';
-import { numFormat } from '../utils/num.utils';
+import { getEditionGridData } from '../utils/edition';
+import { AgGrid } from '../components/AgGrid';
+import { numFormat } from '../utils/num';
 import { Series, Set as MySet, Edition } from '../models/models';
-import { StatusBadge } from "../components/badges/StatusBadge.comp";
+import { StatusBadge } from "../components/badges/StatusBadge";
 
 export function Set() {
 

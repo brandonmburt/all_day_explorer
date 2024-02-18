@@ -1,8 +1,8 @@
 import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { useEditions } from "../providers/EditionsProvider.comp";
-import { getSetsWithinSeries } from '../utils/nav.utils';
-import { SeriesNav } from "./SeriesNav.comp";
+import { getSetsWithinSeries } from '../utils/nav';
+import { SeriesNav } from "./SeriesNav";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
 import { useTheme } from '../providers/ThemeProvider.comp';
