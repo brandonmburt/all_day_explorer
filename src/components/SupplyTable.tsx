@@ -4,7 +4,7 @@ import { numFormat } from '../utils/num';
 export function SupplyTable(props) {
 
     let rows = [];
-    const headers = ['Series', 'Common', 'Uncommon', 'Rare', 'Legendary', 'Ultimate', 'Total'];
+    const HEADERS = ['Series', 'Common', 'Uncommon', 'Rare', 'Legendary', 'Ultimate', 'Total'];
 
     if (props.rows) {
         rows = [...props.rows]
@@ -28,7 +28,7 @@ export function SupplyTable(props) {
         <Table striped bordered hover responsive>
             <thead>
                 <tr>
-                    {headers.map((header, j) => {
+                    {HEADERS.map((header, j) => {
                         return <th key={j}>{header}</th>
                     })}
                 </tr>
