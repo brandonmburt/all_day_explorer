@@ -3,14 +3,13 @@ import { Accordion, Row } from "react-bootstrap"
 export function Accordian(props) {
 
     return (
-        <Row style={{ margin: '25px 0px' }}>
+        <Row className='accordian-container'>
             <Accordion>
-                {props.items.map((item, i) => {
-                    const [header, body] = item;
+                {props.items.map(([header, body], i) => {
                     return (
                         <Accordion.Item key={i} eventKey={i}>
                             <Accordion.Header>{header}</Accordion.Header>
-                            <Accordion.Body style={{ margin: 0, padding: 0 }}>{body}</Accordion.Body>
+                            <Accordion.Body className='accordian-content'>{body}</Accordion.Body>
                         </Accordion.Item>
                     )
                 })}

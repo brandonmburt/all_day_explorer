@@ -28,6 +28,15 @@ body {
     min-height: 100vh;
 }
 
+.accordian-container {
+    margin: '25px 0px'
+}
+
+.accordian-content {
+    margin: 0;
+    padding: 0
+}
+
 #content {
     flex: 1;
 }
