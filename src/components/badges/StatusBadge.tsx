@@ -1,5 +1,6 @@
 import { Badge } from 'react-bootstrap';
 import { TooltipWrapper } from '../TooltipWrapper';
+import { TOOLTIPS } from '../../constants/tooltips';
 
 interface StatusBadgeProps {
     active: boolean;
@@ -9,9 +10,7 @@ export function StatusBadge(props: StatusBadgeProps) {
 
     const bg = props.active ? 'success' : 'danger';
     const TEXT = props.active ? 'Active' : 'Closed';
-    const TOOLTIP_CONTENT = props.active ?
-        'This series is active, meaning that new Editions and Moments can be created' :
-        'This series is closed, meaning that no new Editions or Moments can be created';
+    const TOOLTIP_CONTENT = props.active ? TOOLTIPS.ACTIVE_BADGE : TOOLTIPS.CLOSED_BADGE;
 
     return (
         <TooltipWrapper content={TOOLTIP_CONTENT}>

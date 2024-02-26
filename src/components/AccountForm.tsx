@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Row, Form, Button, Spinner } from 'react-bootstrap';
 import { TooltipIcon } from './TooltipIcon';
 import { addressIsValid } from '../utils/account';
+import { TOOLTIPS } from '../constants/tooltips';
 
 interface AccountFormProps {
     submissionInProgress: boolean;
@@ -36,7 +37,7 @@ export function AccountForm(props: AccountFormProps) {
 
                     <Form.Label className='centered mb-4'>
                         <span className='header-color' style={{ fontSize: '24px' }}>Account Lookup</span>
-                        <TooltipIcon text={'To find your Flow Account Address, navigate to your Dapper wallet and click on your username in the upper righthand corner.'} />
+                        <TooltipIcon text={TOOLTIPS.ACCOUNT_LOOKUP} />
                     </Form.Label>
 
                     <Form.Control
