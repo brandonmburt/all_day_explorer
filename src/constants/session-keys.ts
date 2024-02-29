@@ -6,4 +6,5 @@ export const SESSION_KEYS: Record<string, string> = {
     SETS: "sets",
     USERS: "users",
     TOTAL_SUPPLY: "totalSupply",
+    NAV_OPTIONS: "navOptions",
 }

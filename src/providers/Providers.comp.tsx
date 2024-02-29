@@ -4,6 +4,7 @@ import SeriesProvider from "./SeriesProvider.comp";
 import SetsProvider from './SetsProvider.comp';
 import EditionsProvider from './EditionsProvider.comp';
 import PlaysProvider from './PlaysProvider.comp';
+import NavProvider from './NavProvider.comp';
 import ThemeProvider, { useTheme } from './ThemeProvider.comp';
 
 
@@ -30,9 +31,11 @@ export default function Providers({ children }) {
                     <SetsProvider>
                         <EditionsProvider>
                             <PlaysProvider>
-                                <ContentWrapper>
-                                    {children}
-                                </ContentWrapper>
+                                <NavProvider>
+                                    <ContentWrapper>
+                                        {children}
+                                    </ContentWrapper>
+                                </NavProvider>
                             </PlaysProvider>
                         </EditionsProvider>
                     </SetsProvider>

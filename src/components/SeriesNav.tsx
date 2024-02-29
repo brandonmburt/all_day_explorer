@@ -6,7 +6,7 @@ interface SeriesNavProps {
     id: number;
     name: string;
     active: boolean;
-    sets: Set<string>;
+    sets: string[];
 }
 
 export function SeriesNav(props: SeriesNavProps) {
@@ -18,7 +18,7 @@ export function SeriesNav(props: SeriesNavProps) {
                 <StatusBadge active={props.active} />
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            {Array.from(props.sets).map((set) => {
+            {props.sets.map((set) => {
                 const [id, name] = set.split(":");
                 return (
                     <LinkContainer key={id} to={"/set/" + props.id + "/" + id}>

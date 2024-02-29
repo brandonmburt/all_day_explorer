@@ -1,42 +1,36 @@
 import { useSeries } from '../providers/SeriesProvider.comp';
-import { useSets } from '../providers/SetsProvider.comp';
-import { useEditions } from "../providers/EditionsProvider.comp";
-import { getSetsWithinSeries } from '../utils/nav';
+import { useNav } from '../providers/NavProvider.comp';
 import { SeriesNav } from "./SeriesNav";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
 import { useTheme } from '../providers/ThemeProvider.comp';
 
+const MAIN_LINKS: [path: string, label: string][] = [
+    ['/', 'Home'],
+    ['/account', 'Account'],
+];
+
+const EVALUATE_LINKS: [path: string, label: string][] = [
+    ['/moments', 'Moments'],
+    ['/editions', 'Editions'],
+    ['/plays', 'Plays'],
+];
+
 export function NavBar() {
 
     const { theme } = useTheme();
     const { series } = useSeries();
-    const { sets } = useSets();
-    const { editionsMap } = useEditions();
-
-    let seriesSets: Map<number, Set<string>> = null;
-    if (!!series && !!sets && !!editionsMap) {
-        seriesSets = getSetsWithinSeries(series, sets, editionsMap);
-    }
-
-    const MAIN_LINKS: [path: string, label: string][] = [
-        ['/', 'Home'],
-        ['/account', 'Account'],
-    ];
-
-    const EVALUATE_LINKS: [path: string, label: string][] = [
-        ['/moments', 'Moments'],
-        ['/editions', 'Editions'],
-        ['/plays', 'Plays'],
-    ];
-
-    const LOGO_URL = theme === 'light' ? '/logo/primary-light-theme.png' : '/logo/primary-dark-theme.png';
-
+    const { navOptions } = useNav();
+    
     return (
         <Navbar sticky='top' className='nav-styles' expand="lg" collapseOnSelect>
             <Container>
                 <Navbar.Brand>
-                    <img src={LOGO_URL} alt="All Day Tools" style={{ width: '100px' }} />
+                    <img
+                        src={theme === 'light' ? '/logo/primary-light-theme.png' : '/logo/primary-dark-theme.png'} 
+                        alt="All Day Tools"
+                        style={{ width: '100px' }}
+                    />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -59,10 +53,10 @@ export function NavBar() {
                                 )
                             })}
                         </NavDropdown>
-                        {seriesSets !== null &&
-                            Array.from(seriesSets).map(([key, val]) => {
-                                const s = series.get(key);
-                                return <SeriesNav key={key} id={s.id} name={s.name} active={s.active} sets={val} />;
+                        {navOptions &&
+                            navOptions.map(([seriesId, setIdAndNamesArr]) => {
+                                const s = series.get(seriesId);
+                                return <SeriesNav key={seriesId} id={s.id} name={s.name} active={s.active} sets={setIdAndNamesArr} />;
                             })
                         }
                     </Nav>
