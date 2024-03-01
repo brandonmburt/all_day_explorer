@@ -25,7 +25,7 @@ export default function NavProvider({ children }) {
             session.set(SESSION_KEYS.NAV_OPTIONS, options);
             setNavOptions(options);
         }
-    }, [series, sets, editionsMap]);
+    }, [series, sets, editionsMap, navOptions]);
 
     return (
         <NavContext.Provider value={{ navOptions }}>

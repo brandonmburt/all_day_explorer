@@ -1,7 +1,6 @@
 import { usePlays } from '../providers/PlaysProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
 import { Container } from 'react-bootstrap';
-import { Loading } from '../components/Loading';
 import { TEAMS } from '../constants/teams';
 import { TIERS } from '../constants/tiers';
 import { getAgNumMomentsByTypeAndTeam, getAgNumMomentsByTierAndTeam } from '../utils/moment';
@@ -28,9 +27,6 @@ export function Moments() {
 
     return (
         <Container>
-            {!editionsMap &&
-                <Loading />
-            }
             {!!editionsMap && <>
                 {momentsByTeamAndType.length > 0 && playTypes.length > 0 &&
                     <AgStackedBarChart data={momentsByTeamAndType} yKeys={playTypes} title={'Moments Per Team & Type'} mobileTitle={'Moments Per Team'} />

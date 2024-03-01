@@ -1,7 +1,6 @@
 import { usePlays } from '../providers/PlaysProvider.comp';
 import { Container } from 'react-bootstrap';
 import { AG_PLAYS_COLS } from '../constants/ag-grid/plays-columns';
-import { Loading } from '../components/Loading';
 import { getPlaysGridData } from '../utils/plays';
 import { AgGrid } from '../components/AgGrid';
 import { getAgPlaysByTypeAndTeam } from '../utils/plays';
@@ -27,9 +26,6 @@ export function Plays() {
 
     return (
         <Container>
-            {!playsMap &&
-                <Loading />
-            }
             {!!playsMap && <>
                 {playsByTeam.length > 0 && playTypes.length > 0 &&
                     <AgStackedBarChart data={playsByTeam} yKeys={playTypes} title={'Plays Per Team & Type'} mobileTitle={'Plays Per Team'} />

@@ -4,7 +4,6 @@ import { useSeries } from '../providers/SeriesProvider.comp';
 import { useEditions } from '../providers/EditionsProvider.comp';
 import { SupplyTable } from '../components/SupplyTable';
 import { getSupplyPerSeriesAndTier } from '../utils/supply';
-import { Loading } from '../components/Loading';
 import { RADIOS } from '../constants/radio-buttons';
 import AgPieChart from '../components/ag-charts/PieChart';
 import { CardComp } from '../components/Card';
@@ -56,7 +55,6 @@ export function Home() {
 
     return (
         <Container>
-            {(!series || !editionsMap) && <Loading />}
             {!!series && !!editionsMap && <>
                 {!!seriesSupply &&
                     <CardComp header={'Moments'} body={

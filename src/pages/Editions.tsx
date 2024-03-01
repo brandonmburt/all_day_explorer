@@ -4,7 +4,6 @@ import { useSeries } from '../providers/SeriesProvider.comp';
 import { useSets } from '../providers/SetsProvider.comp';
 import { Container } from 'react-bootstrap';
 import { AG_DETAILED_EDITION_COLS } from '../constants/ag-grid/editions-columns';
-import { Loading } from '../components/Loading';
 import { AgGrid } from '../components/AgGrid';
 import { getAgNumEditionsByTypeAndTeam, getAgNumEditionsByTierAndTeam } from '../utils/edition';
 import { TEAMS } from '../constants/teams';
@@ -37,9 +36,6 @@ export function Editions() {
 
     return (
         <Container>
-            {!editionsMap &&
-                <Loading />
-            }
             {!!editionsMap && <>
                 {editionsByTeamAndType.length > 0 && playTypes.length > 0 &&
                     <AgStackedBarChart data={editionsByTeamAndType} yKeys={playTypes} title={'Editions Per Team & Type'} mobileTitle={'Editions Per Team'} />
