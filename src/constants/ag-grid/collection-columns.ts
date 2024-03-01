@@ -1,6 +1,7 @@
 interface CollectionColumn {
     headerName: string;
     field: string;
+    cellRenderer?: string;
 }
 
 export const AG_COLLECTION_COLS: CollectionColumn[] = [
@@ -11,6 +12,7 @@ export const AG_COLLECTION_COLS: CollectionColumn[] = [
     {
         headerName: 'Team',
         field: 'teamName',
+        cellRenderer: 'teamRenderer',
     },
     {
         headerName: 'Position',

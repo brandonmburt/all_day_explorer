@@ -10,6 +10,7 @@ import { AgGrid } from '../components/AgGrid';
 import { numFormat } from '../utils/num';
 import { Series, Set as MySet, Edition } from '../models/models';
 import { StatusBadge } from "../components/badges/StatusBadge";
+import { TeamBadge } from '../components/badges/TeamBadge';
 
 export function Set() {
 
@@ -54,7 +55,7 @@ export function Set() {
                     })
                 }
             </Row>
-            {gridData.length > 0 && <AgGrid columnDefs={AG_EDITION_COLS} rowData={gridData} />}
+            {gridData.length > 0 && <AgGrid components={{ teamRenderer: TeamBadge }} columnDefs={AG_EDITION_COLS} rowData={gridData} />}
         </Container>
     )
 

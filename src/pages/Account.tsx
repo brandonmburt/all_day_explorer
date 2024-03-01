@@ -12,6 +12,7 @@ import { numFormat } from '../utils/num';
 import { getCollectionIDs, getCollectionMoments } from '../services/account';
 import { AccountCharts } from '../components/AccountCharts';
 import { DescriptiveMoment, Moment } from "../models/models";
+import { TeamBadge } from "../components/badges/TeamBadge";
 
 export function Account() {
 
@@ -101,7 +102,7 @@ export function Account() {
                                 series={series}
                                 playTypes={playTypes}
                             />
-                            <AgGrid columnDefs={AG_COLLECTION_COLS} rowData={collectionMoments} />
+                            <AgGrid components={{ teamRenderer: TeamBadge }} columnDefs={AG_COLLECTION_COLS} rowData={collectionMoments} />
                         </div>
                     ) : (
                         <h4 className="header-color" style={{ marginLeft: '10px' }}>

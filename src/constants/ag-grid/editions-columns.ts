@@ -3,6 +3,7 @@ interface AgEditionCols {
     field: string;
     minWidth?: number;
     sortable?: boolean;
+    cellRenderer?: string,
 }
 
 interface AgDetailedEditionCols {
@@ -10,6 +11,7 @@ interface AgDetailedEditionCols {
     field: string;
     minWidth?: number;
     sortable?: boolean;
+    cellRenderer?: string,
 }
 
 export const AG_EDITION_COLS: AgEditionCols[] = [
@@ -25,6 +27,7 @@ export const AG_EDITION_COLS: AgEditionCols[] = [
     {
         headerName: 'Team',
         field: 'metadata.teamName',
+        cellRenderer: 'teamRenderer',
     },
     {
         headerName: 'Position',
@@ -62,6 +65,7 @@ export const AG_DETAILED_EDITION_COLS: AgDetailedEditionCols[] = [
     {
         headerName: 'Team',
         field: 'metadata.teamName',
+        cellRenderer: 'teamRenderer',
     },
     {
         headerName: 'Position',

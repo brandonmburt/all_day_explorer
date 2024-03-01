@@ -3,6 +3,7 @@ interface AgPlaysCols {
     field: string;
     minWidth?: number;
     sortable?: boolean;
+    cellRenderer?: string,
 }
 
 export const AG_PLAYS_COLS: AgPlaysCols[] = [
@@ -18,10 +19,12 @@ export const AG_PLAYS_COLS: AgPlaysCols[] = [
     {
         headerName: 'Team',
         field: 'teamName',
+        cellRenderer: 'teamRenderer',
     },
     {
         headerName: 'Opponent',
         field: 'opponent',
+        cellRenderer: 'teamRenderer',
     },
     {
         headerName: 'Position',

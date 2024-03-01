@@ -32,6 +32,7 @@ export function AgGrid(props) {
                     animateRows={true}
                     rowSelection='multiple'
                     onGridReady={onGridReady}
+                    components={ props.components ?? null }
                 />
             </div>
         </Row>

@@ -9,6 +9,7 @@ import AgStackedBarChart from '../components/ag-charts/StackedBarChart';
 import { Accordian } from '../components/Accordian';
 import { isMobile } from '../utils/general';
 import { TeamTable } from '../components/TeamTable';
+import { TeamBadge } from '../components/badges/TeamBadge';
 
 export function Plays() {
 
@@ -34,7 +35,7 @@ export function Plays() {
                     <Accordian items={[['Plays Per Team & Type', playTypeTable]]} />
                 }
                 {rowData.length > 0 &&
-                    <AgGrid columnDefs={AG_PLAYS_COLS} rowData={rowData} />
+                    <AgGrid components={{ teamRenderer: TeamBadge }} columnDefs={AG_PLAYS_COLS} rowData={rowData} />
                 }
             </>}
         </Container>
