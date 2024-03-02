@@ -2,7 +2,9 @@ interface AgEditionCols {
     headerName: string;
     field: string;
     minWidth?: number;
+    maxWidth?: number;
     sortable?: boolean;
+    filter?: boolean;
     cellRenderer?: string,
 }
 
@@ -11,14 +13,18 @@ interface AgDetailedEditionCols {
     field: string;
     minWidth?: number;
     sortable?: boolean;
+    filter?: boolean;
     cellRenderer?: string,
 }
 
 export const AG_EDITION_COLS: AgEditionCols[] = [
     {
-        headerName: 'ID',
+        headerName: '',
         field: 'id',
-        minWidth: 85
+        maxWidth: 70,
+        cellRenderer: 'linkRenderer',
+        sortable: false,
+        filter: false,
     },
     {
         headerName: 'Player',
@@ -58,6 +64,7 @@ export const AG_DETAILED_EDITION_COLS: AgDetailedEditionCols[] = [
         field: 'id',
         minWidth: 70,
         cellRenderer: 'linkRenderer',
+        filter: false,
     },
     {
         headerName: 'Player',

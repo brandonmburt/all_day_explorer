@@ -11,5 +11,5 @@ export function OutgoingLink({ value: editionID }) {
                 <OpenInNewIcon />    
             </Link>
         </TooltipWrapper>
-        )
+    );
 }
