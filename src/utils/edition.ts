@@ -8,6 +8,7 @@ export const getEditionGridData = (editions, playsMap) => {
         const play = playsMap.get(playID);
         if (play != null) {
             gridData.push({
+                ...play,
                 id: +id,
                 tier,
                 numMinted,
@@ -16,7 +17,6 @@ export const getEditionGridData = (editions, playsMap) => {
                 setID,
                 player: [play.metadata.playerFirstName, play.metadata.playerLastName].join(' '),
                 playType: play.metadata.playType,
-                ...play
             });
         }
     });
