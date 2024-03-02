@@ -14,6 +14,7 @@ import { Accordian } from '../components/Accordian';
 import { isMobile } from '../utils/general';
 import { TeamTable } from '../components/TeamTable';
 import { TeamBadge } from '../components/badges/TeamBadge';
+import { OutgoingLink } from '../components/OutgoingLink';
 
 export function Editions() {
 
@@ -48,7 +49,7 @@ export function Editions() {
                     <Accordian items={[['Editions Per Team & Type', playTypeTable], ['Editions Per Team & Tier', tierTable]]} />
                 }
                 {rowData.length > 0 &&
-                    <AgGrid components={{ teamRenderer: TeamBadge }} columnDefs={AG_DETAILED_EDITION_COLS} rowData={rowData} />
+                    <AgGrid components={{ teamRenderer: TeamBadge, linkRenderer: OutgoingLink }} columnDefs={AG_DETAILED_EDITION_COLS} rowData={rowData} />
                 }
             </>}
         </Container>

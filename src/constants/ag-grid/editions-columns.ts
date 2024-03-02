@@ -54,9 +54,10 @@ export const AG_EDITION_COLS: AgEditionCols[] = [
 
 export const AG_DETAILED_EDITION_COLS: AgDetailedEditionCols[] = [
     {
-        headerName: 'ID',
+        headerName: '',
         field: 'id',
-        minWidth: 85
+        minWidth: 70,
+        cellRenderer: 'linkRenderer',
     },
     {
         headerName: 'Player',
