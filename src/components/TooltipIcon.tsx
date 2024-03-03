@@ -1,17 +1,23 @@
-import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface TooltipIconProps {
     pixels?: string;
+    marginLeft?: string;
+    paddingBottom?: string;
     text: any;
 }
 
 export function TooltipIcon(props: TooltipIconProps) {
 
-    const pixels = props.pixels || '25px';
     const message = props.text;
-    const margin = '5px';
+    const STYLES = {
+        color: '#6c757d',
+        fontSize: props.pixels || '30px',
+        marginLeft: props.marginLeft || '0',
+        paddingBottom: props.paddingBottom || '0'
+    }
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
@@ -25,18 +31,9 @@ export function TooltipIcon(props: TooltipIconProps) {
             delay={{ show: 250, hide: 400 }}
             overlay={renderTooltip}
         >
-            <Button size='sm' variant="secondary"
-                style={{
-                    width: pixels,
-                    height: pixels,
-                    borderRadius: '50%',
-                    justifyContent: 'center', // Center content horizontally
-                    alignItems: 'center', // Center content vertically
-                    padding: '0', // Adjust padding as needed
-                    marginBottom: 0,
-                    marginLeft: margin,
-                }}
-            >?</Button>
+            <span>
+                <InfoIcon style={STYLES} />
+            </span>
         </OverlayTrigger>
     )
 

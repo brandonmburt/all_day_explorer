@@ -37,7 +37,7 @@ export function AccountForm(props: AccountFormProps) {
 
                     <Form.Label className='centered mb-4'>
                         <span className='header-color' style={{ fontSize: '24px' }}>Account Lookup</span>
-                        <TooltipIcon text={TOOLTIPS.ACCOUNT_LOOKUP} />
+                        <TooltipIcon marginLeft='5px' text={TOOLTIPS.ACCOUNT_LOOKUP} />
                     </Form.Label>
 
                     <Form.Control

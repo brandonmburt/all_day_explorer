@@ -7,6 +7,7 @@ import { getSupplyPerSeriesAndTier } from '../utils/supply';
 import { RADIOS } from '../constants/radio-buttons';
 import AgPieChart from '../components/ag-charts/PieChart';
 import { CardComp } from '../components/Card';
+import { TOOLTIPS } from '../constants/tooltips';
 
 export function Home() {
 
@@ -57,7 +58,7 @@ export function Home() {
         <Container>
             {!!series && !!editionsMap && <>
                 {!!seriesSupply &&
-                    <CardComp header={'Moments'} body={
+                    <CardComp header={'Moments'} tooltip={TOOLTIPS.MOMENTS} body={
                         <Row>
                             <Col lg={6}>
                                 {createButtons('moment', momentRadio, setMomentRadio)}
@@ -70,7 +71,7 @@ export function Home() {
                     } />
                 }
                 {!!editionsSupply &&
-                    <CardComp mb='0' header={'Editions'} body={
+                    <CardComp mb='0' header={'Editions'} tooltip={TOOLTIPS.EDITIONS} body={
                         <Row>
                             <Col lg={6}>
                                 {createButtons('edition', editionRadio, setEditionRadio)}
