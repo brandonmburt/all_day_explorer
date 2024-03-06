@@ -10,6 +10,7 @@ import { useNav } from '../providers/NavProvider.comp';
 export const ContentWrapper = ({ children }) => {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
 
     const { theme } = useTheme();
     const { playsMap, playTypes } = usePlays();
@@ -17,6 +18,13 @@ export const ContentWrapper = ({ children }) => {
     const { series } = useSeries();
     const { sets } = useSets();
     const { navOptions } = useNav();
+
+    useEffect(() => {
+        setTimeout(() => {
+            // Wait for 100ms before showing the loading indicator to avoid flickering on page refresh
+            setShowLoadingIndicator(true);
+        }, 100);
+    }, []);
 
     useEffect(() => {
         document.documentElement.setAttribute('data-bs-theme', theme);
@@ -29,7 +37,7 @@ export const ContentWrapper = ({ children }) => {
     }, [isLoading, playsMap, editionsMap, series, sets, navOptions, playTypes]);
 
 
-    return isLoading ? <Loading /> : (
+    return isLoading ? <Loading showLoadingIndicator={showLoadingIndicator} theme={theme} /> : (
         <div className={`App-${theme}`}>
             {children}
         </div>

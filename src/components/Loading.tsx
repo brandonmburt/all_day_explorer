@@ -1,10 +1,17 @@
-import ReactLoading from "react-loading";
+interface LoadingProps {
+    theme: string;
+    showLoadingIndicator: boolean;
+}
 
-export function Loading() {
+export function Loading({ theme, showLoadingIndicator }: LoadingProps) {
+
+    const logoURL = theme === 'light' ? '/logo/football-light-theme.png' : '/logo/football-dark-theme.png';
 
     return (
         <div className="loading-container">
-            <ReactLoading type="spin" color="gray" height="100px" width="130px" delay={100} />
+            {showLoadingIndicator &&
+                <img src={logoURL} className='Football-logo' alt="Logo" />
+            }
         </div>
     )
 

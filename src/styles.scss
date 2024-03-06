@@ -32,6 +32,27 @@ code {
     min-height: 100vh;
 }
 
+.Football-logo {
+    height: 100px;
+    width: 100px;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .Football-logo {
+        animation: Football-logo-spin infinite 1s linear;
+    }
+}
+
+@keyframes Football-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .accordian-container {
     margin: '25px 0px'
 }
