@@ -12,7 +12,7 @@ interface SeriesNavProps {
 export function SeriesNav(props: SeriesNavProps) {
 
     return (
-        <NavDropdown title={props.name} id="basic-nav-dropdown">
+        <NavDropdown title={props.name} id="basic-nav-dropdown" className="custom-dropdown">
             <NavDropdown.Item disabled>
                 {'Status: '}
                 <StatusBadge active={props.active} />
