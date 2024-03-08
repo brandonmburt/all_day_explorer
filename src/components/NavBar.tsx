@@ -4,17 +4,7 @@ import { SeriesNav } from "./SeriesNav";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
 import { useTheme } from '../providers/ThemeProvider.comp';
-
-const MAIN_LINKS: [path: string, label: string][] = [
-    ['/', 'Home'],
-    ['/account', 'Account'],
-];
-
-const EVALUATE_LINKS: [path: string, label: string][] = [
-    ['/moments', 'Moments'],
-    ['/editions', 'Editions'],
-    ['/plays', 'Plays'],
-];
+import { MAIN_LINKS, EVALUATE_LINKS } from '../constants/links';
 
 export function NavBar() {
 

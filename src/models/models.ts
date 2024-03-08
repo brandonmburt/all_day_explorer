@@ -98,3 +98,5 @@ export interface Set {
     name: string,
     setPlaysInEditions: Record<number, boolean> // TODO: Temporary
 }
+
+export type NavLink = readonly [path: string, label: string];
