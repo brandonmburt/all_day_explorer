@@ -1,7 +1,7 @@
 import { Series, SeriesTiers, TeamObj } from "../models/models";
 
 export const getSeriesTiersMap = (series: Map<number, Series>): Map<number, SeriesTiers> => {
-
+    if (!series) return new Map();
     const myMap: Map<number, SeriesTiers> = new Map();
     series.forEach(s => {
         const { id, name } = s;
@@ -9,18 +9,16 @@ export const getSeriesTiersMap = (series: Map<number, Series>): Map<number, Seri
         myMap.set(id, tiers);
     });
     return myMap;
-
 }
 
 export const convertSeriesTiersMapToArr = (seriesTiersMap: Map<number, SeriesTiers>): SeriesTiers[] => {
-
+    if (!seriesTiersMap) return [];
     let data: SeriesTiers[] = [];
     seriesTiersMap.forEach(v => {
         const TOT = v.COMMON + v.UNCOMMON + v.RARE + v.LEGENDARY + v.ULTIMATE;
         data.push({ TOTAL: TOT, ...v });
     });
     return data;
-
 }
 
 export const generateTeamObjArr = (teamObjMap: Map<string, { [key: string]: number }>, teams: Map<string, string>): TeamObj[] => {
