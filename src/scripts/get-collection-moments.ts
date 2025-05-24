@@ -2,7 +2,7 @@ export const GET_COLLECTION_MOMENTS: string = `
     import NonFungibleToken from 0xNFT
     import AllDay from 0xAllDay
 
-    pub fun main(address: Address, momentIDs: [UInt64]): [AnyStruct] {
+    access(all) fun main(address: Address, momentIDs: [UInt64]): [AnyStruct] {
         let account = getAccount(address)
     
         let collectionRef = account.getCapability(AllDay.CollectionPublicPath)

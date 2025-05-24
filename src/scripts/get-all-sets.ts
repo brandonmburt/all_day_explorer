@@ -1,7 +1,7 @@
 export const GET_ALL_SETS: string = `
     import AllDay from 0xAllDay
 
-    pub fun main(): [AllDay.SetData] {
+    access(all) fun main(): [AllDay.SetData] {
         let sets: [AllDay.SetData] = []
         var id: UInt64 = 1
         // Note < , as nextSetID has not yet been used

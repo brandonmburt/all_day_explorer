@@ -11,13 +11,13 @@ export function NavBar() {
     const { theme } = useTheme();
     const { series } = useSeries();
     const { navOptions } = useNav();
-    
+
     return (
         <Navbar sticky='top' className='nav-styles' expand="lg" collapseOnSelect>
             <Container>
                 <Navbar.Brand>
                     <img
-                        src={theme === 'light' ? '/logo/primary-light-theme.png' : '/logo/primary-dark-theme.png'} 
+                        src={theme === 'light' ? '/logo/primary-light-theme.png' : '/logo/primary-dark-theme.png'}
                         alt="All Day Tools"
                         style={{ width: '100px' }}
                     />
