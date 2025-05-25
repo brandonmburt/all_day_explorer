@@ -31,7 +31,7 @@ export default function useAllPlays(): ReturnVals {
                             } else if (classification === "PLAYER_MELT") {
                                 type = "Player Melt";
                             } else {
-                                console.error("Undefined play type");
+                                // console.error("Undefined play type");
                             }
                         } else if (type === "Pass Deflection") {
                             /* Dapper deprecated the play type "Pass Deflection" in favor of "Pass Defense" */
